@@ -8,20 +8,23 @@
 
 body{
 margin:0;
-font-family:Tahoma;
-background:#111;
+font-family:'Segoe UI', Tahoma, sans-serif;
+background:linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
 color:white;
 text-align:center;
 }
 
 header{
 padding:40px 20px;
-background:linear-gradient(45deg,#000,#222);
+background:linear-gradient(135deg, #000, #1a1f3a);
+border-bottom:2px solid rgba(255, 193, 7, .2);
 }
 
 header h1{
 font-size:40px;
 margin:10px 0;
+color:#ffc107;
+text-shadow:0 4px 15px rgba(255, 193, 7, .3);
 }
 
 header p{
@@ -47,21 +50,53 @@ margin:auto;
 }
 
 .card{
-background:#1b1b1b;
+background:linear-gradient(145deg, #1e2749, #252d47);
 border-radius:15px;
 overflow:hidden;
-box-shadow:0 6px 15px rgba(0,0,0,.4);
+box-shadow:0 8px 32px rgba(0,0,0,.5);
 transition:.3s;
+border:1px solid rgba(255,255,255,.1);
+position:relative;
+}
+
+.card::before{
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:linear-gradient(135deg, rgba(255,255,255,.05) 0%, transparent 100%);
+pointer-events:none;
 }
 
 .card:hover{
-transform:translateY(-5px);
+transform:translateY(-8px);
+box-shadow:0 12px 48px rgba(255, 193, 7, .2);
+border:1px solid rgba(255, 193, 7, .3);
 }
 
 .card img{
 width:100%;
 height:160px;
 object-fit:cover;
+display:none !important;
+}
+
+.card::after{
+content:'';
+display:block;
+width:100%;
+height:160px;
+background:linear-gradient(135deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,.02) 100%);
+background-size:200% 200%;
+animation:shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
 }
 
 .card h3{
@@ -85,10 +120,11 @@ background:#1ebe5d;
 }
 
 .price{
-color:#25D366;
-font-size:18px;
+color:#ffc107;
+font-size:20px;
 font-weight:bold;
 margin:10px 0;
+text-shadow:0 2px 8px rgba(255, 193, 7, .3);
 }
 
 .quantity-control{
@@ -115,29 +151,35 @@ background:#444;
 }
 
 .add-to-cart{
-background:#ff9800;
+background:linear-gradient(135deg, #ffc107, #ffb300);
 border:none;
-color:white;
-padding:10px 20px;
+color:#000;
+padding:12px 20px;
 border-radius:8px;
 cursor:pointer;
 transition:.3s;
 margin-bottom:10px;
 width:90%;
+font-weight:bold;
+box-shadow:0 4px 15px rgba(255, 193, 7, .3);
 }
 
 .add-to-cart:hover{
-background:#e68900;
+background:linear-gradient(135deg, #ffb300, #ff9800);
+transform:scale(1.05);
+box-shadow:0 6px 20px rgba(255, 193, 7, .5);
 }
 
 .cart-section{
 margin:30px 20px;
 padding:20px;
-background:#1b1b1b;
+background:linear-gradient(145deg, #1e2749, #252d47);
 border-radius:15px;
 max-width:900px;
 margin-left:auto;
 margin-right:auto;
+border:1px solid rgba(255, 193, 7, .2);
+box-shadow:0 8px 32px rgba(0,0,0,.5);
 }
 
 .cart-items{
@@ -149,34 +191,40 @@ margin:15px 0;
 display:flex;
 justify-content:space-between;
 padding:10px;
-background:#2a2a2a;
+background:rgba(255, 193, 7, .05);
 margin:5px 0;
 border-radius:8px;
+border-left:3px solid #ffc107;
 }
 
 .cart-total{
 font-size:18px;
 font-weight:bold;
-color:#25D366;
+color:#ffc107;
 margin:15px 0;
 padding:15px;
-border-top:2px solid #333;
+border-top:2px solid rgba(255, 193, 7, .3);
+text-shadow:0 2px 8px rgba(255, 193, 7, .2);
 }
 
 .order-btn{
-background:#25D366;
+background:linear-gradient(135deg, #ffc107, #ffb300);
 width:100%;
 padding:15px;
 border:none;
-color:white;
+color:#000;
 font-size:18px;
 border-radius:10px;
 cursor:pointer;
 transition:.3s;
+font-weight:bold;
+box-shadow:0 4px 15px rgba(255, 193, 7, .3);
 }
 
 .order-btn:hover{
-background:#1ebe5d;
+background:linear-gradient(135deg, #ffb300, #ff9800);
+transform:scale(1.02);
+box-shadow:0 6px 20px rgba(255, 193, 7, .5);
 }
 
 .empty-cart{
@@ -197,9 +245,14 @@ color:#aaa;
  </head>
  <body>
   <header>
-   <h1>متجر شوق</h1>
+   <div style="display:flex; align-items:center; justify-content:center; gap:15px; margin-bottom:10px;">
+    <svg width="50" height="50" viewbox="0 0 50 50" style="filter: drop-shadow(0 2px 8px rgba(255, 193, 7, .4));">
+     <circle cx="25" cy="25" r="24" fill="none" stroke="#ffc107" stroke-width="2" /> <path d="M 25 8 Q 15 15 15 25 Q 15 35 25 40 Q 35 35 35 25 Q 35 15 25 8" fill="#ffc107" opacity="0.3" /> <path d="M 20 28 Q 22 30 25 31 Q 28 30 30 28" stroke="#ffc107" stroke-width="2" fill="none" /> <circle cx="22" cy="24" r="1.5" fill="#ffc107" /> <circle cx="28" cy="24" r="1.5" fill="#ffc107" />
+    </svg>
+    <h1>حلا شوق</h1>
+   </div>
    <p>حلويات فاخرة للمناسبات</p>
-  </header><img class="store-img" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&amp;fit=crop" alt="متجر شوق" loading="lazy">
+  </header>
   <section class="products">
    <h2>منتجاتنا</h2>
    <div class="grid">
@@ -227,6 +280,24 @@ color:#aaa;
      <div class="quantity-control"><button class="qty-btn" onclick="updateQty('box', -1)">−</button> <span id="qty-box">1</span> <button class="qty-btn" onclick="updateQty('box', 1)">+</button>
      </div><button class="add-to-cart" onclick="addToCart('بوكس حلويات', 120, 'box')">أضف للسلة</button>
     </div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1599599810694-b5ac4dd0b7a0?w=400&amp;h=300&amp;fit=crop" alt="هريسة صغيرة" loading="lazy">
+     <h3>هريسة صغيرة</h3>
+     <p class="price">15 ريال</p>
+     <div class="quantity-control"><button class="qty-btn" onclick="updateQty('haresa-small', -1)">−</button> <span id="qty-haresa-small">1</span> <button class="qty-btn" onclick="updateQty('haresa-small', 1)">+</button>
+     </div><button class="add-to-cart" onclick="addToCart('هريسة صغيرة', 15, 'haresa-small')">أضف للسلة</button>
+    </div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1599599810694-b5ac4dd0b7a0?w=400&amp;h=300&amp;fit=crop" alt="رز بحليب صغير" loading="lazy">
+     <h3>رز بحليب صغير</h3>
+     <p class="price">12 ريال</p>
+     <div class="quantity-control"><button class="qty-btn" onclick="updateQty('roz-small', -1)">−</button> <span id="qty-roz-small">1</span> <button class="qty-btn" onclick="updateQty('roz-small', 1)">+</button>
+     </div><button class="add-to-cart" onclick="addToCart('رز بحليب صغير', 12, 'roz-small')">أضف للسلة</button>
+    </div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1585080500935-71b51c63ed39?w=400&amp;h=300&amp;fit=crop" alt="معمول صغير" loading="lazy">
+     <h3>معمول صغير</h3>
+     <p class="price">18 ريال</p>
+     <div class="quantity-control"><button class="qty-btn" onclick="updateQty('ma3mul-small', -1)">−</button> <span id="qty-ma3mul-small">1</span> <button class="qty-btn" onclick="updateQty('ma3mul-small', 1)">+</button>
+     </div><button class="add-to-cart" onclick="addToCart('معمول صغير', 18, 'ma3mul-small')">أضف للسلة</button>
+    </div>
    </div>
    <div class="cart-section">
     <h2>🛒 سلة التسوق</h2>
@@ -235,7 +306,9 @@ color:#aaa;
     </div>
     <div class="cart-total">
      الإجمالي: <span id="total">0</span> ريال
-    </div><button class="order-btn" onclick="sendOrder()" id="order-btn" style="display:none;"> إرسال الطلب عبر واتساب </button>
+    </div>
+    <div style="display:flex; gap:10px; margin-top:15px;"><button class="order-btn" onclick="sendOrder()" id="order-btn" style="display:none; flex:1;"> إرسال الطلب عبر واتساب </button> <button class="order-btn" id="whatsapp-btn" style="display:none; flex:1; background:linear-gradient(135deg, #25D366, #1ebe5d);" onclick="sendWhatsappMessage()"> إرسال استفسار عبر واتساب </button>
+    </div>
    </div>
   </section>
   <footer>
@@ -247,7 +320,10 @@ color:#aaa;
       haresa: 1,
       roz: 1,
       ma3mul: 1,
-      box: 1
+      box: 1,
+      'haresa-small': 1,
+      'roz-small': 1,
+      'ma3mul-small': 1
     };
 
     function updateQty(product, change) {
@@ -289,7 +365,7 @@ color:#aaa;
         totalPrice += itemTotal;
         html += `
           <div class="cart-item">
-            <button onclick="removeFromCart('${id}')" style="background:#d32f2f; border:none; color:white; padding:5px 10px; border-radius:5px; cursor:pointer;">حذف</button>
+            <button onclick="removeFromCart('${id}')" style="background:#d32f2f; border:none; color:white; padding:5px 10px; border-radius:5px; cursor:pointer; font-weight:bold;">🗑️ حذف</button>
             <span>${item.qty} × ${item.price} ريال = ${itemTotal} ريال</span>
             <span>${item.name}</span>
           </div>
@@ -299,6 +375,7 @@ color:#aaa;
       cartItems.innerHTML = html;
       total.textContent = totalPrice;
       orderBtn.style.display = 'block';
+      document.getElementById('whatsapp-btn').style.display = 'block';
     }
 
     function removeFromCart(id) {
@@ -320,6 +397,21 @@ color:#aaa;
       message += `%0A----%0Aالإجمالي: ${total} ريال`;
       window.open(`https://wa.me/966533175212?text=${message}`);
     }
+
+    function sendWhatsappMessage() {
+      let message = 'السلام عليكم ورحمة الله وبركاته%0Aأود الاستفسار عن:%0A%0A';
+      let total = 0;
+
+      for (let id in cart) {
+        const item = cart[id];
+        const itemTotal = item.price * item.qty;
+        total += itemTotal;
+        message += `${item.name} - ${item.qty} × ${item.price} ريال = ${itemTotal} ريال%0A`;
+      }
+
+      message += `%0A----%0Aالإجمالي: ${total} ريال`;
+      window.open(`https://wa.me/966533175212?text=${message}`);
+    }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d9195c00052f92d',t:'MTc3Mjk3MDIzNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d91b4f09325f925',t:'MTc3Mjk3MTUxMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
