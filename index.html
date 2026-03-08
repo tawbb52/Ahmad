@@ -1,104 +1,40 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>נטפליקס רוכשת את InterPositive</title>
+
+<title>شراء الآن</title>
 
 <style>
 
 body{
 margin:0;
 font-family:Arial, sans-serif;
-background:#0f0f0f;
-color:white;
-line-height:1.7;
+background:#111;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
 }
 
-.container{
-max-width:750px;
-margin:auto;
-background:#161616;
-padding:30px;
-}
+/* تخصيص زر Salla */
 
-h1{
-color:#e50914;
-font-size:30px;
-margin-bottom:20px;
-}
-
-p{
-font-size:18px;
-margin-bottom:18px;
-}
-
-.highlight{
-background:#262626;
-padding:16px;
-border-right:4px solid #e50914;
-border-radius:10px;
-margin:20px 0;
-}
-
-.cta{
-margin:30px 0;
-}
-
-.cta a{
+salla-mini-checkout-widget::part(button){
 background:#99C7BB;
 color:#0b3c3b;
+border-radius:20px;
 padding:18px;
-width:100%;
-display:block;
-text-align:center;
-border-radius:22px;
 font-size:22px;
 font-weight:bold;
-text-decoration:none;
-}
-
-.widget{
-background:#222;
-padding:20px;
-border-radius:12px;
-margin-top:20px;
-}
-
-.footer{
-text-align:center;
-font-size:14px;
-color:#aaa;
-padding-top:25px;
+width:100%;
+max-width:420px;
 }
 
 </style>
 </head>
 
 <body>
-
-<div class="container">
-
-<h1>נטפליקס רוכשת את InterPositive</h1>
-
-<p>
-סטארטאפ שהוקם על ידי בן אפלק ומפתח כלים מבוססי בינה מלאכותית ליוצרי סרטים.
-</p>
-
-<p>
-המערכת בונה מודלי AI מתוך חומרי הצילום היומיים של הסרט ומסייעת במשימות כמו תיקוני צבע,
-שינוי תאורה ואפקטים ויזואליים — תוך שמירה על כך שהיוצרים נשארים חלק מהתהליך היצירתי.
-</p>
-
-<div class="highlight">
-נטפליקס: הטכנולוגיה תעניק ליוצרים יותר אפשרויות, יותר שליטה ויותר הגנה על החזון היצירתי שלהם.
-</div>
-
-<div class="cta">
-<a href="#checkout">לחץ כאן עכשיו</a>
-</div>
-
-<div class="widget" id="checkout">
 
 <!-- Salla Mini Checkout Widget -->
 <script type="module" src="https://cdn.assets.salla.network/prod/@salla.sa/fast-checkout-widget/v0.0.25/widget.esm.js"></script>
@@ -107,15 +43,8 @@ padding-top:25px;
 store-id="312309981"
 products="[888651369]"
 language="ar"
+label="اشتري الآن"
 ></salla-mini-checkout-widget>
-
-</div>
-
-<div class="footer">
-כל הזכויות שמורות
-</div>
-
-</div>
 
 </body>
 </html>
