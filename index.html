@@ -1,340 +1,73 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>متجر أحمد العنزي</title>
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family: "Tahoma", Arial, sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plus Apps</title>
 
-    body{
-      background: linear-gradient(180deg, #050505, #101010 40%, #0b0b0b);
-      color: #fff;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      padding: 20px;
-    }
+<style>
+body{
+font-family: Arial;
+background:#0f172a;
+color:white;
+text-align:center;
+padding:40px;
+}
 
-    .phone{
-      width: 390px;
-      min-height: 100vh;
-      background: rgba(18,18,18,0.98);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 30px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.65);
-      position: relative;
-    }
+.container{
+max-width:600px;
+margin:auto;
+}
 
-    .topbar{
-      padding: 22px 20px 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
-    }
+h1{
+font-size:40px;
+margin-bottom:10px;
+}
 
-    .brand{
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: .5px;
-    }
+p{
+color:#cbd5f5;
+}
 
-    .brand span{
-      background: linear-gradient(90deg, #d4af37, #fff1b8, #c69214);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+.btn{
+display:inline-block;
+margin-top:20px;
+padding:12px 25px;
+background:#22c55e;
+color:white;
+text-decoration:none;
+border-radius:8px;
+}
 
-    .badge{
-      background: rgba(212,175,55,0.12);
-      color: #f1d67a;
-      border: 1px solid rgba(212,175,55,0.28);
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 12px;
-    }
+.card{
+background:#1e293b;
+padding:20px;
+margin-top:20px;
+border-radius:10px;
+}
+</style>
 
-    .hero{
-      margin: 12px 16px;
-      padding: 22px;
-      border-radius: 24px;
-      background:
-        linear-gradient(135deg, rgba(212,175,55,0.28), rgba(255,255,255,0.06)),
-        linear-gradient(160deg, #1d1d1d, #111);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
-    }
-
-    .hero h1{
-      font-size: 26px;
-      margin-bottom: 8px;
-      line-height: 1.4;
-    }
-
-    .hero p{
-      color: #d0d0d0;
-      font-size: 14px;
-      line-height: 1.8;
-      margin-bottom: 16px;
-    }
-
-    .hero .btns{
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .btn{
-      border: none;
-      border-radius: 14px;
-      padding: 12px 18px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: .25s ease;
-    }
-
-    .btn.gold{
-      background: linear-gradient(90deg, #d4af37, #f5dc84);
-      color: #111;
-      font-weight: 700;
-    }
-
-    .btn.dark{
-      background: #1a1a1a;
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .search-box{
-      margin: 14px 16px 10px;
-      background: #111;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .search-box input{
-      width: 100%;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: #fff;
-      font-size: 14px;
-    }
-
-    .search-box input::placeholder{
-      color: #8f8f8f;
-    }
-
-    .tabs{
-      display: flex;
-      gap: 10px;
-      padding: 8px 16px 14px;
-      overflow-x: auto;
-    }
-
-    .tabs::-webkit-scrollbar{
-      display:none;
-    }
-
-    .tab{
-      background: #151515;
-      border: 1px solid rgba(255,255,255,0.08);
-      color: #d7d7d7;
-      padding: 10px 16px;
-      border-radius: 999px;
-      white-space: nowrap;
-      font-size: 13px;
-    }
-
-    .tab.active{
-      background: linear-gradient(90deg, #d4af37, #f5dc84);
-      color: #111;
-      font-weight: 700;
-      border: none;
-    }
-
-    .section-title{
-      padding: 0 18px 12px;
-      font-size: 18px;
-      font-weight: 700;
-    }
-
-    .apps{
-      padding: 0 16px 100px;
-    }
-
-    .app-card{
-      background: linear-gradient(180deg, #171717, #121212);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 20px;
-      padding: 14px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 12px;
-      transition: transform .2s ease, border-color .2s ease;
-    }
-
-    .app-card:hover{
-      transform: translateY(-2px);
-      border-color: rgba(212,175,55,0.35);
-    }
-
-    .icon{
-      width: 58px;
-      height: 58px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, #d4af37, #7a5a10);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #111;
-      font-size: 22px;
-      font-weight: bold;
-      flex-shrink: 0;
-      box-shadow: 0 10px 25px rgba(212,175,55,0.18);
-    }
-
-    .app-info{
-      flex: 1;
-    }
-
-    .app-info h3{
-      font-size: 17px;
-      margin-bottom: 5px;
-    }
-
-    .app-info p{
-      color: #a9a9a9;
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    .version{
-      color: #f1d67a;
-      font-size: 12px;
-      margin-top: 4px;
-    }
-
-    .download{
-      background: linear-gradient(90deg, #d4af37, #f5dc84);
-      color: #111;
-      border: none;
-      border-radius: 12px;
-      padding: 10px 14px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .bottom-nav{
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      background: rgba(12,12,12,0.96);
-      border-top: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      justify-content: space-around;
-      padding: 14px 8px 18px;
-      backdrop-filter: blur(10px);
-    }
-
-    .nav-item{
-      text-align: center;
-      font-size: 12px;
-      color: #9d9d9d;
-    }
-
-    .nav-item.active{
-      color: #f1d67a;
-      font-weight: 700;
-    }
-  </style>
 </head>
+
 <body>
-  <div class="phone">
-    <div class="topbar">
-      <div class="brand">متجر <span>أحمد العنزي</span></div>
-      <div class="badge">نسخة فاخرة</div>
-    </div>
 
-    <div class="hero">
-      <h1>أهلاً بك في متجر أحمد العنزي</h1>
-      <p>
-        متجر احترافي بتصميم فاخر وأنيق، مخصص لعرض التطبيقات والخدمات الرقمية
-        بشكل راقٍ وسريع وسهل الاستخدام.
-      </p>
-      <div class="btns">
-        <button class="btn gold">استعراض المتجر</button>
-        <button class="btn dark">الأكثر تحميلاً</button>
-      </div>
-    </div>
+<div class="container">
 
-    <div class="search-box">
-      <span>🔍</span>
-      <input type="text" placeholder="ابحث عن التطبيق أو الخدمة..." />
-    </div>
+<h1>Plus Apps</h1>
 
-    <div class="tabs">
-      <div class="tab active">الكل</div>
-      <div class="tab">الأحدث</div>
-      <div class="tab">الأكثر شهرة</div>
-      <div class="tab">الألعاب</div>
-      <div class="tab">الأدوات</div>
-    </div>
+<p>منصة لتحميل التطبيقات والأدوات</p>
 
-    <div class="section-title">التطبيقات المميزة</div>
+<div class="card">
+<h2>التطبيقات</h2>
+<p>هنا ستظهر التطبيقات المتوفرة في المنصة</p>
+<a class="btn" href="#">عرض التطبيقات</a>
+</div>
 
-    <div class="apps">
-      <div class="app-card">
-        <div class="icon">A</div>
-        <div class="app-info">
-          <h3>Ahmed Store App</h3>
-          <p>تطبيق المتجر الرسمي بواجهة أنيقة وسرعة عالية وتجربة استخدام فخمة.</p>
-          <div class="version">الإصدار 1.0.0</div>
-        </div>
-        <button class="download">تنزيل</button>
-      </div>
+<div class="card">
+<h2>عن المشروع</h2>
+<p>مشروع لتوفير تطبيقات وأدوات للمستخدمين</p>
+</div>
 
-      <div class="app-card">
-        <div class="icon">P</div>
-        <div class="app-info">
-          <h3>Pro Tools</h3>
-          <p>مجموعة أدوات احترافية مصممة لتوفير أفضل أداء وتنظيم داخل المتجر.</p>
-          <div class="version">الإصدار 2.4.1</div>
-        </div>
-        <button class="download">تنزيل</button>
-      </div>
+</div>
 
-      <div class="app-card">
-        <div class="icon">G</div>
-        <div class="app-info">
-          <h3>Golden Apps</h3>
-          <p>تطبيقات مختارة بعناية بطابع فاخر وجودة عالية تناسب المتجر المميز.</p>
-          <div class="version">الإصدار 3.2.0</div>
-        </div>
-        <button class="download">تنزيل</button>
-      </div>
-    </div>
-
-    <div class="bottom-nav">
-      <div class="nav-item active">الرئيسية</div>
-      <div class="nav-item">التطبيقات</div>
-      <div class="nav-item">الأقسام</div>
-      <div class="nav-item">التنزيلات</div>
-      <div class="nav-item">الإعدادات</div>
-    </div>
-  </div>
 </body>
 </html>
