@@ -1,122 +1,325 @@
-<!DOCTYPE html>
-<html lang="he" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>רכישה מהירה</title>
+<!doctype html>
+<html lang="ar" dir="rtl">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>متجر شوق</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
-      line-height: 1.7;
-    }
+body{
+margin:0;
+font-family:Tahoma;
+background:#111;
+color:white;
+text-align:center;
+}
 
-    .wrap {
-      max-width: 760px;
-      margin: 0 auto;
-      min-height: 100vh;
-      background: #1a1a1a;
-      padding: 32px 20px;
-    }
+header{
+padding:40px 20px;
+background:linear-gradient(45deg,#000,#222);
+}
 
-    .card {
-      background: #222;
-      border-radius: 20px;
-      padding: 28px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-    }
+header h1{
+font-size:40px;
+margin:10px 0;
+}
 
-    h1 {
-      margin: 0 0 16px;
-      font-size: 32px;
-      color: #ffffff;
-      text-align: center;
-    }
+header p{
+color:#ccc;
+}
 
-    .subtitle {
-      text-align: center;
-      font-size: 18px;
-      color: #d8d8d8;
-      margin-bottom: 28px;
-    }
+.store-img{
+width:100%;
+max-height:350px;
+object-fit:cover;
+}
 
-    .info {
-      background: #2a2a2a;
-      border-radius: 14px;
-      padding: 18px;
-      margin-bottom: 24px;
-      color: #f1f1f1;
-      font-size: 17px;
-    }
+.products{
+padding:40px 20px;
+}
 
-    .button-area {
-      margin-top: 24px;
-    }
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+max-width:900px;
+margin:auto;
+}
 
-    .buy-btn {
-      display: block;
-      width: 100%;
-      text-align: center;
-      text-decoration: none;
-      background: #99C7BB;
-      color: #0b3c3b;
-      font-size: 28px;
-      font-weight: 700;
-      padding: 22px 18px;
-      border-radius: 20px;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
+.card{
+background:#1b1b1b;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 6px 15px rgba(0,0,0,.4);
+transition:.3s;
+}
 
-    .buy-btn:hover {
-      transform: translateY(-1px);
-      opacity: 0.96;
-    }
+.card:hover{
+transform:translateY(-5px);
+}
 
-    .note {
-      text-align: center;
-      color: #bdbdbd;
-      font-size: 14px;
-      margin-top: 18px;
-    }
+.card img{
+width:100%;
+height:160px;
+object-fit:cover;
+}
 
-    .footer {
-      text-align: center;
-      color: #8f8f8f;
-      font-size: 13px;
-      margin-top: 24px;
-    }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <div class="card">
-      <h1>רכישה מהירה ובטוחה</h1>
-      <div class="subtitle">המשיכו לעמוד התשלום כדי להשלים את ההזמנה</div>
+.card h3{
+margin:15px 0;
+}
 
-      <div class="info">
-        לחצו על הכפתור למטה כדי לעבור ישירות לעמוד הרכישה.
-      </div>
+.btn{
+display:inline-block;
+margin:30px;
+padding:15px 35px;
+background:#25D366;
+color:white;
+font-size:20px;
+text-decoration:none;
+border-radius:10px;
+transition:.3s;
+}
 
-      <div class="button-area">
-        <a class="buy-btn" href="https://b52-store.com/ar/payment/p888651369" target="_blank" rel="noopener noreferrer">
-          קנו עכשיו
-        </a>
-      </div>
+.btn:hover{
+background:#1ebe5d;
+}
 
-      <div class="note">
-        מעבר ישיר לעמוד התשלום
-      </div>
+.price{
+color:#25D366;
+font-size:18px;
+font-weight:bold;
+margin:10px 0;
+}
+
+.quantity-control{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+margin:10px 0;
+}
+
+.qty-btn{
+background:#333;
+border:none;
+color:white;
+width:30px;
+height:30px;
+border-radius:5px;
+cursor:pointer;
+transition:.2s;
+}
+
+.qty-btn:hover{
+background:#444;
+}
+
+.add-to-cart{
+background:#ff9800;
+border:none;
+color:white;
+padding:10px 20px;
+border-radius:8px;
+cursor:pointer;
+transition:.3s;
+margin-bottom:10px;
+width:90%;
+}
+
+.add-to-cart:hover{
+background:#e68900;
+}
+
+.cart-section{
+margin:30px 20px;
+padding:20px;
+background:#1b1b1b;
+border-radius:15px;
+max-width:900px;
+margin-left:auto;
+margin-right:auto;
+}
+
+.cart-items{
+text-align:right;
+margin:15px 0;
+}
+
+.cart-item{
+display:flex;
+justify-content:space-between;
+padding:10px;
+background:#2a2a2a;
+margin:5px 0;
+border-radius:8px;
+}
+
+.cart-total{
+font-size:18px;
+font-weight:bold;
+color:#25D366;
+margin:15px 0;
+padding:15px;
+border-top:2px solid #333;
+}
+
+.order-btn{
+background:#25D366;
+width:100%;
+padding:15px;
+border:none;
+color:white;
+font-size:18px;
+border-radius:10px;
+cursor:pointer;
+transition:.3s;
+}
+
+.order-btn:hover{
+background:#1ebe5d;
+}
+
+.empty-cart{
+color:#aaa;
+padding:20px;
+}
+
+footer{
+padding:20px;
+color:#aaa;
+}
+
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+ </head>
+ <body>
+  <header>
+   <h1>متجر شوق</h1>
+   <p>حلويات فاخرة للمناسبات</p>
+  </header><img class="store-img" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&amp;fit=crop" alt="متجر شوق" loading="lazy">
+  <section class="products">
+   <h2>منتجاتنا</h2>
+   <div class="grid">
+    <div class="card"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&amp;h=300&amp;fit=crop" alt="هريسة" loading="lazy">
+     <h3>هريسة</h3>
+     <p class="price">50 ريال</p>
+     <div class="quantity-control"><button class="qty-btn" onclick="updateQty('haresa', -1)">−</button> <span id="qty-haresa">1</span> <button class="qty-btn" onclick="updateQty('haresa', 1)">+</button>
+     </div><button class="add-to-cart" onclick="addToCart('هريسة', 50, 'haresa')">أضف للسلة</button>
     </div>
-
-    <div class="footer">
-      כל הזכויות שמורות
+    <div class="card"><img src="https://images.unsplash.com/photo-1599599810694-b5ac4dd0b7a0?w=400&amp;h=300&amp;fit=crop" alt="رز بحليب" loading="lazy">
+     <h3>رز بحليب</h3>
+     <p class="price">45 ريال</p>
+     <div class="quantity-control"><button class="qty-btn" onclick="updateQty('roz', -1)">−</button> <span id="qty-roz">1</span> <button class="qty-btn" onclick="updateQty('roz', 1)">+</button>
+     </div><button class="add-to-cart" onclick="addToCart('رز بحليب', 45, 'roz')">أضف للسلة</button>
     </div>
-  </div>
-</body>
+    <div class="card"><img src="https://images.unsplash.com/photo-1585080500935-71b51c63ed39?w=400&amp;h=300&amp;fit=crop" alt="معمول" loading="lazy">
+     <h3>معمول</h3>
+     <p class="price">60 ريال</p>
+     <div class="quantity-control"><button class="qty-btn" onclick="updateQty('ma3mul', -1)">−</button> <span id="qty-ma3mul">1</span> <button class="qty-btn" onclick="updateQty('ma3mul', 1)">+</button>
+     </div><button class="add-to-cart" onclick="addToCart('معمول', 60, 'ma3mul')">أضف للسلة</button>
+    </div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=400&amp;h=300&amp;fit=crop" alt="بوكس حلويات" loading="lazy">
+     <h3>بوكس حلويات</h3>
+     <p class="price">120 ريال</p>
+     <div class="quantity-control"><button class="qty-btn" onclick="updateQty('box', -1)">−</button> <span id="qty-box">1</span> <button class="qty-btn" onclick="updateQty('box', 1)">+</button>
+     </div><button class="add-to-cart" onclick="addToCart('بوكس حلويات', 120, 'box')">أضف للسلة</button>
+    </div>
+   </div>
+   <div class="cart-section">
+    <h2>🛒 سلة التسوق</h2>
+    <div id="cart-items" class="cart-items">
+     <p class="empty-cart">السلة فارغة</p>
+    </div>
+    <div class="cart-total">
+     الإجمالي: <span id="total">0</span> ريال
+    </div><button class="order-btn" onclick="sendOrder()" id="order-btn" style="display:none;"> إرسال الطلب عبر واتساب </button>
+   </div>
+  </section>
+  <footer>
+   © متجر شوق
+  </footer>
+  <script>
+    let cart = {};
+    let quantities = {
+      haresa: 1,
+      roz: 1,
+      ma3mul: 1,
+      box: 1
+    };
+
+    function updateQty(product, change) {
+      quantities[product] += change;
+      if (quantities[product] < 1) quantities[product] = 1;
+      document.getElementById('qty-' + product).textContent = quantities[product];
+    }
+
+    function addToCart(name, price, id) {
+      const qty = quantities[id];
+      if (cart[id]) {
+        cart[id].qty += qty;
+      } else {
+        cart[id] = { name, price, qty };
+      }
+      quantities[id] = 1;
+      document.getElementById('qty-' + id).textContent = '1';
+      updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+      const cartItems = document.getElementById('cart-items');
+      const total = document.getElementById('total');
+      const orderBtn = document.getElementById('order-btn');
+
+      if (Object.keys(cart).length === 0) {
+        cartItems.innerHTML = '<p class="empty-cart">السلة فارغة</p>';
+        total.textContent = '0';
+        orderBtn.style.display = 'none';
+        return;
+      }
+
+      let html = '';
+      let totalPrice = 0;
+
+      for (let id in cart) {
+        const item = cart[id];
+        const itemTotal = item.price * item.qty;
+        totalPrice += itemTotal;
+        html += `
+          <div class="cart-item">
+            <button onclick="removeFromCart('${id}')" style="background:#d32f2f; border:none; color:white; padding:5px 10px; border-radius:5px; cursor:pointer;">حذف</button>
+            <span>${item.qty} × ${item.price} ريال = ${itemTotal} ريال</span>
+            <span>${item.name}</span>
+          </div>
+        `;
+      }
+
+      cartItems.innerHTML = html;
+      total.textContent = totalPrice;
+      orderBtn.style.display = 'block';
+    }
+
+    function removeFromCart(id) {
+      delete cart[id];
+      updateCartDisplay();
+    }
+
+    function sendOrder() {
+      let message = 'طلبي من متجر شوق:%0A%0A';
+      let total = 0;
+
+      for (let id in cart) {
+        const item = cart[id];
+        const itemTotal = item.price * item.qty;
+        total += itemTotal;
+        message += `${item.name} - ${item.qty} × ${item.price} ريال = ${itemTotal} ريال%0A`;
+      }
+
+      message += `%0A----%0Aالإجمالي: ${total} ريال`;
+      window.open(`https://wa.me/966533175212?text=${message}`);
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d9195c00052f92d',t:'MTc3Mjk3MDIzNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
