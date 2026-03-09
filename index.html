@@ -1,78 +1,173 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="UTF-8">
-<title>متجر أحمد الرقمي للصم</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>متجر أحمد الرقمي للصم</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      direction: rtl;
+      margin: 0;
+      background: #f5f5f5;
+      color: #222;
+      text-align: center;
+    }
 
-<style>
-body{
-font-family: Arial;
-direction: rtl;
-text-align:center;
-background:#f4f4f4;
-}
+    .header {
+      background: #111;
+      color: white;
+      padding: 25px 15px;
+    }
 
-.box{
-background:white;
-width:85%;
-max-width:500px;
-margin:80px auto;
-padding:30px;
-border-radius:15px;
-}
+    .header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
 
-select, input{
-width:90%;
-padding:10px;
-margin:10px;
-font-size:16px;
-}
+    .header p {
+      margin-top: 10px;
+      color: #ddd;
+    }
 
-button{
-background:#25D366;
-color:white;
-border:none;
-padding:12px 20px;
-font-size:16px;
-border-radius:8px;
-cursor:pointer;
-}
-</style>
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 30px auto;
+    }
+
+    .name-box {
+      background: white;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      margin-bottom: 25px;
+    }
+
+    .name-box input {
+      width: 90%;
+      max-width: 400px;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      outline: none;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding-bottom: 20px;
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card h3 {
+      margin: 15px 10px 8px;
+      font-size: 20px;
+    }
+
+    .price {
+      font-size: 18px;
+      color: #0a7f2e;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .btn {
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .footer {
+      margin: 35px 0 20px;
+      color: #666;
+      font-size: 14px;
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="box">
+  <div class="header">
+    <h1>متجر أحمد الرقمي للصم</h1>
+    <p>اختر الاشتراك المناسب ثم اطلبه عبر واتساب</p>
+  </div>
 
-<h2>متجر أحمد الرقمي للصم</h2>
+  <div class="container">
 
-<input type="text" id="name" placeholder="اكتب اسمك">
+    <div class="name-box">
+      <h2>اكتب اسمك</h2>
+      <input type="text" id="customerName" placeholder="مثال: أحمد">
+    </div>
 
-<select id="product">
-<option value="اشتراك تطبيقات بلس - 45 ريال">اشتراك تطبيقات بلس - 45 ريال</option>
-<option value="اشتراك شاهد VIP مسلسلات - 8 ريال">اشتراك شاهد VIP مسلسلات - 8 ريال</option>
-<option value="اشتراك نتفلكس ملف خاص - 18 ريال">اشتراك نتفلكس ملف خاص - 18 ريال</option>
-</select>
+    <div class="products">
 
-<button onclick="sendWhats()">اشتراك عبر واتساب</button>
+      <div class="card">
+        <img src="plus.jpg" alt="اشتراك تطبيقات بلس">
+        <h3>اشتراك تطبيقات بلس</h3>
+        <div class="price">45 ريال</div>
+        <button class="btn" onclick="orderNow('اشتراك تطبيقات بلس - 45 ريال')">اطلب عبر واتساب</button>
+      </div>
 
-</div>
+      <div class="card">
+        <img src="shahid.jpg" alt="اشتراك شاهد VIP مسلسلات">
+        <h3>اشتراك شاهد VIP مسلسلات</h3>
+        <div class="price">8 ريال</div>
+        <button class="btn" onclick="orderNow('اشتراك شاهد VIP مسلسلات - 8 ريال')">اطلب عبر واتساب</button>
+      </div>
 
-<script>
-function sendWhats(){
+      <div class="card">
+        <img src="netflix.jpg" alt="اشتراك نتفلكس ملف خاص">
+        <h3>اشتراك نتفلكس ملف خاص</h3>
+        <div class="price">18 ريال</div>
+        <button class="btn" onclick="orderNow('اشتراك نتفلكس ملف خاص - 18 ريال')">اطلب عبر واتساب</button>
+      </div>
 
-var name = document.getElementById("name").value;
-var product = document.getElementById("product").value;
+    </div>
 
-var phone = "966504106065"; 
+    <div class="footer">
+      جميع الحقوق محفوظة © متجر أحمد الرقمي للصم
+    </div>
 
-var message = "مرحبا، اسمي " + name + " أريد " + product;
+  </div>
 
-var url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
+  <script>
+    function orderNow(product) {
+      var name = document.getElementById("customerName").value.trim();
+      var phone = "966XXXXXXXXX"; // ضع رقم واتساب هنا بدون +
 
-window.open(url);
-}
-</script>
+      if (name === "") {
+        alert("فضلاً اكتب اسمك أولاً");
+        return;
+      }
+
+      var message = "السلام عليكم، اسمي " + name + " وأرغب في " + product;
+      var url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
+      window.open(url, "_blank");
+    }
+  </script>
 
 </body>
 </html>
