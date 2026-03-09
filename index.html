@@ -1,558 +1,61 @@
-<button onclick="showPayment()">🚀 اشترك الآن</button>
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>متجر أحمد الرقمي للصم</title>
 
-<div id="paymentBox" style="display:none;">
-<h3>الدفع عبر تحويل الراجحي</h3>
+<style>
+body{
+font-family: Arial;
+direction: rtl;
+text-align: center;
+background:#f2f2f2;
+}
 
-<p>الباقة: Plus</p>
-<p>السعر: 4.99$ شهرياً</p>
+.box{
+background:white;
+width:80%;
+max-width:600px;
+margin:100px auto;
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 10px rgba(0,0,0,0.1);
+}
 
-<p><b>اسم البنك:</b> الراجحي</p>
-<p><b>اسم الحساب:</b> اسمك</p>
-<p><b>رقم الآيبان:</b> SAxxxxxxxxxxxxxxxx</p>
+h1{
+color:#222;
+}
 
-<p>بعد التحويل أرسل صورة التحويل عبر واتساب</p>
+p{
+font-size:18px;
+color:#555;
+}
 
-<a href="https://wa.me/966XXXXXXXXX">إرسال إثبات الدفع</a>
+button{
+background:#0077ff;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:8px;
+font-size:16px;
+cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+<h1>متجر أحمد الرقمي للصم</h1>
+
+<p>مرحباً بكم في متجر أحمد الرقمي</p>
+
+<p>هنا نقدم خدمات ومنتجات رقمية مخصصة للصم</p>
+
+<button>تواصل معنا</button>
+
 </div>
 
-<script>
-function showPayment(){
-document.getElementById("paymentBox").style.display="block";
-}
-</script>
-<!doctype html>
-<html lang="ar" dir="rtl" class="h-full">
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تطبيقات بلس - احمد العنزي</title>
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <script src="/_sdk/element_sdk.js"></script>
-  <script src="/_sdk/data_sdk.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
-  <style>
-    * { font-family: 'Tajawal', sans-serif; }
-    .tab-bar { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-    .card-glass { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-    .app-icon { border-radius: 22.5%; }
-    .scrollbar-hide::-webkit-scrollbar { display: none; }
-    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-    .animate-slide-up { animation: slideUp 0.4s ease-out forwards; }
-    .animate-pulse-soft { animation: pulse 2s ease-in-out infinite; }
-    .status-dot { width: 8px; height: 8px; border-radius: 50%; }
-  </style>
-  <style>body { box-sizing: border-box; }</style>
- </head>
- <body class="h-full bg-gray-100 overflow-auto">
-  <div id="app" class="h-full w-full bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
-   <!-- الشاشات -->
-   <div id="screens" class="h-full">
-    <!-- شاشة المتجر -->
-    <div id="store-screen" class="h-full flex flex-col pb-20 overflow-auto scrollbar-hide">
-     <!-- الهيدر -->
-     <div class="sticky top-0 z-10 bg-gradient-to-b from-slate-900 to-transparent pt-12 pb-4 px-5">
-      <div class="flex items-center justify-between mb-2">
-       <div>
-        <p id="welcome-text" class="text-gray-400 text-sm">مرحباً بك 👋</p>
-        <h1 id="store-name" class="text-white text-2xl font-bold">تطبيقات بلس</h1>
-       </div>
-       <div class="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center">
-        <span class="text-white text-lg">👤</span>
-       </div>
-      </div><!-- البحث -->
-      <div class="relative mt-4">
-       <input type="text" placeholder="ابحث عن التطبيقات..." class="w-full bg-slate-800/80 text-white placeholder-gray-500 rounded-2xl py-3 px-5 pr-12 outline-none border border-slate-700 focus:border-cyan-500 transition-all"> <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500">🔍</span>
-      </div>
-     </div><!-- المحتوى -->
-     <div class="px-5 space-y-6 pb-8">
-      <!-- البانر -->
-      <div class="relative bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-700 rounded-3xl p-6 overflow-hidden animate-slide-up">
-       <div class="absolute top-0 left-0 w-full h-full opacity-20">
-        <div class="absolute top-4 left-4 w-20 h-20 bg-white rounded-full blur-2xl"></div>
-        <div class="absolute bottom-4 right-4 w-32 h-32 bg-cyan-300 rounded-full blur-3xl"></div>
-       </div>
-       <div class="relative z-10">
-        <span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full">جديد</span>
-        <h2 class="text-white text-xl font-bold mt-3">احصل على Premium</h2>
-        <p class="text-white/80 text-sm mt-1">وصول غير محدود لجميع التطبيقات</p><button onclick="showSubscribe()" class="mt-4 bg-white text-blue-600 font-bold py-2 px-6 rounded-xl hover:scale-105 transition-transform"> اشترك الآن </button>
-       </div>
-      </div><!-- التصنيفات -->
-      <div>
-       <h3 class="text-white font-bold text-lg mb-3">التصنيفات</h3>
-       <div class="flex gap-3 overflow-x-auto scrollbar-hide pb-2">
-        <button class="flex-shrink-0 bg-cyan-500 text-white px-5 py-2 rounded-xl text-sm font-medium">الكل</button> <button class="flex-shrink-0 bg-slate-800 text-gray-300 px-5 py-2 rounded-xl text-sm hover:bg-slate-700 transition-colors">ألعاب</button> <button class="flex-shrink-0 bg-slate-800 text-gray-300 px-5 py-2 rounded-xl text-sm hover:bg-slate-700 transition-colors">إنتاجية</button> <button class="flex-shrink-0 bg-slate-800 text-gray-300 px-5 py-2 rounded-xl text-sm hover:bg-slate-700 transition-colors">تواصل</button> <button class="flex-shrink-0 bg-slate-800 text-gray-300 px-5 py-2 rounded-xl text-sm hover:bg-slate-700 transition-colors">تعليم</button>
-       </div>
-      </div><!-- التطبيقات المميزة -->
-      <div>
-       <div class="flex items-center justify-between mb-3">
-        <h3 class="text-white font-bold text-lg">تطبيقات مميزة</h3><span class="text-cyan-400 text-sm">عرض الكل</span>
-       </div>
-       <div class="grid grid-cols-2 gap-3">
-        <!-- تطبيق 1 -->
-        <div class="bg-slate-800/60 card-glass rounded-2xl p-4 border border-slate-700/50 hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/20 transition-all animate-slide-up cursor-pointer transform hover:scale-105" style="animation-delay: 0.1s">
-         <div class="app-icon w-14 h-14 bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center text-2xl mb-3 shadow-lg shadow-pink-500/30">
-          📸
-         </div>
-         <h4 class="text-white font-bold text-sm">PhotoEdit Pro</h4>
-         <p class="text-gray-500 text-xs mt-1">تعديل الصور احترافي</p>
-         <div class="flex items-center justify-between mt-3">
-          <span class="text-yellow-400 text-xs font-bold">⭐ 4.9</span> <button class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-xs px-3 py-1.5 rounded-lg hover:shadow-lg transition-all font-semibold">تحميل</button>
-         </div>
-        </div><!-- تطبيق 2 -->
-        <div class="bg-slate-800/60 card-glass rounded-2xl p-4 border border-slate-700/50 hover:border-green-500/50 hover:shadow-lg hover:shadow-green-500/20 transition-all animate-slide-up cursor-pointer transform hover:scale-105" style="animation-delay: 0.15s">
-         <div class="app-icon w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-2xl mb-3 shadow-lg shadow-green-500/30">
-          🎮
-         </div>
-         <h4 class="text-white font-bold text-sm">GameBox</h4>
-         <p class="text-gray-500 text-xs mt-1">ألعاب ممتعة</p>
-         <div class="flex items-center justify-between mt-3">
-          <span class="text-yellow-400 text-xs font-bold">⭐ 4.8</span> <button class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-xs px-3 py-1.5 rounded-lg hover:shadow-lg transition-all font-semibold">تحميل</button>
-         </div>
-        </div><!-- تطبيق 3 -->
-        <div class="bg-slate-800/60 card-glass rounded-2xl p-4 border border-slate-700/50 hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/20 transition-all animate-slide-up cursor-pointer transform hover:scale-105" style="animation-delay: 0.2s">
-         <div class="app-icon w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-2xl mb-3 shadow-lg shadow-blue-500/30">
-          💬
-         </div>
-         <h4 class="text-white font-bold text-sm">ChatPlus</h4>
-         <p class="text-gray-500 text-xs mt-1">تواصل فوري</p>
-         <div class="flex items-center justify-between mt-3">
-          <span class="text-yellow-400 text-xs font-bold">⭐ 4.7</span> <button class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-xs px-3 py-1.5 rounded-lg hover:shadow-lg transition-all font-semibold">تحميل</button>
-         </div>
-        </div><!-- تطبيق 4 -->
-        <div class="bg-slate-800/60 card-glass rounded-2xl p-4 border border-slate-700/50 hover:border-orange-500/50 hover:shadow-lg hover:shadow-orange-500/20 transition-all animate-slide-up cursor-pointer transform hover:scale-105" style="animation-delay: 0.25s">
-         <div class="app-icon w-14 h-14 bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center text-2xl mb-3 shadow-lg shadow-orange-500/30">
-          📚
-         </div>
-         <h4 class="text-white font-bold text-sm">LearnHub</h4>
-         <p class="text-gray-500 text-xs mt-1">تعليم مستمر</p>
-         <div class="flex items-center justify-between mt-3">
-          <span class="text-yellow-400 text-xs font-bold">⭐ 4.9</span> <button class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-xs px-3 py-1.5 rounded-lg hover:shadow-lg transition-all font-semibold">تحميل</button>
-         </div>
-        </div>
-       </div>
-      </div><!-- تطبيقات اليوم -->
-      <div>
-       <h3 class="text-white font-bold text-lg mb-3">تطبيقات اليوم</h3>
-       <div class="space-y-3">
-        <div class="bg-gradient-to-br from-purple-500/20 to-violet-600/20 card-glass rounded-2xl p-5 flex items-center gap-4 border border-purple-500/30 hover:border-purple-400/60 hover:shadow-lg hover:shadow-purple-500/20 transition-all cursor-pointer">
-         <div class="app-icon w-16 h-16 bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center text-3xl shadow-lg shadow-purple-500/30 flex-shrink-0">
-          🎵
-         </div>
-         <div class="flex-1">
-          <h4 class="text-white font-bold text-sm">MusicStream Pro</h4>
-          <p class="text-gray-400 text-xs mt-0.5">موسيقى بجودة عالية وبودكاست</p>
-          <div class="flex items-center gap-2 mt-2">
-           <span class="text-yellow-400 text-xs font-bold">⭐ 4.9</span> <span class="text-gray-600 text-xs">•</span> <span class="text-gray-500 text-xs">50K+ تحميل</span>
-          </div>
-         </div><button class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-5 py-2 rounded-xl text-sm font-bold hover:shadow-lg transition-all flex-shrink-0">تحميل</button>
-        </div>
-        <div class="bg-gradient-to-br from-red-500/20 to-pink-600/20 card-glass rounded-2xl p-5 flex items-center gap-4 border border-red-500/30 hover:border-red-400/60 hover:shadow-lg hover:shadow-red-500/20 transition-all cursor-pointer">
-         <div class="app-icon w-16 h-16 bg-gradient-to-br from-red-500 to-pink-600 flex items-center justify-center text-3xl shadow-lg shadow-red-500/30 flex-shrink-0">
-          🎬
-         </div>
-         <div class="flex-1">
-          <h4 class="text-white font-bold text-sm">VideoMaker Elite</h4>
-          <p class="text-gray-400 text-xs mt-0.5">تعديل فيديو احترافي مع مرشحات</p>
-          <div class="flex items-center gap-2 mt-2">
-           <span class="text-yellow-400 text-xs font-bold">⭐ 4.8</span> <span class="text-gray-600 text-xs">•</span> <span class="text-gray-500 text-xs">30K+ تحميل</span>
-          </div>
-         </div><button class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-5 py-2 rounded-xl text-sm font-bold hover:shadow-lg transition-all flex-shrink-0">تحميل</button>
-        </div>
-       </div>
-      </div>
-     </div>
-    </div><!-- شاشة الاشتراك -->
-    <div id="subscribe-screen" class="h-full flex-col pb-20 overflow-auto scrollbar-hide hidden">
-     <div class="sticky top-0 z-10 bg-slate-900 pt-12 pb-4 px-5">
-      <div class="flex items-center gap-4">
-       <button onclick="showStore()" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center text-white">←</button>
-       <h1 class="text-white text-xl font-bold">الاشتراكات</h1>
-      </div>
-     </div>
-     <div class="px-5 space-y-4 pb-8">
-      <!-- خطة مجانية -->
-      <div class="bg-slate-800/60 card-glass rounded-2xl p-5 border border-slate-700/50">
-       <div class="flex items-center justify-between mb-4">
-        <div>
-         <h3 class="text-white font-bold text-lg">مجاني</h3>
-         <p class="text-gray-500 text-sm">للمستخدمين الجدد</p>
-        </div>
-        <div class="text-left">
-         <span class="text-cyan-400 text-2xl font-bold">$0</span>
-         <p class="text-gray-500 text-xs">/شهرياً</p>
-        </div>
-       </div>
-       <div class="space-y-2 mb-4">
-        <p class="text-gray-400 text-sm flex items-center gap-2"><span class="text-green-400">✓</span> 5 تطبيقات مجانية</p>
-        <p class="text-gray-400 text-sm flex items-center gap-2"><span class="text-green-400">✓</span> إعلانات محدودة</p>
-        <p class="text-gray-500 text-sm flex items-center gap-2"><span class="text-red-400">✗</span> تطبيقات Premium</p>
-       </div><button class="w-full bg-slate-700 text-gray-400 py-3 rounded-xl font-medium">الخطة الحالية</button>
-      </div><!-- خطة Plus -->
-      <div class="bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-2xl p-5 border-2 border-cyan-500 relative overflow-hidden">
-       <div class="absolute top-4 right-4 bg-cyan-500 text-white text-xs px-3 py-1 rounded-full font-bold">
-        ⭐ الأكثر شعبية
-       </div>
-       <div class="flex items-center justify-between mb-5 mt-2">
-        <div>
-         <h3 class="text-white font-bold text-xl">خطة Plus</h3>
-         <p class="text-cyan-300 text-sm font-medium">للمستخدمين النشطين</p>
-        </div>
-        <div class="text-left">
-         <span class="text-cyan-300 text-3xl font-black">$4.99</span>
-         <p class="text-gray-400 text-xs font-medium">/شهرياً</p>
-        </div>
-       </div>
-       <div class="space-y-2.5 mb-5 bg-black/20 rounded-lg p-4">
-        <p class="text-gray-100 text-sm flex items-center gap-3"><span class="text-green-400 text-lg">✓</span> جميع التطبيقات المجانية</p>
-        <p class="text-gray-100 text-sm flex items-center gap-3"><span class="text-green-400 text-lg">✓</span> بدون إعلانات مزعجة</p>
-        <p class="text-gray-100 text-sm flex items-center gap-3"><span class="text-green-400 text-lg">✓</span> 50+ تطبيق Premium</p>
-        <p class="text-gray-100 text-sm flex items-center gap-3"><span class="text-green-400 text-lg">✓</span> دعم فني سريع</p>
-       </div><button onclick="showSubscribeForm('plus')" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-3.5 rounded-2xl font-black text-lg hover:opacity-90 hover:shadow-xl transition-all shadow-lg shadow-cyan-500/30 animate-pulse-soft"> اشترك الآن 🚀 </button>
-      </div><!-- خطة Premium -->
-      <div class="bg-gradient-to-br from-purple-500/20 to-pink-600/20 rounded-2xl p-5 border border-purple-500/50">
-       <div class="flex items-center justify-between mb-5">
-        <div>
-         <h3 class="text-white font-bold text-xl">خطة Premium</h3>
-         <p class="text-purple-300 text-sm font-medium">وصول VIP غير محدود</p>
-        </div>
-        <div class="text-left">
-         <span class="text-purple-300 text-3xl font-black">$9.99</span>
-         <p class="text-gray-400 text-xs font-medium">/شهرياً</p>
-        </div>
-       </div>
-       <div class="space-y-2.5 mb-5 bg-black/20 rounded-lg p-4">
-        <p class="text-gray-100 text-sm flex items-center gap-3"><span class="text-green-400 text-lg">✓</span> كل مميزات Plus</p>
-        <p class="text-gray-100 text-sm flex items-center gap-3"><span class="text-green-400 text-lg">✓</span> جميع التطبيقات Premium</p>
-        <p class="text-gray-100 text-sm flex items-center gap-3"><span class="text-green-400 text-lg">✓</span> تحديثات مبكرة حصرية</p>
-        <p class="text-gray-100 text-sm flex items-center gap-3"><span class="text-green-400 text-lg">✓</span> دعم VIP 24/7 مخصص</p>
-       </div><button onclick="showSubscribeForm('premium')" class="w-full bg-gradient-to-r from-purple-500 to-pink-600 text-white py-3.5 rounded-2xl font-black text-lg hover:opacity-90 hover:shadow-xl transition-all shadow-lg shadow-purple-500/30"> اشترك الآن 👑 </button>
-      </div>
-     </div>
-    </div><!-- نموذج الاشتراك -->
-    <div id="subscribe-form-screen" class="h-full flex-col pb-20 overflow-auto scrollbar-hide hidden">
-     <div class="sticky top-0 z-10 bg-slate-900 pt-12 pb-4 px-5">
-      <div class="flex items-center gap-4">
-       <button onclick="showSubscribe()" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center text-white">←</button>
-       <h1 class="text-white text-xl font-bold">تأكيد الاشتراك</h1>
-      </div>
-     </div>
-     <div class="px-5 pb-8">
-      <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 border-2 border-slate-700 shadow-2xl">
-       <div id="selected-plan-info" class="text-center mb-8">
-        <!-- سيتم ملؤها ديناميكياً -->
-       </div>
-       <form id="subscribe-form" class="space-y-4">
-        <div>
-         <label class="text-gray-300 text-sm block mb-3 font-semibold">👤 الاسم الكامل</label> <input type="text" id="sub-name" required class="w-full bg-slate-700/80 text-white placeholder-gray-400 rounded-2xl py-3.5 px-5 outline-none border-2 border-slate-600 focus:border-cyan-500 transition-all font-medium" placeholder="أدخل اسمك بالكامل">
-        </div>
-        <div>
-         <label class="text-gray-300 text-sm block mb-3 font-semibold">📧 البريد الإلكتروني</label> <input type="email" id="sub-email" required class="w-full bg-slate-700/80 text-white placeholder-gray-400 rounded-2xl py-3.5 px-5 outline-none border-2 border-slate-600 focus:border-cyan-500 transition-all font-medium" placeholder="example@email.com">
-        </div>
-        <div>
-         <label class="text-gray-300 text-sm block mb-3 font-semibold">📱 رقم الهاتف (اختياري)</label> <input type="tel" id="sub-phone" class="w-full bg-slate-700/80 text-white placeholder-gray-400 rounded-2xl py-3.5 px-5 outline-none border-2 border-slate-600 focus:border-cyan-500 transition-all font-medium" placeholder="+966 5X XXX XXXX">
-        </div>
-        <div class="bg-gradient-to-r from-cyan-500/20 to-blue-600/20 rounded-2xl p-4 mt-6 border border-cyan-500/30">
-         <p class="text-gray-300 text-sm text-center font-medium">✅ نموذج تجريبي آمن - بيانات اختبار فقط</p>
-        </div><button type="submit" id="submit-sub-btn" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-4 rounded-2xl font-black text-lg hover:opacity-90 hover:shadow-xl transition-all mt-8 shadow-lg shadow-cyan-500/30 transform hover:scale-105"> ✓ تأكيد الاشتراك </button>
-       </form>
-      </div>
-     </div>
-    </div><!-- لوحة الإدارة -->
-    <div id="admin-screen" class="h-full flex-col pb-20 overflow-auto scrollbar-hide hidden">
-     <div class="sticky top-0 z-10 bg-slate-900 pt-12 pb-4 px-5">
-      <h1 class="text-white text-2xl font-bold mb-4">لوحة الإدارة</h1><!-- الإحصائيات -->
-      <div class="grid grid-cols-2 gap-3">
-       <div class="bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-2xl p-4 border border-cyan-500/30">
-        <p class="text-gray-400 text-xs">المشتركين</p>
-        <p id="total-subscribers" class="text-cyan-400 text-2xl font-bold">0</p>
-       </div>
-       <div class="bg-gradient-to-br from-green-500/20 to-emerald-600/20 rounded-2xl p-4 border border-green-500/30">
-        <p class="text-gray-400 text-xs">نشط</p>
-        <p id="active-subscribers" class="text-green-400 text-2xl font-bold">0</p>
-       </div>
-      </div>
-     </div>
-     <div class="px-5 pb-8">
-      <h3 class="text-white font-bold mb-3">المشتركين الأخيرين</h3>
-      <div id="subscribers-list" class="space-y-3">
-       <div class="bg-slate-800/60 rounded-2xl p-8 text-center border border-slate-700/50">
-        <p class="text-gray-500">لا يوجد مشتركين بعد</p>
-        <p class="text-gray-600 text-sm mt-1">سيظهر المشتركين هنا</p>
-       </div>
-      </div>
-     </div>
-    </div>
-   </div><!-- شريط التنقل -->
-   <div class="fixed bottom-0 left-0 right-0 tab-bar bg-slate-900/90 border-t border-slate-800 px-6 py-3 z-50">
-    <div class="flex items-center justify-around max-w-md mx-auto">
-     <button onclick="showStore()" id="tab-store" class="flex flex-col items-center gap-1 text-cyan-400"> <span class="text-xl">🏠</span> <span class="text-xs font-medium">المتجر</span> </button> <button onclick="showSubscribe()" id="tab-subscribe" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-300 transition-colors"> <span class="text-xl">💎</span> <span class="text-xs font-medium">الاشتراك</span> </button> <button onclick="showAdmin()" id="tab-admin" class="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-300 transition-colors"> <span class="text-xl">⚙️</span> <span class="text-xs font-medium">الإدارة</span> </button>
-    </div>
-   </div><!-- رسالة النجاح -->
-   <div id="success-toast" class="fixed top-20 left-1/2 -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-xl shadow-lg z-50 hidden transform transition-all">
-    <p class="font-medium">✓ تم الاشتراك بنجاح!</p>
-   </div>
-  </div>
-  <script>
-    // الإعدادات الافتراضية
-    const defaultConfig = {
-      store_name: 'تطبيقات بلس',
-      store_brand: 'احمد العنزي',
-      welcome_text: 'مرحباً بك في عالم التطبيقات',
-      background_color: '#0f172a',
-      surface_color: '#1e293b',
-      text_color: '#ffffff',
-      primary_action: '#06b6d4',
-      secondary_action: '#64748b'
-    };
-
-    let config = { ...defaultConfig };
-    let subscribers = [];
-    let selectedPlan = 'plus';
-    let isSubmitting = false;
-
-    // تهيئة Element SDK
-    if (window.elementSdk) {
-      window.elementSdk.init({
-        defaultConfig,
-        onConfigChange: async (newConfig) => {
-          config = { ...defaultConfig, ...newConfig };
-          updateUI();
-        },
-        mapToCapabilities: (cfg) => ({
-          recolorables: [
-            { get: () => cfg.background_color || defaultConfig.background_color, set: (v) => window.elementSdk.setConfig({ background_color: v }) },
-            { get: () => cfg.surface_color || defaultConfig.surface_color, set: (v) => window.elementSdk.setConfig({ surface_color: v }) },
-            { get: () => cfg.text_color || defaultConfig.text_color, set: (v) => window.elementSdk.setConfig({ text_color: v }) },
-            { get: () => cfg.primary_action || defaultConfig.primary_action, set: (v) => window.elementSdk.setConfig({ primary_action: v }) },
-            { get: () => cfg.secondary_action || defaultConfig.secondary_action, set: (v) => window.elementSdk.setConfig({ secondary_action: v }) }
-          ],
-          borderables: [],
-          fontEditable: undefined,
-          fontSizeable: undefined
-        }),
-        mapToEditPanelValues: (cfg) => new Map([
-          ['store_name', cfg.store_name || defaultConfig.store_name],
-          ['store_brand', cfg.store_brand || defaultConfig.store_brand],
-          ['welcome_text', cfg.welcome_text || defaultConfig.welcome_text]
-        ])
-      });
-    }
-
-    // تهيئة Data SDK
-    const dataHandler = {
-      onDataChanged(data) {
-        subscribers = data.filter(d => d.type === 'subscriber');
-        renderSubscribers();
-      }
-    };
-
-    async function initDataSdk() {
-      if (window.dataSdk) {
-        const result = await window.dataSdk.init(dataHandler);
-        if (!result.isOk) {
-          console.error('Failed to initialize Data SDK');
-        }
-      }
-    }
-    initDataSdk();
-
-    // تحديث الواجهة
-    function updateUI() {
-      document.getElementById('store-name').textContent = config.store_name || defaultConfig.store_name;
-      document.getElementById('store-brand').textContent = config.store_brand || defaultConfig.store_brand;
-      document.getElementById('welcome-text').textContent = config.welcome_text || defaultConfig.welcome_text;
-    }
-
-    // التنقل بين الشاشات
-    function hideAllScreens() {
-      document.getElementById('store-screen').classList.add('hidden');
-      document.getElementById('store-screen').classList.remove('flex');
-      document.getElementById('subscribe-screen').classList.add('hidden');
-      document.getElementById('subscribe-screen').classList.remove('flex');
-      document.getElementById('subscribe-form-screen').classList.add('hidden');
-      document.getElementById('subscribe-form-screen').classList.remove('flex');
-      document.getElementById('admin-screen').classList.add('hidden');
-      document.getElementById('admin-screen').classList.remove('flex');
-      
-      document.getElementById('tab-store').classList.remove('text-cyan-400');
-      document.getElementById('tab-store').classList.add('text-gray-500');
-      document.getElementById('tab-subscribe').classList.remove('text-cyan-400');
-      document.getElementById('tab-subscribe').classList.add('text-gray-500');
-      document.getElementById('tab-admin').classList.remove('text-cyan-400');
-      document.getElementById('tab-admin').classList.add('text-gray-500');
-    }
-
-    function showStore() {
-      hideAllScreens();
-      document.getElementById('store-screen').classList.remove('hidden');
-      document.getElementById('store-screen').classList.add('flex');
-      document.getElementById('tab-store').classList.add('text-cyan-400');
-      document.getElementById('tab-store').classList.remove('text-gray-500');
-    }
-
-    function showSubscribe() {
-      hideAllScreens();
-      document.getElementById('subscribe-screen').classList.remove('hidden');
-      document.getElementById('subscribe-screen').classList.add('flex');
-      document.getElementById('tab-subscribe').classList.add('text-cyan-400');
-      document.getElementById('tab-subscribe').classList.remove('text-gray-500');
-    }
-
-    function showSubscribeForm(plan) {
-      selectedPlan = plan;
-      hideAllScreens();
-      document.getElementById('subscribe-form-screen').classList.remove('hidden');
-      document.getElementById('subscribe-form-screen').classList.add('flex');
-      document.getElementById('tab-subscribe').classList.add('text-cyan-400');
-      document.getElementById('tab-subscribe').classList.remove('text-gray-500');
-      
-      const planInfo = document.getElementById('selected-plan-info');
-      if (plan === 'plus') {
-        planInfo.innerHTML = `
-          <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl mx-auto flex items-center justify-center text-3xl mb-3">💎</div>
-          <h3 class="text-white font-bold text-xl">خطة Plus</h3>
-          <p class="text-cyan-400 text-lg font-bold mt-1">$4.99/شهرياً</p>
-        `;
-      } else {
-        planInfo.innerHTML = `
-          <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl mx-auto flex items-center justify-center text-3xl mb-3">👑</div>
-          <h3 class="text-white font-bold text-xl">خطة Premium</h3>
-          <p class="text-purple-400 text-lg font-bold mt-1">$9.99/شهرياً</p>
-        `;
-      }
-    }
-
-    function showAdmin() {
-      hideAllScreens();
-      document.getElementById('admin-screen').classList.remove('hidden');
-      document.getElementById('admin-screen').classList.add('flex');
-      document.getElementById('tab-admin').classList.add('text-cyan-400');
-      document.getElementById('tab-admin').classList.remove('text-gray-500');
-      renderSubscribers();
-    }
-
-    // عرض المشتركين
-    function renderSubscribers() {
-      const list = document.getElementById('subscribers-list');
-      const total = document.getElementById('total-subscribers');
-      const active = document.getElementById('active-subscribers');
-      
-      total.textContent = subscribers.length;
-      active.textContent = subscribers.filter(s => s.status === 'active').length;
-      
-      if (subscribers.length === 0) {
-        list.innerHTML = `
-          <div class="bg-slate-800/60 rounded-2xl p-8 text-center border border-slate-700/50">
-            <p class="text-gray-500">لا يوجد مشتركين بعد</p>
-            <p class="text-gray-600 text-sm mt-1">سيظهر المشتركين هنا</p>
-          </div>
-        `;
-        return;
-      }
-      
-      list.innerHTML = subscribers.map(sub => `
-        <div class="bg-slate-800/60 card-glass rounded-2xl p-4 border border-slate-700/50 flex items-center gap-4">
-          <div class="w-12 h-12 rounded-full bg-gradient-to-br ${sub.plan === 'premium' ? 'from-purple-500 to-pink-600' : 'from-cyan-500 to-blue-600'} flex items-center justify-center text-white font-bold">
-            ${sub.name.charAt(0)}
-          </div>
-          <div class="flex-1">
-            <h4 class="text-white font-medium">${sub.name}</h4>
-            <p class="text-gray-500 text-sm">${sub.email}</p>
-            <div class="flex items-center gap-2 mt-1">
-              <span class="status-dot ${sub.status === 'active' ? 'bg-green-400' : 'bg-gray-500'}"></span>
-              <span class="text-xs ${sub.plan === 'premium' ? 'text-purple-400' : 'text-cyan-400'}">${sub.plan === 'premium' ? 'Premium' : 'Plus'}</span>
-            </div>
-          </div>
-          <button onclick="deleteSubscriber('${sub.__backendId}')" class="text-red-400 hover:text-red-300 p-2">🗑️</button>
-        </div>
-      `).join('');
-    }
-
-    // حذف مشترك
-    let deleteConfirm = null;
-    async function deleteSubscriber(id) {
-      const sub = subscribers.find(s => s.__backendId === id);
-      if (!sub) return;
-      
-      if (deleteConfirm !== id) {
-        deleteConfirm = id;
-        showToast('اضغط مرة أخرى للتأكيد', 'warning');
-        setTimeout(() => { deleteConfirm = null; }, 3000);
-        return;
-      }
-      
-      const result = await window.dataSdk.delete(sub);
-      if (result.isOk) {
-        showToast('تم حذف المشترك', 'success');
-      }
-      deleteConfirm = null;
-    }
-
-    // إرسال نموذج الاشتراك
-    document.getElementById('subscribe-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      if (isSubmitting) return;
-      
-      if (subscribers.length >= 999) {
-        showToast('تم الوصول للحد الأقصى من المشتركين', 'error');
-        return;
-      }
-      
-      const name = document.getElementById('sub-name').value.trim();
-      const email = document.getElementById('sub-email').value.trim();
-      
-      if (!name || !email) return;
-      
-      isSubmitting = true;
-      const btn = document.getElementById('submit-sub-btn');
-      btn.textContent = 'جاري المعالجة...';
-      btn.disabled = true;
-      
-      const result = await window.dataSdk.create({
-        id: Date.now().toString(),
-        type: 'subscriber',
-        name,
-        email,
-        phone: document.getElementById('sub-phone').value.trim() || 'لم يتم تحديده',
-        plan: selectedPlan,
-        status: 'active',
-        date: new Date().toISOString(),
-        amount: selectedPlan === 'premium' ? 9.99 : 4.99
-      });
-      
-      isSubmitting = false;
-      btn.textContent = 'تأكيد الاشتراك';
-      btn.disabled = false;
-      
-      if (result.isOk) {
-        document.getElementById('sub-name').value = '';
-        document.getElementById('sub-email').value = '';
-        document.getElementById('sub-phone').value = '';
-        showToast('تم الاشتراك بنجاح! 🎉', 'success');
-        setTimeout(() => showStore(), 1500);
-      } else {
-        showToast('حدث خطأ، حاول مرة أخرى', 'error');
-      }
-    });
-
-    // إضافة دالة عرض الملف الشخصي
-    function showProfile() {
-      showToast('💳 قريباً - ملفك الشخصي', 'info');
-    }
-
-    // رسائل Toast
-    function showToast(message, type = 'success') {
-      const toast = document.getElementById('success-toast');
-      toast.innerHTML = `<p class="font-medium">${type === 'success' ? '✓' : type === 'warning' ? '⚠️' : '✗'} ${message}</p>`;
-      toast.className = `fixed top-20 left-1/2 -translate-x-1/2 ${type === 'success' ? 'bg-green-500' : type === 'warning' ? 'bg-yellow-500' : 'bg-red-500'} text-white px-6 py-3 rounded-xl shadow-lg z-50 transform transition-all`;
-      setTimeout(() => toast.classList.add('hidden'), 2500);
-    }
-
-    // تهيئة الواجهة
-    updateUI();
-  </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d9689f5b750aa2c',t:'MTc3MzAyMjE4MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
