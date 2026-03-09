@@ -1,1 +1,116 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة التحكم - Ahmad IPA Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <div class="admin-layout">
+    <aside class="sidebar">
+      <h2>لوحة التحكم</h2>
+      <a href="index.html">عرض المتجر</a>
+      <a href="#formSection">إضافة تطبيق</a>
+      <a href="#tableSection">إدارة التطبيقات</a>
+    </aside>
 
+    <main class="content">
+      <header class="topbar">
+        <h1>إدارة التطبيقات</h1>
+        <button id="resetBtn" class="danger-btn">إعادة ضبط البيانات</button>
+      </header>
+
+      <section class="card" id="formSection">
+        <h2 id="formTitle">إضافة تطبيق جديد</h2>
+
+        <form id="appForm" class="app-form">
+          <input type="hidden" id="appId" />
+
+          <div class="grid">
+            <div>
+              <label for="name">اسم التطبيق</label>
+              <input type="text" id="name" required />
+            </div>
+
+            <div>
+              <label for="category">التصنيف</label>
+              <input type="text" id="category" required />
+            </div>
+
+            <div>
+              <label for="version">الإصدار</label>
+              <input type="text" id="version" required />
+            </div>
+
+            <div>
+              <label for="size">الحجم</label>
+              <input type="text" id="size" required />
+            </div>
+
+            <div>
+              <label for="downloads">عدد التحميلات</label>
+              <input type="number" id="downloads" min="0" value="0" required />
+            </div>
+
+            <div>
+              <label for="image">رابط الصورة</label>
+              <input type="url" id="image" required />
+            </div>
+
+            <div class="full">
+              <label for="shortDescription">وصف مختصر</label>
+              <input type="text" id="shortDescription" required />
+            </div>
+
+            <div class="full">
+              <label for="description">الوصف الكامل</label>
+              <textarea id="description" rows="5" required></textarea>
+            </div>
+
+            <div class="full">
+              <label for="downloadUrl">رابط التحميل</label>
+              <input type="url" id="downloadUrl" required />
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="primary-btn">حفظ</button>
+            <button type="button" id="cancelEditBtn" class="secondary-btn">إلغاء التعديل</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card" id="tableSection">
+        <div class="section-head">
+          <h2>قائمة التطبيقات</h2>
+          <input type="text" id="searchAdmin" placeholder="ابحث باسم التطبيق..." />
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>الصورة</th>
+                <th>الاسم</th>
+                <th>التصنيف</th>
+                <th>الإصدار</th>
+                <th>الحجم</th>
+                <th>التحميلات</th>
+                <th>إجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="appsTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
