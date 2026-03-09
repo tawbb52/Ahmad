@@ -8,54 +8,71 @@
 body{
 font-family: Arial;
 direction: rtl;
-text-align: center;
-background:#f2f2f2;
+text-align:center;
+background:#f4f4f4;
 }
 
 .box{
 background:white;
-width:80%;
-max-width:600px;
-margin:100px auto;
+width:85%;
+max-width:500px;
+margin:80px auto;
 padding:30px;
 border-radius:15px;
-box-shadow:0 5px 10px rgba(0,0,0,0.1);
 }
 
-h1{
-color:#222;
-}
-
-p{
-font-size:18px;
-color:#555;
+select, input{
+width:90%;
+padding:10px;
+margin:10px;
+font-size:16px;
 }
 
 button{
-background:#0077ff;
+background:#25D366;
 color:white;
 border:none;
 padding:12px 20px;
-border-radius:8px;
 font-size:16px;
+border-radius:8px;
 cursor:pointer;
 }
 </style>
-
 </head>
 
 <body>
 
 <div class="box">
-<h1>متجر أحمد الرقمي للصم</h1>
 
-<p>مرحباً بكم في متجر أحمد الرقمي</p>
+<h2>متجر أحمد الرقمي للصم</h2>
 
-<p>هنا نقدم خدمات ومنتجات رقمية مخصصة للصم</p>
+<input type="text" id="name" placeholder="اكتب اسمك">
 
-<button>تواصل معنا</button>
+<select id="product">
+<option value="اشتراك تطبيقات بلس - 45 ريال">اشتراك تطبيقات بلس - 45 ريال</option>
+<option value="اشتراك شاهد VIP مسلسلات - 8 ريال">اشتراك شاهد VIP مسلسلات - 8 ريال</option>
+<option value="اشتراك نتفلكس ملف خاص - 18 ريال">اشتراك نتفلكس ملف خاص - 18 ريال</option>
+</select>
+
+<button onclick="sendWhats()">اشتراك عبر واتساب</button>
 
 </div>
+
+<script>
+function sendWhats(){
+
+var name = document.getElementById("name").value;
+var product = document.getElementById("product").value;
+
+var phone = "966504106065"; 
+
+var message = "مرحبا، اسمي " + name + " أريد " + product;
+
+var url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
+
+window.open(url);
+}
+</script>
 
 </body>
 </html>
