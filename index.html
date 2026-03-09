@@ -1,156 +1,209 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plus Apps</title>
+<title>متجر احمد العنزي</title>
 
 <style>
 
-body{
+*{
+box-sizing:border-box;
 margin:0;
+padding:0;
 font-family:Arial;
+}
+
+body{
 background:#0f172a;
 color:white;
 }
 
 header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px;
-background:#020617;
+background:#1e293b;
+padding:30px;
+text-align:center;
+border-bottom:2px solid #38bdf8;
 }
 
-.logo{
-font-size:24px;
+header h1{
+font-size:32px;
+margin-bottom:10px;
+}
+
+nav{
+background:#111827;
+padding:15px;
+text-align:center;
+}
+
+nav a{
+color:#38bdf8;
+margin:0 10px;
+text-decoration:none;
 font-weight:bold;
 }
 
-.search{
-padding:10px;
-border-radius:8px;
-border:none;
-width:200px;
-}
-
 .container{
+width:90%;
 max-width:1100px;
-margin:auto;
-padding:30px;
+margin:30px auto;
 }
 
-.title{
-font-size:35px;
+.card{
+background:#1e293b;
+padding:25px;
+border-radius:15px;
 margin-bottom:20px;
+border:1px solid #334155;
 }
 
-.apps{
+.card h2{
+color:#38bdf8;
+margin-bottom:15px;
+}
+
+.stats{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
+gap:15px;
 }
 
-.app-card{
-background:#1e293b;
+.box{
+background:#0f172a;
 padding:20px;
-border-radius:15px;
+border-radius:10px;
 text-align:center;
-transition:0.2s;
+border:1px solid #334155;
 }
 
-.app-card:hover{
-transform:scale(1.05);
+.box span{
+font-size:24px;
+color:#38bdf8;
+font-weight:bold;
 }
 
-.icon{
-font-size:45px;
-margin-bottom:10px;
+.upload{
+border:2px dashed #38bdf8;
+padding:20px;
+text-align:center;
+border-radius:10px;
 }
 
-.app-name{
-font-size:18px;
-margin-bottom:10px;
-}
-
-.desc{
-font-size:14px;
-color:#94a3b8;
-margin-bottom:10px;
-}
-
-.btn{
-background:#22c55e;
+button{
+background:#38bdf8;
+border:none;
 padding:10px 20px;
+margin-top:15px;
 border-radius:8px;
-text-decoration:none;
-color:white;
-display:inline-block;
+font-weight:bold;
+cursor:pointer;
 }
 
 footer{
 text-align:center;
 padding:20px;
+background:#111827;
 margin-top:40px;
 color:#94a3b8;
 }
 
 </style>
-
 </head>
 
 <body>
 
 <header>
-
-<div class="logo">Plus Apps</div>
-
-<input class="search" placeholder="بحث عن تطبيق">
-
+<h1>متجر احمد العنزي</h1>
+<p>متجر التطبيقات وإدارة المستخدمين</p>
 </header>
+
+<nav>
+<a href="#store">متجر التطبيقات</a>
+<a href="#upload">رفع التطبيق</a>
+<a href="#users">المستخدمين</a>
+<a href="#apple">شهادة مطور أبل</a>
+</nav>
 
 <div class="container">
 
-<h1 class="title">التطبيقات</h1>
+<div class="card" id="store">
+<h2>متجر التطبيقات</h2>
 
-<div class="apps">
-
-<div class="app-card">
-<div class="icon">📱</div>
-<div class="app-name">WhatsApp Plus</div>
-<div class="desc">نسخة مطورة من واتساب</div>
-<a class="btn" href="#">تحميل</a>
+<div class="stats">
+<div class="box">
+<h3>عدد التطبيقات</h3>
+<span>12</span>
 </div>
 
-<div class="app-card">
-<div class="icon">🎮</div>
-<div class="app-name">Game Tools</div>
-<div class="desc">أدوات للألعاب</div>
-<a class="btn" href="#">تحميل</a>
+<div class="box">
+<h3>التطبيقات المنشورة</h3>
+<span>9</span>
 </div>
 
-<div class="app-card">
-<div class="icon">🎵</div>
-<div class="app-name">Music Plus</div>
-<div class="desc">تشغيل الموسيقى بدون إعلانات</div>
-<a class="btn" href="#">تحميل</a>
+<div class="box">
+<h3>قيد المراجعة</h3>
+<span>3</span>
+</div>
 </div>
 
-<div class="app-card">
-<div class="icon">⭐</div>
-<div class="app-name">Pro Tools</div>
-<div class="desc">أدوات احترافية للمستخدمين</div>
-<a class="btn" href="#">تحميل</a>
 </div>
+
+<div class="card" id="upload">
+
+<h2>رفع التطبيق</h2>
+
+<div class="upload">
+<p>اختر ملف التطبيق</p>
+<input type="file">
+<br>
+<button>رفع التطبيق</button>
+</div>
+
+</div>
+
+<div class="card" id="users">
+
+<h2>المستخدمين</h2>
+
+<div class="stats">
+
+<div class="box">
+<h3>إجمالي المستخدمين</h3>
+<span>1250</span>
+</div>
+
+<div class="box">
+<h3>النشطون</h3>
+<span>860</span>
+</div>
+
+<div class="box">
+<h3>الجدد</h3>
+<span>74</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="card" id="apple">
+
+<h2>شهادة مطور أبل</h2>
+
+<ul>
+<li>اسم الشهادة: Apple Developer</li>
+<li>الحالة: مفعلة</li>
+<li>تاريخ الانتهاء: 2026</li>
+<li>المالك: احمد العنزي</li>
+</ul>
 
 </div>
 
 </div>
 
 <footer>
-
-© 2026 Plus Apps
-
+© 2026 متجر احمد العنزي
 </footer>
 
 </body>
