@@ -1,1 +1,19 @@
+app/
+Http/Controllers/
+    HomeController.php
+    AppController.php
+    CategoryController.php
+    PackageController.php
+    DownloadController.php
+    Admin/
 
+resources/views/
+    home.blade.php
+    apps/show.blade.php
+    categories/index.blade.php
+    packages/index.blade.php
+    layouts/app.blade.php
+    admin/
+
+database/migrations/
+database/seeders/
