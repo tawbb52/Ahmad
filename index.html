@@ -1,94 +1,519 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-<meta charset="UTF-8">
-<title>متجر أحمد الرقمي للصم</title>
+<!doctype html>
+<html lang="ar" dir="rtl" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>متجر احمد العنزي الرقمي</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Tajawal', sans-serif; box-sizing: border-box; }
+    html, body { height: 100%; width: 100%; }
+    .tab-bar { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+    .card-glass { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+    .product-icon { border-radius: 25%; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    .animate-slide-up { animation: slideUp 0.4s ease-out forwards; }
+    .animate-slide-down { animation: slideDown 0.4s ease-out forwards; }
+    .animate-pulse-soft { animation: pulse 2s ease-in-out infinite; }
+    .animate-bounce-soft { animation: bounce 2s ease-in-out infinite; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .product-card { transition: all 0.3s ease; }
+    .product-card:hover { transform: translateY(-8px); }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+ </head>
+ <body class="h-full w-full bg-gray-50 overflow-hidden">
+  <div id="app" class="h-full w-full flex flex-col overflow-hidden">
+   <!-- الشاشات -->
+   <div id="screens" class="h-full flex flex-col overflow-hidden">
+    <!-- شاشة المتجر -->
+    <div id="store-screen" class="h-full flex flex-col pb-24 overflow-auto scrollbar-hide">
+     <!-- الهيدر -->
+     <div class="sticky top-0 z-10 bg-gradient-to-b from-white to-gray-50 pt-4 pb-4 px-5 border-b border-gray-200 shadow-sm">
+      <div class="flex items-center justify-between mb-4">
+       <div>
+        <p id="welcome-text" class="text-gray-500 text-sm font-medium">مرحباً بك 👋</p>
+        <h1 id="store-name" class="text-gray-900 text-2xl font-black mt-1">متجر احمد العنزي</h1>
+       </div>
+       <div class="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center shadow-lg">
+        <span class="text-white text-xl">🛍️</span>
+       </div>
+      </div><!-- البحث -->
+      <div class="relative">
+       <input type="text" placeholder="ابحث عن المنتجات..." class="w-full bg-gray-100 text-gray-900 placeholder-gray-500 rounded-xl py-2.5 px-4 pr-10 outline-none border border-gray-200 focus:border-green-500 focus:bg-white transition-all text-sm"> <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+      </div>
+     </div><!-- المحتوى -->
+     <div class="flex-1 overflow-auto scrollbar-hide">
+      <div class="px-5 py-6 space-y-6">
+       <!-- البانر الرئيسي -->
+       <div class="relative bg-gradient-to-br from-green-400 via-emerald-500 to-teal-600 rounded-2xl p-6 overflow-hidden animate-slide-up shadow-xl">
+        <div class="absolute top-0 left-0 w-full h-full opacity-20">
+         <div class="absolute top-4 left-4 w-24 h-24 bg-white rounded-full blur-2xl"></div>
+         <div class="absolute bottom-4 right-4 w-32 h-32 bg-green-300 rounded-full blur-3xl"></div>
+        </div>
+        <div class="relative z-10">
+         <span class="bg-white/25 text-white text-xs px-3 py-1 rounded-full font-bold">🎁 عروض حصرية</span>
+         <h2 class="text-white text-2xl font-black mt-3">اشترك الآن وحقق أحلامك</h2>
+         <p class="text-white/90 text-sm mt-1 font-medium">أفضل الخدمات الرقمية بأسعار مميزة</p><button onclick="scrollToProducts()" class="mt-4 bg-white text-emerald-600 font-black py-2.5 px-6 rounded-xl hover:shadow-lg hover:scale-105 transition-all text-sm">اكتشف المنتجات</button>
+        </div>
+       </div><!-- التصنيفات -->
+       <div>
+        <h3 class="text-gray-900 font-black text-lg mb-3">التصنيفات</h3>
+        <div class="flex gap-2 overflow-x-auto scrollbar-hide pb-2">
+         <button class="flex-shrink-0 bg-green-500 text-white px-4 py-2 rounded-xl text-xs font-bold">الكل</button> <button class="flex-shrink-0 bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-xs font-medium hover:bg-gray-200 transition-colors">تطبيقات</button> <button class="flex-shrink-0 bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-xs font-medium hover:bg-gray-200 transition-colors">بث</button> <button class="flex-shrink-0 bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-xs font-medium hover:bg-gray-200 transition-colors">خدمات</button>
+        </div>
+       </div><!-- المنتجات المميزة -->
+       <div id="products-container">
+        <div class="flex items-center justify-between mb-4">
+         <h3 class="text-gray-900 font-black text-lg">المنتجات المميزة 🌟</h3>
+        </div>
+        <div class="grid grid-cols-1 gap-4">
+         <!-- منتج 1 -->
+         <div class="product-card bg-white rounded-2xl p-5 border-2 border-purple-200 hover:border-purple-400 hover:shadow-xl transition-all animate-slide-up" style="animation-delay: 0.1s">
+          <div class="flex items-start gap-4">
+           <div class="product-icon w-16 h-16 bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center text-3xl shadow-lg flex-shrink-0">
+            📱
+           </div>
+           <div class="flex-1 text-right">
+            <h4 class="text-gray-900 font-black text-lg">تطبيقات بلس</h4>
+            <p class="text-gray-600 text-sm mt-0.5 font-medium">اشتراك سنوي لأفضل التطبيقات</p>
+            <div class="flex items-center justify-between mt-3">
+             <button onclick="showCheckout('تطبيقات بلس', 45)" class="bg-gradient-to-r from-green-500 to-emerald-600 text-white text-sm px-5 py-2 rounded-lg hover:shadow-lg transition-all font-bold">اطلب</button> <span class="text-purple-600 text-xl font-black">45 ر.س</span>
+            </div>
+           </div>
+          </div>
+         </div><!-- منتج 2 -->
+         <div class="product-card bg-white rounded-2xl p-5 border-2 border-red-200 hover:border-red-400 hover:shadow-xl transition-all animate-slide-up" style="animation-delay: 0.15s">
+          <div class="flex items-start gap-4">
+           <div class="product-icon w-16 h-16 bg-gradient-to-br from-red-500 to-pink-600 flex items-center justify-center text-3xl shadow-lg flex-shrink-0">
+            🎬
+           </div>
+           <div class="flex-1 text-right">
+            <h4 class="text-gray-900 font-black text-lg">شاهد VIP مسلسلات</h4>
+            <p class="text-gray-600 text-sm mt-0.5 font-medium">آلاف المسلسلات والأفلام</p>
+            <div class="flex items-center justify-between mt-3">
+             <button onclick="showCheckout('شاهد VIP مسلسلات', 8)" class="bg-gradient-to-r from-green-500 to-emerald-600 text-white text-sm px-5 py-2 rounded-lg hover:shadow-lg transition-all font-bold">اطلب</button> <span class="text-red-600 text-xl font-black">8 ر.س</span>
+            </div>
+           </div>
+          </div>
+         </div><!-- منتج 3 -->
+         <div class="product-card bg-white rounded-2xl p-5 border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-all animate-slide-up" style="animation-delay: 0.2s">
+          <div class="flex items-start gap-4">
+           <div class="product-icon w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center text-3xl shadow-lg flex-shrink-0">
+            📺
+           </div>
+           <div class="flex-1 text-right">
+            <h4 class="text-gray-900 font-black text-lg">نتفلكس ملف خاص</h4>
+            <p class="text-gray-600 text-sm mt-0.5 font-medium">ملف خاص بك ومشاركة ممتعة</p>
+            <div class="flex items-center justify-between mt-3">
+             <button onclick="showCheckout('نتفلكس ملف خاص', 18)" class="bg-gradient-to-r from-green-500 to-emerald-600 text-white text-sm px-5 py-2 rounded-lg hover:shadow-lg transition-all font-bold">اطلب</button> <span class="text-blue-600 text-xl font-black">18 ر.س</span>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div><!-- شاشة الطلب -->
+    <div id="checkout-screen" class="h-full flex flex-col pb-24 overflow-auto scrollbar-hide hidden">
+     <div class="sticky top-0 z-10 bg-slate-900 pt-12 pb-4 px-5">
+      <div class="flex items-center gap-4">
+       <button onclick="showStore()" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center text-white">←</button>
+       <h1 class="text-white text-xl font-bold">الاشتراكات</h1>
+      </div>
+     </div>
+     <div class="px-5 space-y-4 pb-8">
+      <!-- خطة مجانية -->
+      <div class="bg-slate-800/60 card-glass rounded-2xl p-5 border border-slate-700/50">
+       <div class="flex items-center justify-between mb-4">
+        <div>
+         <h3 class="text-white font-bold text-lg">مجاني</h3>
+         <p class="text-gray-500 text-sm">للمستخدمين الجدد</p>
+        </div>
+        <div class="text-left">
+         <span class="text-cyan-400 text-2xl font-bold">$0</span>
+         <p class="text-gray-500 text-xs">/شهرياً</p>
+        </div>
+       </div>
+       <div class="space-y-2 mb-4">
+        <p class="text-gray-400 text-sm flex items-center gap-2"><span class="text-green-400">✓</span> 5 تطبيقات مجانية</p>
+        <p class="text-gray-400 text-sm flex items-center gap-2"><span class="text-green-400">✓</span> إعلانات محدودة</p>
+        <p class="text-gray-500 text-sm flex items-center gap-2"><span class="text-red-400">✗</span> تطبيقات Premium</p>
+       </div><button class="w-full bg-slate-700 text-gray-400 py-3 rounded-xl font-medium">الخطة الحالية</button>
+      </div><!-- خطة Plus -->
+      <div class="bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-2xl p-5 border-2 border-cyan-500 relative overflow-hidden">
+       <div class="absolute top-4 right-4 bg-cyan-500 text-white text-xs px-3 py-1 rounded-full font-bold">
+        ⭐ الأكثر شعبية
+       </div>
+       <div class="flex items-center justify-between mb-5 mt-2">
+        <div>
+         <h3 class="text-white font-bold text-xl">خطة Plus</h3>
+         <p class="text-cyan-300 text-sm font-medium">للمستخدمين النشطين</p>
+        </div>
+        <div class="text-left">
+         <span class="text-cyan-300 text-3xl font-black">$4.99</span>
+         <p class="text-gray-400 text-xs font-medium">/شهرياً</p>
+        </div>
+       </div>
+       <div class="space-y-2.5 mb-5 bg-black/20 rounded-lg p-4">
+        <p class="text-gray-100 text-sm flex items-center gap-3"><span class="text-green-400 text-lg">✓</span> جميع التطبيقات المجانية</p>
+        <p class="text-gray-100 text-sm flex items-center gap-3"><span class="text-green-400 text-lg">✓</span> بدون إعلانات مزعجة</p>
+        <p class="text-gray-100 text-sm flex items-center gap-3"><span class="text-green-400 text-lg">✓</span> 50+ تطبيق Premium</p>
+        <p class="text-gray-100 text-sm flex items-center gap-3"><span class="text-green-400 text-lg">✓</span> دعم فني سريع</p>
+       </div><button onclick="showSubscribeForm('plus')" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-3.5 rounded-2xl font-black text-lg hover:opacity-90 hover:shadow-xl transition-all shadow-lg shadow-cyan-500/30 animate-pulse-soft"> اشترك الآن 🚀 </button>
+      </div><!-- خطة Premium -->
+      <div class="bg-gradient-to-br from-purple-500/20 to-pink-600/20 rounded-2xl p-5 border border-purple-500/50">
+       <div class="flex items-center justify-between mb-5">
+        <div>
+         <h3 class="text-white font-bold text-xl">خطة Premium</h3>
+         <p class="text-purple-300 text-sm font-medium">وصول VIP غير محدود</p>
+        </div>
+        <div class="text-left">
+         <span class="text-purple-300 text-3xl font-black">$9.99</span>
+         <p class="text-gray-400 text-xs font-medium">/شهرياً</p>
+        </div>
+       </div>
+       <div class="space-y-2.5 mb-5 bg-black/20 rounded-lg p-4">
+        <p class="text-gray-100 text-sm flex items-center gap-3"><span class="text-green-400 text-lg">✓</span> كل مميزات Plus</p>
+        <p class="text-gray-100 text-sm flex items-center gap-3"><span class="text-green-400 text-lg">✓</span> جميع التطبيقات Premium</p>
+        <p class="text-gray-100 text-sm flex items-center gap-3"><span class="text-green-400 text-lg">✓</span> تحديثات مبكرة حصرية</p>
+        <p class="text-gray-100 text-sm flex items-center gap-3"><span class="text-green-400 text-lg">✓</span> دعم VIP 24/7 مخصص</p>
+       </div><button onclick="showSubscribeForm('premium')" class="w-full bg-gradient-to-r from-purple-500 to-pink-600 text-white py-3.5 rounded-2xl font-black text-lg hover:opacity-90 hover:shadow-xl transition-all shadow-lg shadow-purple-500/30"> اشترك الآن 👑 </button>
+      </div>
+     </div>
+    </div><!-- نموذج الاشتراك -->
+    <div id="subscribe-form-screen" class="h-full flex-col pb-20 overflow-auto scrollbar-hide hidden">
+     <div class="sticky top-0 z-10 bg-slate-900 pt-12 pb-4 px-5">
+      <div class="flex items-center gap-4">
+       <button onclick="showSubscribe()" class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center text-white">←</button>
+       <h1 class="text-white text-xl font-bold">تأكيد الاشتراك</h1>
+      </div>
+     </div>
+     <div class="px-5 pb-8">
+      <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 border-2 border-slate-700 shadow-2xl">
+       <div id="selected-plan-info" class="text-center mb-8">
+        <!-- سيتم ملؤها ديناميكياً -->
+       </div>
+       <form id="subscribe-form" class="space-y-4">
+        <div>
+         <label class="text-gray-300 text-sm block mb-3 font-semibold">👤 الاسم الكامل</label> <input type="text" id="sub-name" required class="w-full bg-slate-700/80 text-white placeholder-gray-400 rounded-2xl py-3.5 px-5 outline-none border-2 border-slate-600 focus:border-cyan-500 transition-all font-medium" placeholder="أدخل اسمك بالكامل">
+        </div>
+        <div>
+         <label class="text-gray-300 text-sm block mb-3 font-semibold">📧 البريد الإلكتروني</label> <input type="email" id="sub-email" required class="w-full bg-slate-700/80 text-white placeholder-gray-400 rounded-2xl py-3.5 px-5 outline-none border-2 border-slate-600 focus:border-cyan-500 transition-all font-medium" placeholder="example@email.com">
+        </div>
+        <div>
+         <label class="text-gray-300 text-sm block mb-3 font-semibold">📱 رقم الهاتف (اختياري)</label> <input type="tel" id="sub-phone" class="w-full bg-slate-700/80 text-white placeholder-gray-400 rounded-2xl py-3.5 px-5 outline-none border-2 border-slate-600 focus:border-cyan-500 transition-all font-medium" placeholder="+966 5X XXX XXXX">
+        </div>
+        <div class="bg-gradient-to-r from-cyan-500/20 to-blue-600/20 rounded-2xl p-4 mt-6 border border-cyan-500/30">
+         <p class="text-gray-300 text-sm text-center font-medium">✅ نموذج تجريبي آمن - بيانات اختبار فقط</p>
+        </div><button type="submit" id="submit-sub-btn" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-4 rounded-2xl font-black text-lg hover:opacity-90 hover:shadow-xl transition-all mt-8 shadow-lg shadow-cyan-500/30 transform hover:scale-105"> ✓ تأكيد الاشتراك </button>
+       </form>
+      </div>
+     </div>
+    </div><!-- لوحة الإدارة -->
+    <div id="admin-screen" class="h-full flex-col pb-20 overflow-auto scrollbar-hide hidden">
+     <div class="sticky top-0 z-10 bg-slate-900 pt-12 pb-4 px-5">
+      <h1 class="text-white text-2xl font-bold mb-4">لوحة الإدارة</h1><!-- الإحصائيات -->
+      <div class="grid grid-cols-2 gap-3">
+       <div class="bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-2xl p-4 border border-cyan-500/30">
+        <p class="text-gray-400 text-xs">المشتركين</p>
+        <p id="total-subscribers" class="text-cyan-400 text-2xl font-bold">0</p>
+       </div>
+       <div class="bg-gradient-to-br from-green-500/20 to-emerald-600/20 rounded-2xl p-4 border border-green-500/30">
+        <p class="text-gray-400 text-xs">نشط</p>
+        <p id="active-subscribers" class="text-green-400 text-2xl font-bold">0</p>
+       </div>
+      </div>
+     </div>
+     <div class="px-5 pb-8">
+      <h3 class="text-white font-bold mb-3">المشتركين الأخيرين</h3>
+      <div id="subscribers-list" class="space-y-3">
+       <div class="bg-slate-800/60 rounded-2xl p-8 text-center border border-slate-700/50">
+        <p class="text-gray-500">لا يوجد مشتركين بعد</p>
+        <p class="text-gray-600 text-sm mt-1">سيظهر المشتركين هنا</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- شريط التنقل -->
+   <div class="fixed bottom-0 left-0 right-0 tab-bar bg-white/95 border-t-2 border-gray-200 px-6 py-3 z-50 shadow-xl">
+    <div class="flex items-center justify-around max-w-md mx-auto">
+     <button onclick="showStore()" id="tab-store" class="flex flex-col items-center gap-1.5 text-green-600 font-bold"> <span class="text-2xl">🏠</span> <span class="text-xs">المتجر</span> </button> <button onclick="showCheckoutForm()" id="tab-checkout" class="flex flex-col items-center gap-1.5 text-gray-500 hover:text-gray-700 transition-colors"> <span class="text-2xl">🛒</span> <span class="text-xs">الطلبات</span> </button> <button onclick="showAdmin()" id="tab-admin" class="flex flex-col items-center gap-1.5 text-gray-500 hover:text-gray-700 transition-colors"> <span class="text-2xl">📊</span> <span class="text-xs">الإدارة</span> </button>
+    </div>
+   </div><!-- رسالة النجاح -->
+   <div id="success-toast" class="fixed top-20 left-1/2 -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-2xl shadow-xl z-50 hidden transform transition-all font-bold text-center">
+    <p class="font-bold">✓ تم الطلب بنجاح!</p>
+   </div>
+  </div>
+  <script>
+    // الإعدادات الافتراضية
+    const defaultConfig = {
+      store_name: 'متجر احمد العنزي',
+      store_phone: '+966XXXXXXXXX',
+      welcome_text: 'مرحباً بك في متجرنا',
+      background_color: '#ffffff',
+      surface_color: '#f3f4f6',
+      text_color: '#111827',
+      primary_action: '#10b981',
+      secondary_action: '#6b7280'
+    };
 
-<style>
-body{
-font-family: Arial;
-direction: rtl;
-text-align:center;
-background:#f3f3f3;
-}
+    let config = { ...defaultConfig };
+    let orders = [];
+    let currentProduct = { name: '', price: 0 };
+    let isSubmitting = false;
 
-.container{
-width:90%;
-max-width:900px;
-margin:auto;
-}
+    // تهيئة Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (newConfig) => {
+          config = { ...defaultConfig, ...newConfig };
+          updateUI();
+        },
+        mapToCapabilities: (cfg) => ({
+          recolorables: [
+            { get: () => cfg.background_color || defaultConfig.background_color, set: (v) => window.elementSdk.setConfig({ background_color: v }) },
+            { get: () => cfg.surface_color || defaultConfig.surface_color, set: (v) => window.elementSdk.setConfig({ surface_color: v }) },
+            { get: () => cfg.text_color || defaultConfig.text_color, set: (v) => window.elementSdk.setConfig({ text_color: v }) },
+            { get: () => cfg.primary_action || defaultConfig.primary_action, set: (v) => window.elementSdk.setConfig({ primary_action: v }) },
+            { get: () => cfg.secondary_action || defaultConfig.secondary_action, set: (v) => window.elementSdk.setConfig({ secondary_action: v }) }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (cfg) => new Map([
+          ['store_name', cfg.store_name || defaultConfig.store_name],
+          ['store_phone', cfg.store_phone || defaultConfig.store_phone],
+          ['welcome_text', cfg.welcome_text || defaultConfig.welcome_text]
+        ])
+      });
+    }
 
-.product{
-background:white;
-margin:20px;
-padding:20px;
-border-radius:15px;
-box-shadow:0 5px 10px rgba(0,0,0,0.1);
-}
+    // تهيئة Data SDK
+    const dataHandler = {
+      onDataChanged(data) {
+        orders = data.filter(d => d.type === 'order');
+        renderOrders();
+      }
+    };
 
-.product img{
-width:100%;
-max-width:300px;
-border-radius:10px;
-}
+    async function initDataSdk() {
+      if (window.dataSdk) {
+        const result = await window.dataSdk.init(dataHandler);
+        if (!result.isOk) {
+          console.error('Failed to initialize Data SDK');
+        }
+      }
+    }
+    initDataSdk();
 
-button{
-background:#25D366;
-color:white;
-border:none;
-padding:12px 20px;
-font-size:16px;
-border-radius:8px;
-cursor:pointer;
-}
-</style>
+    // تحديث الواجهة
+    function updateUI() {
+      document.getElementById('store-name').textContent = config.store_name || defaultConfig.store_name;
+      document.getElementById('welcome-text').textContent = config.welcome_text || defaultConfig.welcome_text;
+    }
 
-</head>
+    // التنقل بين الشاشات
+    function hideAllScreens() {
+      document.getElementById('store-screen').classList.add('hidden');
+      document.getElementById('checkout-screen').classList.add('hidden');
+      document.getElementById('admin-screen').classList.add('hidden');
+      
+      document.getElementById('tab-store').classList.remove('text-green-600');
+      document.getElementById('tab-store').classList.add('text-gray-500');
+      document.getElementById('tab-checkout').classList.remove('text-green-600');
+      document.getElementById('tab-checkout').classList.add('text-gray-500');
+      document.getElementById('tab-admin').classList.remove('text-green-600');
+      document.getElementById('tab-admin').classList.add('text-gray-500');
+    }
 
-<body>
+    function showStore() {
+      hideAllScreens();
+      document.getElementById('store-screen').classList.remove('hidden');
+      document.getElementById('tab-store').classList.add('text-green-600');
+      document.getElementById('tab-store').classList.remove('text-gray-500');
+    }
 
-<h1>متجر أحمد الرقمي للصم</h1>
+    function showCheckout(name, price) {
+      currentProduct = { name, price };
+      document.getElementById('checkout-name').value = '';
+      document.getElementById('checkout-email').value = '';
+      document.getElementById('checkout-phone').value = '';
+      
+      const info = document.getElementById('checkout-product-info');
+      info.innerHTML = `
+        <div class="mb-4">
+         <span class="text-4xl mb-3 block">${name === 'تطبيقات بلس' ? '📱' : name.includes('شاهد') ? '🎬' : '📺'}</span>
+         <h3 class="text-gray-900 font-black text-2xl">${name}</h3>
+         <p class="text-green-700 text-3xl font-black mt-2">${price} ريال</p>
+        </div>
+      `;
+      
+      hideAllScreens();
+      document.getElementById('checkout-screen').classList.remove('hidden');
+      document.getElementById('tab-checkout').classList.add('text-green-600');
+      document.getElementById('tab-checkout').classList.remove('text-gray-500');
+    }
 
-<input type="text" id="name" placeholder="اكتب اسمك">
+    function showCheckoutForm() {
+      hideAllScreens();
+      document.getElementById('checkout-screen').classList.remove('hidden');
+      document.getElementById('tab-checkout').classList.add('text-green-600');
+      document.getElementById('tab-checkout').classList.remove('text-gray-500');
+    }
 
-<div class="container">
+    function showAdmin() {
+      hideAllScreens();
+      document.getElementById('admin-screen').classList.remove('hidden');
+      document.getElementById('tab-admin').classList.add('text-green-600');
+      document.getElementById('tab-admin').classList.remove('text-gray-500');
+      renderOrders();
+    }
 
-<div class="product">
-<img src="https://i.imgur.com/Fz7ZxYp.png">
-<h3>اشتراك تطبيقات بلس</h3>
-<p>السعر: 45 ريال</p>
-<button onclick="order('اشتراك تطبيقات بلس - 45 ريال')">اطلب عبر واتساب</button>
-</div>
+    // عرض الطلبات
+    function renderOrders() {
+      const list = document.getElementById('orders-list');
+      const total = document.getElementById('total-orders');
+      const revenue = document.getElementById('total-revenue');
+      
+      total.textContent = orders.length;
+      const totalRev = orders.reduce((sum, o) => sum + (o.product_price || 0), 0);
+      revenue.textContent = totalRev.toFixed(0) + ' ر.س';
+      
+      if (orders.length === 0) {
+        list.innerHTML = `
+          <div class="bg-gray-100 rounded-xl p-8 text-center border-2 border-gray-200">
+            <p class="text-gray-600 font-bold">لا توجد طلبات بعد</p>
+            <p class="text-gray-500 text-sm mt-1">سيظهر الطلبات هنا</p>
+          </div>
+        `;
+        return;
+      }
+      
+      list.innerHTML = orders.map((order, idx) => `
+        <div class="bg-white rounded-xl p-4 border-2 border-gray-200 flex items-center gap-4 hover:shadow-lg transition-all">
+          <div class="w-14 h-14 rounded-lg bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center text-2xl font-black flex-shrink-0">
+            ${(idx + 1).toString().padStart(2, '0')}
+          </div>
+          <div class="flex-1 text-right">
+            <h4 class="text-gray-900 font-black">${order.name}</h4>
+            <p class="text-gray-600 text-sm">${order.product_name}</p>
+            <p class="text-gray-500 text-xs mt-0.5">${order.email}</p>
+          </div>
+          <div class="text-left flex-shrink-0">
+            <p class="text-green-700 font-black">${order.product_price} ر.س</p>
+            <button onclick="deleteOrder('${order.__backendId}')" class="text-red-500 hover:text-red-700 text-sm mt-1 font-bold">حذف</button>
+          </div>
+        </div>
+      `).join('');
+    }
 
-<div class="product">
-<img src="https://i.imgur.com/9XqQK7F.png">
-<h3>اشتراك شاهد VIP مسلسلات</h3>
-<p>السعر: 8 ريال</p>
-<button onclick="order('اشتراك شاهد VIP مسلسلات - 8 ريال')">اطلب عبر واتساب</button>
-</div>
+    // حذف طلب
+    let deleteConfirm = null;
+    async function deleteOrder(id) {
+      const order = orders.find(o => o.__backendId === id);
+      if (!order) return;
+      
+      if (deleteConfirm !== id) {
+        deleteConfirm = id;
+        showToast('اضغط مرة أخرى للتأكيد', 'warning');
+        setTimeout(() => { deleteConfirm = null; }, 3000);
+        return;
+      }
+      
+      const result = await window.dataSdk.delete(order);
+      if (result.isOk) {
+        showToast('تم حذف الطلب', 'success');
+      }
+      deleteConfirm = null;
+    }
 
-<div class="product">
-<img src="https://i.imgur.com/6Z8Y2zU.png">
-<h3>اشتراك نتفلكس ملف خاص</h3>
-<p>السعر: 18 ريال</p>
-<button onclick="order('اشتراك نتفلكس ملف خاص - 18 ريال')">اطلب عبر واتساب</button>
-</div>
+    // إرسال نموذج الطلب
+    document.getElementById('checkout-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      if (isSubmitting) return;
+      
+      if (orders.length >= 999) {
+        showToast('تم الوصول للحد الأقصى من الطلبات', 'error');
+        return;
+      }
+      
+      const name = document.getElementById('checkout-name').value.trim();
+      const email = document.getElementById('checkout-email').value.trim();
+      const phone = document.getElementById('checkout-phone').value.trim();
+      
+      if (!name || !email) return;
+      
+      isSubmitting = true;
+      const btn = document.getElementById('submit-checkout-btn');
+      btn.textContent = 'جاري المعالجة...';
+      btn.disabled = true;
+      
+      const result = await window.dataSdk.create({
+        id: Date.now().toString(),
+        type: 'order',
+        name,
+        email,
+        phone: phone || 'لم يتم تحديده',
+        product_name: currentProduct.name,
+        product_price: currentProduct.price,
+        status: 'pending',
+        date: new Date().toISOString()
+      });
+      
+      isSubmitting = false;
+      btn.textContent = 'تأكيد الطلب';
+      btn.disabled = false;
+      
+      if (result.isOk) {
+        // إرسال رسالة واتساب
+        const whatsappMessage = `مرحباً 👋\n\nاسمي: ${name}\nالبريد: ${email}\nالجوال: ${phone || 'لم يتم تحديده'}\n\nالمنتج: ${currentProduct.name}\nالسعر: ${currentProduct.price} ر.س\n\nأريد الاشتراك في هذا المنتج`;
+        const whatsappUrl = `https://wa.me/966504106065?text=${encodeURIComponent(whatsappMessage)}`;
+        
+        document.getElementById('checkout-name').value = '';
+        document.getElementById('checkout-email').value = '';
+        document.getElementById('checkout-phone').value = '';
+        showToast('تم الطلب بنجاح! جاري فتح واتساب... 📲', 'success');
+        
+        setTimeout(() => {
+          window.open(whatsappUrl, '_blank');
+          showStore();
+        }, 1500);
+      } else {
+        showToast('حدث خطأ، حاول مرة أخرى', 'error');
+      }
+    });
 
-</div>
+    // رسائل Toast
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('success-toast');
+      toast.innerHTML = `<p class="font-bold">${type === 'success' ? '✓' : type === 'warning' ? '⚠️' : '✗'} ${message}</p>`;
+      toast.className = `fixed top-20 left-1/2 -translate-x-1/2 ${type === 'success' ? 'bg-green-500' : type === 'warning' ? 'bg-yellow-500' : 'bg-red-500'} text-white px-6 py-3 rounded-2xl shadow-xl z-50 transform transition-all font-bold text-center`;
+      setTimeout(() => toast.classList.add('hidden'), 2500);
+    }
 
-<script>
-function order(product){
+    function scrollToProducts() {
+      showStore();
+      setTimeout(() => {
+        document.getElementById('products-container')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
 
-var name=document.getElementById("name").value;
-var phone="966XXXXXXXXX";
-
-var text="مرحبا اسمي "+name+" أريد "+product;
-
-var url="https://wa.me/"+phone+"?text="+encodeURIComponent(text);
-
-window.open(url);
-}
-</script>
-
-</body>
+    // تهيئة الواجهة
+    updateUI();
+    showStore();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d96fe22927df91d',t:'MTc3MzAyNjkzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
