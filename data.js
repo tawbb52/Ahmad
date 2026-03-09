@@ -1,50 +1,26 @@
 const apps = [
   {
     id: 1,
-    name: "WhatsApp Plus",
-    category: "Social",
+    name: "My First App",
+    category: "Utilities",
     version: "1.0.0",
-    size: "120 MB",
-    downloads: 320,
-    image: "https://via.placeholder.com/200x200.png?text=WhatsApp",
-    shortDescription: "نسخة عرض تجريبية لواجهة المتجر.",
-    description: "هذا مجرد مثال لتطبيق ظاهر داخل متجر Ahmad. يمكنك تعديل الاسم والوصف والرابط والصورة.",
-    downloadUrl: "#"
+    size: "85 MB",
+    downloads: 120,
+    image: "https://via.placeholder.com/200x200.png?text=App+1",
+    shortDescription: "تطبيق تجريبي داخل المتجر.",
+    description: "هذا وصف كامل للتطبيق الأول داخل متجر Ahmad.",
+    downloadUrl: "https://example.com/download/app1"
   },
   {
     id: 2,
-    name: "TikTok Viewer",
-    category: "Media",
-    version: "2.4.1",
-    size: "280 MB",
-    downloads: 510,
-    image: "https://via.placeholder.com/200x200.png?text=TikTok",
-    shortDescription: "واجهة بطاقة مشابهة لمواقع التطبيقات.",
-    description: "يمكنك استخدام هذا العنصر لعرض اسم التطبيق، الإصدار، الحجم، والوصف الكامل داخل نافذة التفاصيل.",
-    downloadUrl: "#"
-  },
-  {
-    id: 3,
-    name: "YouTube Client",
-    category: "Video",
-    version: "3.1.2",
-    size: "190 MB",
-    downloads: 210,
-    image: "https://via.placeholder.com/200x200.png?text=YouTube",
-    shortDescription: "بطاقة أنيقة مع عداد تحميلات.",
-    description: "هذا التطبيق مجرد عنصر تجريبي داخل واجهة المتجر. استبدله بما يناسب مشروعك.",
-    downloadUrl: "#"
-  },
-  {
-    id: 4,
-    name: "Instagram Viewer",
-    category: "Social",
-    version: "4.0.0",
-    size: "240 MB",
-    downloads: 430,
-    image: "https://via.placeholder.com/200x200.png?text=Instagram",
-    shortDescription: "تصميم متجاوب ويعمل على الجوال.",
-    description: "يمكنك إضافة المزيد من البيانات لاحقًا مثل التقييمات، لقطات الشاشة، أو سجل التحديثات.",
-    downloadUrl: "#"
+    name: "My Second App",
+    category: "Tools",
+    version: "2.3.1",
+    size: "140 MB",
+    downloads: 90,
+    image: "https://via.placeholder.com/200x200.png?text=App+2",
+    shortDescription: "مثال آخر لبطاقة تطبيق.",
+    description: "يمكنك تغيير هذه البيانات من لوحة التحكم المحلية.",
+    downloadUrl: "https://example.com/download/app2"
   }
 ];
