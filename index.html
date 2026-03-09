@@ -6,7 +6,19 @@
 <title>متجر احمد العنزي</title>
 
 <style>
+<input type="file" id="appFile">
+<button onclick="uploadApp()">رفع التطبيق</button>
 
+<script>
+function uploadApp() {
+  const file = document.getElementById("appFile").files[0];
+  if(file){
+    alert("تم اختيار الملف: " + file.name);
+  } else {
+    alert("اختر ملف أولاً");
+  }
+}
+</script>
 *{
 box-sizing:border-box;
 margin:0;
