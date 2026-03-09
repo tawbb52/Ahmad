@@ -1,1 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plus Apps</title>
 
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#0f172a;
+color:white;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px;
+background:#020617;
+}
+
+.logo{
+font-size:24px;
+font-weight:bold;
+}
+
+.search{
+padding:10px;
+border-radius:8px;
+border:none;
+width:200px;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:30px;
+}
+
+.title{
+font-size:40px;
+margin-bottom:20px;
+}
+
+.apps{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+.app-card{
+background:#1e293b;
+padding:20px;
+border-radius:15px;
+text-align:center;
+transition:0.2s;
+}
+
+.app-card:hover{
+transform:scale(1.05);
+}
+
+.app-icon{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.app-name{
+font-size:18px;
+margin-bottom:10px;
+}
+
+.btn{
+background:#22c55e;
+padding:10px 20px;
+border-radius:8px;
+text-decoration:none;
+color:white;
+display:inline-block;
+}
+
+footer{
+text-align:center;
+padding:20px;
+margin-top:40px;
+color:#94a3b8;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">Plus Apps</div>
+
+<input class="search" placeholder="بحث عن تطبيق">
+
+</header>
+
+<div class="container">
+
+<div class="title">التطبيقات</div>
+
+<div class="apps">
+
+<div class="app-card">
+<div class="app-icon">📱</div>
+<div class="app-name">App 1</div>
+<a class="btn" href="#">تحميل</a>
+</div>
+
+<div class="app-card">
+<div class="app-icon">🔥</div>
+<div class="app-name">App 2</div>
+<a class="btn" href="#">تحميل</a>
+</div>
+
+<div class="app-card">
+<div class="app-icon">⭐</div>
+<div class="app-name">App 3</div>
+<a class="btn" href="#">تحميل</a>
+</div>
+
+<div class="app-card">
+<div class="app-icon">🚀</div>
+<div class="app-name">App 4</div>
+<a class="btn" href="#">تحميل</a>
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 Plus Apps
+
+</footer>
+
+</body>
+</html>
