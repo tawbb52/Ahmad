@@ -1,105 +1,90 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ahmad IPA Store</title>
-  <meta name="description" content="متجر Ahmad لعرض تطبيقات IPA بشكل أنيق" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B52 Store</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 
-  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <header class="navbar">
-    <div class="container nav-content">
-      <div class="logo">Ahmad IPA Store</div>
-      <nav class="nav-links">
-        <a href="#home">الرئيسية</a>
-        <a href="#apps">التطبيقات</a>
-        <a href="#categories">التصنيفات</a>
-        <a href="#about">من نحن</a>
-      </nav>
-    </div>
-  </header>
 
-  <section class="hero" id="home">
-    <div class="container hero-content">
-      <div class="hero-text">
-        <h1>اكتشف أفضل تطبيقات IPA</h1>
-        <p>واجهة أنيقة لعرض التطبيقات، البحث، التصنيفات، وعدد التحميلات.</p>
+<header class="header">
+<h1>متجر B52</h1>
+</header>
 
-        <div class="stats">
-          <div class="stat-box">
-            <strong id="appsCount">0</strong>
-            <span>تطبيق</span>
-          </div>
-          <div class="stat-box">
-            <strong id="downloadsCount">0</strong>
-            <span>تحميل</span>
-          </div>
-          <div class="stat-box">
-            <strong id="categoriesCount">0</strong>
-            <span>تصنيف</span>
-          </div>
-        </div>
-      </div>
-      <div class="hero-card">
-        <div class="phone-mockup">📱</div>
-      </div>
-    </div>
-  </section>
+<div class="products">
 
-  <section class="search-section">
-    <div class="container">
-      <div class="search-box">
-        <input type="text" id="searchInput" placeholder="ابحث باسم التطبيق..." />
-        <select id="categoryFilter">
-          <option value="all">كل التصنيفات</option>
-        </select>
-      </div>
-    </div>
-  </section>
+<!-- منتج 1 -->
 
-  <section class="categories-section" id="categories">
-    <div class="container">
-      <h2 class="section-title">التصنيفات</h2>
-      <div id="categoryTags" class="category-tags"></div>
-    </div>
-  </section>
+<div class="card">
 
-  <section class="apps-section" id="apps">
-    <div class="container">
-      <h2 class="section-title">التطبيقات</h2>
-      <div id="appsGrid" class="apps-grid"></div>
-    </div>
-  </section>
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg">
 
-  <section class="about-section" id="about">
-    <div class="container">
-      <h2 class="section-title">من نحن</h2>
-      <p class="about-text">
-        هذا نموذج متجر Frontend لعرض تطبيقات IPA بشكل مرتب وجذاب، ويمكنك لاحقًا ربطه بملفات JSON أو API أو لوحة إدارة.
-      </p>
-    </div>
-  </section>
+<div class="title">
+اشتراك شات جي بي تي<br>
+ChatGPT Plus
+</div>
 
-  <div id="appModal" class="modal hidden">
-    <div class="modal-content">
-      <button class="close-btn" id="closeModal">×</button>
-      <div id="modalBody"></div>
-    </div>
-  </div>
+<div class="price">
+25 ر.س
+</div>
 
-  <footer class="footer">
-    <div class="container">
-      <p>© 2026 Ahmad IPA Store - جميع الحقوق محفوظة</p>
-    </div>
-  </footer>
+<a class="whatsapp-btn" data-product="ChatGPT Plus">
+اطلب واتساب
+</a>
 
-  <script src="data.js"></script>
-  <script src="script.js"></script>
+</div>
+
+
+<!-- منتج 2 -->
+
+<div class="card">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Snapchat_logo.svg">
+
+<div class="title">
+سناب شات بلس<br>
+Snapchat+
+</div>
+
+<div class="price">
+44 ر.س
+</div>
+
+<a class="whatsapp-btn" data-product="Snapchat Plus">
+اطلب واتساب
+</a>
+
+</div>
+
+
+<!-- منتج 3 -->
+
+<div class="card">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png">
+
+<div class="title">
+توثيق انستقرام
+</div>
+
+<div class="price">
+120 ر.س
+</div>
+
+<a class="whatsapp-btn" data-product="توثيق انستقرام">
+اطلب واتساب
+</a>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
