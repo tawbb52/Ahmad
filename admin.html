@@ -1,118 +1,105 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>B52 Store</title>
-
-<style>
-
-body{
-background:#000;
-font-family:Arial;
-color:#fff;
-margin:0;
-}
-
-.products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-padding:40px;
-}
-
-.card{
-background:#0b0b0b;
-border:2px solid #0a5c87;
-border-radius:6px;
-overflow:hidden;
-text-align:center;
-}
-
-.card img{
-width:100%;
-height:230px;
-object-fit:contain;
-background:#0d2c4a;
-}
-
-.title{
-font-size:22px;
-margin-top:15px;
-}
-
-.price{
-font-size:20px;
-margin:10px 0 20px;
-}
-
-.whatsapp-btn{
-display:block;
-background:#ffffff;
-color:#e53935;
-padding:14px;
-text-decoration:none;
-font-size:18px;
-margin:0 15px 20px;
-border-radius:4px;
-}
-
-.whatsapp-btn:hover{
-background:#f1f1f1;
-}
-
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة التحكم</title>
+  <link rel="stylesheet" href="admin.css" />
 </head>
-
 <body>
 
-<div class="products">
+  <div class="admin-container">
+    
+    <aside class="sidebar">
+      <h2>لوحة التحكم</h2>
+      <a href="#">الرئيسية</a>
+      <a href="#">المنتجات</a>
+      <a href="#">الطلبات</a>
+      <a href="#">الإعدادات</a>
+    </aside>
 
-<div class="card">
-<img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Snapchat_logo.svg">
+    <main class="main">
+      <h1>إدارة المنتجات</h1>
 
-<div class="title">
-سناب شات<br>Snapchat+
-</div>
+      <button class="btn btn-add" onclick="showForm()">إضافة منتج</button>
 
-<div class="price">
-44 ر.س
-</div>
+      <div id="product-form" style="display:none; margin-bottom:20px;">
+        <label>اسم المنتج</label>
+        <input type="text" id="name" placeholder="مثال: ChatGPT Plus">
 
-<a class="whatsapp-btn"
-href="https://wa.me/966504106065?text=السلام%20عليكم%20أرغب%20بطلب%20Snapchat%2B"
-target="_blank">
+        <label>السعر</label>
+        <input type="text" id="price" placeholder="مثال: 25 ر.س">
 
-اطلب واتساب
+        <label>رابط الصورة</label>
+        <input type="text" id="image" placeholder="ضع رابط الصورة">
 
-</a>
+        <button class="btn btn-add" onclick="addProduct()">حفظ المنتج</button>
+      </div>
 
-</div>
+      <table>
+        <thead>
+          <tr>
+            <th>الصورة</th>
+            <th>اسم المنتج</th>
+            <th>السعر</th>
+            <th>التحكم</th>
+          </tr>
+        </thead>
+        <tbody id="products-table">
+          <tr>
+            <td><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" width="50"></td>
+            <td>ChatGPT Plus</td>
+            <td>25 ر.س</td>
+            <td>
+              <button class="btn btn-edit">تعديل</button>
+              <button class="btn btn-delete" onclick="deleteRow(this)">حذف</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
 
+  <script>
+    function showForm() {
+      const form = document.getElementById("product-form");
+      form.style.display = form.style.display === "none" ? "block" : "none";
+    }
 
-<div class="card">
+    function addProduct() {
+      const name = document.getElementById("name").value;
+      const price = document.getElementById("price").value;
+      const image = document.getElementById("image").value;
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg">
+      if (!name || !price || !image) {
+        alert("أكمل جميع الحقول");
+        return;
+      }
 
-<div class="title">
-اشتراك شات جي بي تي<br>ChatGPT Plus
-</div>
+      const table = document.getElementById("products-table");
+      const row = document.createElement("tr");
 
-<div class="price">
-5.99$
-</div>
+      row.innerHTML = `
+        <td><img src="${image}" width="50"></td>
+        <td>${name}</td>
+        <td>${price}</td>
+        <td>
+          <button class="btn btn-edit">تعديل</button>
+          <button class="btn btn-delete" onclick="deleteRow(this)">حذف</button>
+        </td>
+      `;
 
-<a class="whatsapp-btn"
-href="https://wa.me/966504106065?text=السلام%20عليكم%20أرغب%20بطلب%20ChatGPT%20Plus"
-target="_blank">
+      table.appendChild(row);
 
-اطلب واتساب
+      document.getElementById("name").value = "";
+      document.getElementById("price").value = "";
+      document.getElementById("image").value = "";
+    }
 
-</a>
-
-</div>
-
-</div>
+    function deleteRow(button) {
+      button.parentElement.parentElement.remove();
+    }
+  </script>
 
 </body>
 </html>
