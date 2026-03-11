@@ -1,1 +1,190 @@
+<?php
+/*
+Plugin Name: iOS Apps Manager
+Description: إدارة وعرض تطبيقات iOS داخل ووردبريس مع لوحة تحكم كاملة.
+Version: 1.0
+Author: Apps Plus
+*/
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+/* =========================
+   تسجيل نوع المنشور
+========================= */
+function iam_register_post_type() {
+    $labels = array(
+        'name'               => 'تطبيقات iOS',
+        'singular_name'      => 'تطبيق iOS',
+        'menu_name'          => 'تطبيقات iOS',
+        'add_new'            => 'إضافة جديد',
+        'add_new_item'       => 'إضافة تطبيق جديد',
+        'edit_item'          => 'تعديل التطبيق',
+        'new_item'           => 'تطبيق جديد',
+        'view_item'          => 'عرض التطبيق',
+        'search_items'       => 'بحث عن تطبيق',
+        'not_found'          => 'لا توجد تطبيقات',
+        'not_found_in_trash' => 'لا توجد تطبيقات في السلة',
+    );
+
+    $args = array(
+        'labels'        => $labels,
+        'public'        => true,
+        'has_archive'   => true,
+        'menu_icon'     => 'dashicons-smartphone',
+        'supports'      => array('title', 'editor', 'thumbnail', 'excerpt'),
+        'rewrite'       => array('slug' => 'ios-apps'),
+        'show_in_rest'  => true,
+    );
+
+    register_post_type('ios_app', $args);
+}
+add_action('init', 'iam_register_post_type');
+
+/* =========================
+   إضافة الحقول المخصصة
+========================= */
+function iam_add_meta_boxes() {
+    add_meta_box(
+        'iam_app_details',
+        'بيانات التطبيق',
+        'iam_meta_box_callback',
+        'ios_app',
+        'normal',
+        'high'
+    );
+}
+add_action('add_meta_boxes', 'iam_add_meta_boxes');
+
+function iam_meta_box_callback($post) {
+    wp_nonce_field('iam_save_app_details', 'iam_app_nonce');
+
+    $version  = get_post_meta($post->ID, '_iam_version', true);
+    $size     = get_post_meta($post->ID, '_iam_size', true);
+    $ios      = get_post_meta($post->ID, '_iam_ios_support', true);
+    $download = get_post_meta($post->ID, '_iam_download_link', true);
+    ?>
+    <table style="width:100%; border-collapse: collapse;">
+        <tr>
+            <td style="padding:10px 0; width:180px;"><strong>الإصدار</strong></td>
+            <td><input type="text" name="iam_version" value="<?php echo esc_attr($version); ?>" style="width:100%;"></td>
+        </tr>
+        <tr>
+            <td style="padding:10px 0;"><strong>الحجم</strong></td>
+            <td><input type="text" name="iam_size" value="<?php echo esc_attr($size); ?>" style="width:100%;"></td>
+        </tr>
+        <tr>
+            <td style="padding:10px 0;"><strong>دعم iOS</strong></td>
+            <td><input type="text" name="iam_ios_support" value="<?php echo esc_attr($ios); ?>" style="width:100%;" placeholder="مثال: iOS 14+"></td>
+        </tr>
+        <tr>
+            <td style="padding:10px 0;"><strong>رابط التحميل</strong></td>
+            <td><input type="url" name="iam_download_link" value="<?php echo esc_attr($download); ?>" style="width:100%;" placeholder="https://"></td>
+        </tr>
+    </table>
+    <?php
+}
+
+function iam_save_meta_boxes($post_id) {
+    if (!isset($_POST['iam_app_nonce']) || !wp_verify_nonce($_POST['iam_app_nonce'], 'iam_save_app_details')) {
+        return;
+    }
+
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    if (isset($_POST['iam_version'])) {
+        update_post_meta($post_id, '_iam_version', sanitize_text_field($_POST['iam_version']));
+    }
+
+    if (isset($_POST['iam_size'])) {
+        update_post_meta($post_id, '_iam_size', sanitize_text_field($_POST['iam_size']));
+    }
+
+    if (isset($_POST['iam_ios_support'])) {
+        update_post_meta($post_id, '_iam_ios_support', sanitize_text_field($_POST['iam_ios_support']));
+    }
+
+    if (isset($_POST['iam_download_link'])) {
+        update_post_meta($post_id, '_iam_download_link', esc_url_raw($_POST['iam_download_link']));
+    }
+}
+add_action('save_post', 'iam_save_meta_boxes');
+
+/* =========================
+   أعمدة لوحة التحكم
+========================= */
+function iam_admin_columns($columns) {
+    $new_columns = array();
+    $new_columns['cb'] = $columns['cb'];
+    $new_columns['title'] = 'اسم التطبيق';
+    $new_columns['app_version'] = 'الإصدار';
+    $new_columns['app_size'] = 'الحجم';
+    $new_columns['app_ios'] = 'دعم iOS';
+    $new_columns['date'] = 'التاريخ';
+    return $new_columns;
+}
+add_filter('manage_ios_app_posts_columns', 'iam_admin_columns');
+
+function iam_admin_column_content($column, $post_id) {
+    switch ($column) {
+        case 'app_version':
+            echo esc_html(get_post_meta($post_id, '_iam_version', true));
+            break;
+        case 'app_size':
+            echo esc_html(get_post_meta($post_id, '_iam_size', true));
+            break;
+        case 'app_ios':
+            echo esc_html(get_post_meta($post_id, '_iam_ios_support', true));
+            break;
+    }
+}
+add_action('manage_ios_app_posts_custom_column', 'iam_admin_column_content', 10, 2);
+
+/* =========================
+   ستايل الواجهة
+========================= */
+function iam_enqueue_styles() {
+    if (is_post_type_archive('ios_app') || is_singular('ios_app')) {
+        wp_enqueue_style('iam-style', plugin_dir_url(__FILE__) . 'style.css');
+    }
+}
+add_action('wp_enqueue_scripts', 'iam_enqueue_styles');
+
+/* =========================
+   قالب صفحة التطبيق المفرد
+========================= */
+function iam_single_template($single) {
+    global $post;
+
+    if ($post->post_type == 'ios_app') {
+        $plugin_template = plugin_dir_path(__FILE__) . 'single-ios_app.php';
+        if (file_exists($plugin_template)) {
+            return $plugin_template;
+        }
+    }
+
+    return $single;
+}
+add_filter('single_template', 'iam_single_template');
+
+/* =========================
+   قالب أرشيف التطبيقات
+========================= */
+function iam_archive_template($archive) {
+    if (is_post_type_archive('ios_app')) {
+        $plugin_template = plugin_dir_path(__FILE__) . 'archive-ios_app.php';
+        if (file_exists($plugin_template)) {
+            return $plugin_template;
+        }
+    }
+
+    return $archive;
+}
+add_filter('archive_template', 'iam_archive_template');
