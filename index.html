@@ -1,90 +1,117 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>B52 Store</title>
 
-<link rel="stylesheet" href="style.css">
+<style>
+body{
+font-family: Arial;
+margin:0;
+background:#0f172a;
+color:white;
+direction:rtl;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px;
+background:#020617;
+}
+
+header a{
+color:white;
+text-decoration:none;
+margin:0 10px;
+}
+
+.hero{
+text-align:center;
+padding:100px 20px;
+}
+
+.hero h1{
+font-size:45px;
+}
+
+.btn{
+background:#22c55e;
+padding:12px 25px;
+border-radius:6px;
+text-decoration:none;
+color:white;
+}
+
+.products{
+display:flex;
+justify-content:center;
+gap:20px;
+padding:60px;
+flex-wrap:wrap;
+}
+
+.product{
+background:#1e293b;
+padding:25px;
+border-radius:10px;
+width:220px;
+text-align:center;
+}
+
+footer{
+text-align:center;
+padding:20px;
+background:#020617;
+}
+</style>
 
 </head>
 
 <body>
 
-<header class="header">
-<h1>متجر B52</h1>
+<header>
+<h2>B52 Store</h2>
+
+<nav>
+<a href="#">الرئيسية</a>
+<a href="#">المنتجات</a>
+<a href="#">الأسعار</a>
+<a href="#">تواصل معنا</a>
+</nav>
 </header>
 
-<div class="products">
+<section class="hero">
+<h1>مرحبا بكم في B52 Store</h1>
+<p>أفضل متجر للبطاقات والخدمات الرقمية</p>
 
-<!-- منتج 1 -->
+<a class="btn" href="#">تسوق الآن</a>
+</section>
 
-<div class="card">
+<section class="products">
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg">
-
-<div class="title">
-اشتراك شات جي بي تي<br>
-ChatGPT Plus
+<div class="product">
+<h3>بطاقة رقمية</h3>
+<p>شراء البطاقات بسهولة</p>
 </div>
 
-<div class="price">
-25 ر.س
+<div class="product">
+<h3>خدمات أونلاين</h3>
+<p>أفضل الخدمات الرقمية</p>
 </div>
 
-<a class="whatsapp-btn" data-product="ChatGPT Plus">
-اطلب واتساب
-</a>
-
+<div class="product">
+<h3>الدفع السريع</h3>
+<p>طرق دفع متعددة وآمنة</p>
 </div>
 
+</section>
 
-<!-- منتج 2 -->
-
-<div class="card">
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Snapchat_logo.svg">
-
-<div class="title">
-سناب شات بلس<br>
-Snapchat+
-</div>
-
-<div class="price">
-44 ر.س
-</div>
-
-<a class="whatsapp-btn" data-product="Snapchat Plus">
-اطلب واتساب
-</a>
-
-</div>
-
-
-<!-- منتج 3 -->
-
-<div class="card">
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png">
-
-<div class="title">
-توثيق انستقرام
-</div>
-
-<div class="price">
-120 ر.س
-</div>
-
-<a class="whatsapp-btn" data-product="توثيق انستقرام">
-اطلب واتساب
-</a>
-
-</div>
-
-</div>
-
-<script src="script.js"></script>
+<footer>
+<p>© 2026 B52 Store</p>
+</footer>
 
 </body>
 </html>
