@@ -123,6 +123,235 @@ footer{
 <header>
 <h2>B52 Store</h2>
 <nav>
+<a href="#" onclick="scrollToSection('homeSection')">الرئيسية</a>
+<a href="#" onclick="scrollToSection('products')">المنتجات</a>
+<a href="#" onclick="scrollToSection('buy')">شراء</a>
+<a href="#" id="loginBtn">تسجيل دخول</a>
+</nav>
+</header>
+
+<section class="hero" id="homeSection">
+<h1>مرحبا بكم في B52 Store</h1>
+<p>أفضل متجر للبطاقات والخدمات الرقمية</p>
+<a class="btn" href="#buy">ابدأ الشراء</a>
+</section>
+
+<!-- Products Section -->
+<section id="products" class="products">
+<div class="product">
+<h3>بطاقة رقمية</h3>
+<p>شراء البطاقات بسهولة</p>
+<button class="btn" onclick="alert('اختر')">شراء واتس</button>
+</div>
+<div class="product">
+<h3>خدمات أونلاين</h3>
+<p>أفضل الخدمات الرقمية</p>
+<button class="btn" onclick="alert('اختر')">شراء واتس</button>
+</div>
+<div class="product">
+<h3>الدفع السريع</h3>
+<p>طرق دفع متعددة وآمنة</p>
+<button class="btn" onclick="alert('اختر')">شراء واتس</button>
+</div>
+</section>
+
+<!-- Buy Section -->
+<section id="buy" class="buy-section">
+<h2>صفحة الشراء والدفع</h2>
+<p>أدخل المبلغ المطلوب بالدولار:</p>
+<input type="number" id="amount" placeholder="USD">
+<button class="btn" onclick="pay()">ادفع الآن</button>
+<p id="paymentMsg" style="margin-top:20px;color:#22c55e;"></p>
+<p style="margin-top:20px;">
+<a class="btn" href="https://wa.me/966504106065" target="_blank">شراء عبر واتس اب</a>
+</p>
+</section>
+
+<footer>
+<p>© 2026 B52 Store</p>
+</footer>
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+<div class="modal-content">
+<span class="close" id="closeModal">&times;</span>
+<h2>تسجيل الدخول</h2>
+<input type="text" id="username" placeholder="اسم المستخدم">
+<input type="password" id="password" placeholder="كلمة المرور">
+<button class="btn" onclick="login()">دخول</button>
+<p id="loginMsg" style="margin-top:10px;"></p>
+</div>
+</div>
+
+<script>
+// فتح وإغلاق المودال
+const loginBtn = document.getElementById('loginBtn');
+const modal = document.getElementById('loginModal');
+const closeModal = document.getElementById('closeModal');
+
+loginBtn.onclick = ()=>{ modal.style.display='flex'; }
+closeModal.onclick = ()=>{ modal.style.display='none'; }
+window.onclick = (e)=>{ if(e.target==modal) modal.style.display='none'; }
+
+// تسجيل الدخول وهمي
+function login(){
+    const user = document.getElementById('username').value;
+    const pass = document.getElementById('password').value;
+    const msg = document.getElementById('loginMsg');
+    if(user==="admin" && pass==="1234"){
+        msg.textContent = "تم تسجيل الدخول بنجاح ✅";
+        msg.style.color="#22c55e";
+        setTimeout(()=>{ modal.style.display='none'; },1000);
+    }else{
+        msg.textContent = "خطأ في اسم المستخدم أو كلمة المرور ❌";
+        msg.style.color="#f87171";
+    }
+}
+
+// دفع وهمي
+function pay(){
+    const amount = document.getElementById('amount').value;
+    const msg = document.getElementById('paymentMsg');
+    if(amount>0){
+        msg.textContent = `تم الدفع ${amount} USD بنجاح! 💳`;
+    }else{
+        msg.textContent = "ادخل مبلغ صالح للدفع";
+    }
+}
+
+// التمرير للصفحات
+function scrollToSection(id){
+    document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B52 Store</title>
+<style>
+body{
+    font-family: Arial;
+    margin:0;
+    background:#0f172a;
+    color:white;
+    direction:rtl;
+}
+
+/* Header */
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px;
+    background:#020617;
+}
+header h2{
+    font-size:24px;
+}
+header nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 10px;
+}
+
+/* Hero Section */
+.hero{
+    text-align:center;
+    padding:80px 20px;
+}
+.hero h1{font-size:45px;margin-bottom:20px;}
+.hero p{font-size:18px;margin-bottom:30px;}
+.btn{
+    background:#22c55e;
+    padding:12px 25px;
+    border-radius:6px;
+    text-decoration:none;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+/* Products Section */
+.products{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    padding:60px;
+    flex-wrap:wrap;
+}
+.product{
+    background:#1e293b;
+    padding:25px;
+    border-radius:10px;
+    width:220px;
+    text-align:center;
+}
+
+/* Buy Section */
+.buy-section{
+    text-align:center;
+    padding:60px 20px;
+}
+.buy-section input{
+    padding:10px;
+    border-radius:6px;
+    border:none;
+    width:150px;
+    margin-right:10px;
+}
+
+/* Footer */
+footer{
+    text-align:center;
+    padding:20px;
+    background:#020617;
+}
+
+/* Login Modal */
+.modal{
+    display:none;
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.7);
+    justify-content:center;
+    align-items:center;
+}
+.modal-content{
+    background:#1e293b;
+    padding:30px;
+    border-radius:10px;
+    width:300px;
+    text-align:center;
+    position:relative;
+}
+.modal-content input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:6px;
+    border:none;
+}
+.close{
+    position:absolute;
+    top:10px;
+    left:10px;
+    cursor:pointer;
+    font-size:18px;
+    color:white;
+}
+</style>
+</head>
+<body>
+
+<header>
+<h2>B52 Store</h2>
+<nav>
 <a href="#">الرئيسية</a>
 <a href="#products">المنتجات</a>
 <a href="#buy">شراء</a>
