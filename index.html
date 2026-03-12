@@ -75,6 +75,20 @@ header nav a{
     margin-right:10px;
 }
 
+/* Dashboard */
+#dashboard{
+    display:none;
+    padding:40px 20px;
+    background:#111827;
+    min-height:400px;
+}
+.dashboard-card{
+    background:#1e293b;
+    padding:20px;
+    margin:20px 0;
+    border-radius:10px;
+}
+
 /* Modal */
 .modal{
     display:none;
@@ -126,9 +140,11 @@ footer{
 <a href="#" onclick="scrollToSection('repository')">التطبيقات</a>
 <a href="#" onclick="scrollToSection('buy')">شراء</a>
 <a href="#" id="loginBtn">تسجيل دخول</a>
+<a href="#" id="logoutBtn" style="display:none;" onclick="logout()">تسجيل خروج</a>
 </nav>
 </header>
 
+<!-- Hero -->
 <section class="hero" id="home">
 <h1>مرحبا بك في B52 Store Repository</h1>
 <p>تحميل التطبيقات والألعاب بصيغة IPA مباشرة</p>
@@ -140,17 +156,17 @@ footer{
 <div class="app-card">
 <h3>تطبيق 1</h3>
 <p>تطبيق مفعل</p>
-<button class="btn" onclick="alert('اختر')">تحميل / شراء</button>
+<button class="btn" onclick="order('تطبيق 1')">تحميل / شراء</button>
 </div>
 <div class="app-card">
 <h3>تطبيق 2</h3>
 <p>نسخة معدلة</p>
-<button class="btn" onclick="alert('اختر')">تحميل / شراء</button>
+<button class="btn" onclick="order('تطبيق 2')">تحميل / شراء</button>
 </div>
 <div class="app-card">
 <h3>تطبيق 3</h3>
 <p>تجربة مجانية</p>
-<button class="btn" onclick="alert('اختر')">تحميل / شراء</button>
+<button class="btn" onclick="order('تطبيق 3')">تحميل / شراء</button>
 </div>
 </section>
 
@@ -164,6 +180,12 @@ footer{
 <p style="margin-top:20px;">
 <a class="btn" href="https://wa.me/966504106065" target="_blank">شراء عبر واتس اب</a>
 </p>
+</section>
+
+<!-- Dashboard -->
+<section id="dashboard">
+<h2>لوحة تحكم المستخدم</h2>
+<div id="ordersContainer"></div>
 </section>
 
 <footer>
@@ -183,11 +205,19 @@ footer{
 </div>
 
 <script>
-// فتح وإغلاق المودال
+// عناصر DOM
 const loginBtn = document.getElementById('loginBtn');
+const logoutBtn = document.getElementById('logoutBtn');
 const modal = document.getElementById('loginModal');
 const closeModal = document.getElementById('closeModal');
+const dashboard = document.getElementById('dashboard');
+const ordersContainer = document.getElementById('ordersContainer');
 
+// بيانات المستخدم وهمية
+let userLogged = false;
+let orders = [];
+
+// فتح/إغلاق المودال
 loginBtn.onclick = ()=>{ modal.style.display='flex'; }
 closeModal.onclick = ()=>{ modal.style.display='none'; }
 window.onclick = (e)=>{ if(e.target==modal) modal.style.display='none'; }
@@ -197,25 +227,74 @@ function login(){
     const user = document.getElementById('username').value;
     const pass = document.getElementById('password').value;
     const msg = document.getElementById('loginMsg');
+
     if(user==="admin" && pass==="1234"){
         msg.textContent = "تم تسجيل الدخول بنجاح ✅";
         msg.style.color="#22c55e";
-        setTimeout(()=>{ modal.style.display='none'; },1000);
+        modal.style.display='none';
+        userLogged = true;
+        showDashboard();
     }else{
         msg.textContent = "خطأ في اسم المستخدم أو كلمة المرور ❌";
         msg.style.color="#f87171";
     }
 }
 
-// دفع وهمي
+// عرض لوحة التحكم
+function showDashboard(){
+    dashboard.style.display='block';
+    loginBtn.style.display='none';
+    logoutBtn.style.display='inline';
+    renderOrders();
+}
+
+// تسجيل خروج
+function logout(){
+    dashboard.style.display='none';
+    loginBtn.style.display='inline';
+    logoutBtn.style.display='none';
+    userLogged = false;
+    orders = [];
+    ordersContainer.innerHTML = '';
+}
+
+// الدفع الوهمي
 function pay(){
     const amount = document.getElementById('amount').value;
     const msg = document.getElementById('paymentMsg');
     if(amount>0){
         msg.textContent = `تم الدفع ${amount} USD بنجاح! 💳`;
+        if(userLogged){
+            orders.push(`دفع مبلغ ${amount} USD`);
+            renderOrders();
+        }
     }else{
         msg.textContent = "ادخل مبلغ صالح للدفع";
     }
+}
+
+// الطلبات الوهمية من Repository
+function order(appName){
+    alert('اختر');
+    if(userLogged){
+        orders.push(`طلب ${appName}`);
+        renderOrders();
+    }
+}
+
+// عرض الطلبات في لوحة التحكم
+function renderOrders(){
+    ordersContainer.innerHTML = '';
+    if(orders.length === 0){
+        ordersContainer.innerHTML = '<p>لا توجد طلبات حالياً</p>';
+        return;
+    }
+    orders.forEach((o,i)=>{
+        let div = document.createElement('div');
+        div.className = 'dashboard-card';
+        div.textContent = `${i+1}. ${o}`;
+        ordersContainer.appendChild(div);
+    });
 }
 
 // التمرير للصفحات
