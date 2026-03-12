@@ -213,3 +213,111 @@ function pay(){
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B52 Store Login</title>
+
+<style>
+body{
+font-family: Arial;
+background:#0f172a;
+color:white;
+text-align:center;
+padding-top:100px;
+}
+
+button{
+padding:12px 25px;
+background:#22c55e;
+border:none;
+border-radius:6px;
+color:white;
+cursor:pointer;
+font-size:16px;
+}
+
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+justify-content:center;
+align-items:center;
+}
+
+.modal-content{
+background:#1e293b;
+padding:30px;
+border-radius:10px;
+width:300px;
+text-align:center;
+position:relative;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border-radius:6px;
+border:none;
+}
+
+.close{
+position:absolute;
+top:10px;
+left:10px;
+cursor:pointer;
+font-size:18px;
+color:white;
+}
+</style>
+</head>
+
+<body>
+
+<h1>B52 Store</h1>
+<button onclick="openLogin()">تسجيل الدخول</button>
+
+<div id="loginModal" class="modal">
+<div class="modal-content">
+<span class="close" onclick="closeLogin()">✖</span>
+<h2>تسجيل الدخول</h2>
+<input type="text" id="username" placeholder="اسم المستخدم">
+<input type="password" id="password" placeholder="كلمة المرور">
+<button onclick="login()">دخول</button>
+<p id="msg" style="margin-top:10px;"></p>
+</div>
+</div>
+
+<script>
+function openLogin(){
+document.getElementById("loginModal").style.display="flex";
+}
+
+function closeLogin(){
+document.getElementById("loginModal").style.display="none";
+}
+
+function login(){
+let user=document.getElementById("username").value;
+let pass=document.getElementById("password").value;
+let msg=document.getElementById("msg");
+
+if(user=="admin" && pass=="1234"){
+msg.innerHTML="تم تسجيل الدخول بنجاح ✅";
+msg.style.color="#22c55e";
+}else{
+msg.innerHTML="خطأ في البيانات ❌";
+msg.style.color="#f87171";
+}
+}
+</script>
+
+</body>
+</html>
