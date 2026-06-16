@@ -26,12 +26,12 @@ body{
 .logo{
   font-size:28px;
   font-weight:bold;
-  margin-bottom:10px;
+  margin-bottom:15px;
 }
 
 .subtitle{
   color:#9ca3af;
-  margin-bottom:25px;
+  margin-bottom:20px;
 }
 
 input{
@@ -64,8 +64,15 @@ input::placeholder{
 .btn:hover{
   background:#eab308;
 }
-</style>
 
+/* رسالة خطأ */
+.error{
+  color:red;
+  font-size:13px;
+  margin-top:10px;
+  display:none;
+}
+</style>
 </head>
 
 <body>
@@ -73,21 +80,45 @@ input::placeholder{
 <div class="box">
 
   <!-- الشعار -->
-  <div class="logo">📺 شعار</div>
+  <div class="logo">📺 IPTV</div>
 
   <!-- العنوان -->
-  <div class="subtitle">إضافة قائمة تشغيل</div>
+  <div class="subtitle">تسجيل الدخول</div>
 
   <!-- الحقول -->
-  <input type="text" placeholder="اسم المستخدم">
-  <input type="password" placeholder="كلمة المرور">
-  <input type="text" placeholder="السيرفر">
-  <input type="text" placeholder="الخادم">
+  <input id="user" type="text" placeholder="اسم المستخدم">
+  <input id="pass" type="password" placeholder="كلمة المرور">
 
   <!-- الزر -->
-  <button class="btn">ابدأ ▶</button>
+  <button class="btn" onclick="login()">ابدأ ▶</button>
+
+  <div class="error" id="error">خطأ في البيانات</div>
 
 </div>
+
+<script>
+const server = "http://barq-tv.site:80";
+
+function login(){
+  const u = document.getElementById("user").value;
+  const p = document.getElementById("pass").value;
+
+  // مثال ربط (API وهمي)
+  fetch(server + "/player_api.php?username=" + u + "&password=" + p)
+  .then(res => res.json())
+  .then(data => {
+    if(data.user_info){
+      alert("تم الدخول بنجاح");
+      window.location.href = "channels.html";
+    } else {
+      document.getElementById("error").style.display = "block";
+    }
+  })
+  .catch(err => {
+    document.getElementById("error").style.display = "block";
+  });
+}
+</script>
 
 </body>
 </html>
