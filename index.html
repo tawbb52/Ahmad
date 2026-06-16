@@ -1,35 +1,93 @@
-<script>
-const server = "http://barq-tv.site:80";
 
-function login(){
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
 
-  const username = document.getElementById("user").value;
-  const password = document.getElementById("pass").value;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BARQ</title>
+    <link rel="stylesheet" href="src/output.css?1.0.01">
+    <style>
+        body {
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                url(./assets/img/bg.png);
 
-  fetch(`${server}/player_api.php?username=${username}&password=${password}`)
-  .then(res => res.json())
-  .then(data => {
+            background-size: cover;
+            /* يملى الشاشة */
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
 
-    // إذا الحساب صحيح
-    if(data.user_info){
+        body::before {
+            background-color: rgb(0 0 0 / 0%) !important;
+        }
 
-      // نخزن البيانات
-      localStorage.setItem("user", username);
-      localStorage.setItem("pass", password);
+        .card {
+            position: relative;
+            z-index: 2;
+        }
 
-      alert("تم تسجيل الدخول بنجاح ✔️");
+        .card>div {
+            background-color: #0000009e !important;
+            border-color: #fd811e !important;
+            border-width: 3px !important;
+        }
+    </style>
+</head>
 
-      // نروح للقنوات
-      window.location.href = "channels.html";
+<body class="bg-gray-900 flex items-center justify-center min-h-screen">
+    <div id="particles-js" style="position: absolute;width: 100%;height: 100%;"></div>
+    <div class="w-full">
+        <div class="flex justify-center mb-6">
+            <img src="assets/img/logo.png?1.0.01" alt="Logo" class="w-32 h-32 rounded-full object-cover border-4 border-gray-700 shadow-lg bg-gray-700">
+        </div>
+        <div class="flex justify-center card">
+            <div class="w-full max-w-md p-8 bg-gray-800 rounded-lg shadow-2xl border border-gray-700">
+                <h2 class="text-2xl font-bold text-center text-white mb-8">تسجيل الدخول</h2>
+                
+                <form id="loginForm" action="/login.php?referrer=%2F" method="post" class="space-y-6">
+                    <div>
+                        <label for="username" class="block mb-2 text-sm font-medium text-gray-300">اسم المستخدم:</label>
+                        <input type="text" id="username" name="username" required class="w-full px-2 py-1.5 text-white bg-transparent border border-white/20 rounded-lg outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400 transition duration-200 placeholder-gray-400" placeholder="أدخل اسم المستخدم">
+                    </div>
 
-    } else {
-      alert("خطأ في اسم المستخدم أو كلمة المرور ❌");
-    }
+                    <div>
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-300">كلمة المرور:</label>
+                        <input type="password" id="password" name="password" required class="w-full px-2 py-1.5 text-white bg-transparent border border-white/20 rounded-lg outline-none focus:border-orange-400 focus:ring-1 focus:ring-orange-400 transition duration-200 placeholder-gray-400" placeholder="********">
+                    </div>
 
-  })
-  .catch(err => {
-    alert("لا يوجد اتصال بالسيرفر ⚠️");
-  });
+                    <button id="submitBtn" type="submit" class="w-full flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-orange-500 rounded-lg hover:bg-orange-600 focus:ring-4 focus:ring-orange-400/50 transition duration-300 ease-in-out transform active:scale-95 shadow-lg disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none">
+                        <span id="btnText">دخول</span>
+                        <svg id="loadingIcon" class="hidden w-5 h-5 text-orange-100 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-}
-</script>
+    <script src="./assets/js/particles.js?1.0.01"></script>
+    <script src="./assets/js/particles_new.js?1.0.01"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            if (!this.checkValidity()) {
+                return;
+            }
+
+            const btn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const loadingIcon = document.getElementById('loadingIcon');
+
+            btn.disabled = true;
+            btnText.classList.add('hidden');
+            loadingIcon.classList.remove('hidden');
+        });
+    </script>
+
+</body>
+
+</html>
