@@ -3,95 +3,91 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>كأس العالم - البث المباشر</title>
+<title>IPTV Login</title>
 
 <style>
-body {
-  margin: 0;
+body{
+  margin:0;
   font-family: Arial;
-  background: #0b1220;
-  color: white;
+  background:#0b0f19;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
 }
 
-header {
-  background: #111827;
-  padding: 15px;
-  text-align: center;
-  font-size: 22px;
-  font-weight: bold;
-  color: gold;
+.box{
+  width:90%;
+  max-width:400px;
+  text-align:center;
 }
 
-.container {
-  display: flex;
-  flex-wrap: wrap;
+.logo{
+  font-size:28px;
+  font-weight:bold;
+  margin-bottom:10px;
 }
 
-.channels {
-  width: 30%;
-  min-width: 250px;
-  background: #111827;
-  height: 100vh;
-  overflow-y: auto;
+.subtitle{
+  color:#9ca3af;
+  margin-bottom:25px;
 }
 
-.channel {
-  padding: 15px;
-  border-bottom: 1px solid #222;
-  cursor: pointer;
+input{
+  width:100%;
+  padding:14px;
+  margin-bottom:10px;
+  border:none;
+  border-radius:10px;
+  background:#1f2937;
+  color:white;
+  outline:none;
 }
 
-.channel:hover {
-  background: #1f2937;
+input::placeholder{
+  color:#9ca3af;
 }
 
-.player {
-  flex: 1;
-  padding: 20px;
+.btn{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:10px;
+  background:#facc15;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:10px;
 }
 
-video {
-  width: 100%;
-  border-radius: 12px;
-  background: black;
-}
-
-.title {
-  margin-bottom: 10px;
-  color: #22c55e;
+.btn:hover{
+  background:#eab308;
 }
 </style>
+
 </head>
 
 <body>
 
-<header>⚽ كأس العالم - البث المباشر</header>
+<div class="box">
 
-<div class="container">
+  <!-- الشعار -->
+  <div class="logo">📺 شعار</div>
 
-  <!-- القنوات -->
-  <div class="channels">
-    <div class="channel" onclick="play('STREAM_URL_1')">قناة 1 - مباراة 1</div>
-    <div class="channel" onclick="play('STREAM_URL_2')">قناة 2 - مباراة 2</div>
-    <div class="channel" onclick="play('STREAM_URL_3')">قناة 3 - مباراة 3</div>
-    <div class="channel" onclick="play('STREAM_URL_4')">قناة 4 - مباراة 4</div>
-  </div>
+  <!-- العنوان -->
+  <div class="subtitle">إضافة قائمة تشغيل</div>
 
-  <!-- المشغل -->
-  <div class="player">
-    <div class="title">🎬 اختر قناة للمشاهدة</div>
-    <video id="video" controls autoplay></video>
-  </div>
+  <!-- الحقول -->
+  <input type="text" placeholder="اسم المستخدم">
+  <input type="password" placeholder="كلمة المرور">
+  <input type="text" placeholder="السيرفر">
+  <input type="text" placeholder="الخادم">
+
+  <!-- الزر -->
+  <button class="btn">ابدأ ▶</button>
 
 </div>
-
-<script>
-function play(url) {
-  const video = document.getElementById("video");
-  video.src = url;
-  video.play();
-}
-</script>
 
 </body>
 </html>
