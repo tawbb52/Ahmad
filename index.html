@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم IPTV</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- الهيدر -->
+        <header class="header">
+            <h1>📺 لوحة تحكم IPTV</h1>
+            <p>إدارة قنوات البث المباشر</p>
+        </header>
+
+        <!-- شريط البحث والإضافة -->
+        <div class="controls">
+            <input 
+                type="text" 
+                id="searchInput" 
+                placeholder="ابحث عن قناة..." 
+                class="search-box"
+            >
+            <button id="addBtn" class="btn btn-add">➕ إضافة قناة</button>
+        </div>
+
+        <!-- نموذج إضافة قناة (مخفي في البداية) -->
+        <div id="addModal" class="modal hidden">
+            <div class="modal-content">
+                <h2>إضافة قناة جديدة</h2>
+                <form id="addChannelForm">
+                    <input 
+                        type="text" 
+                        id="channelName" 
+                        placeholder="اسم القناة" 
+                        required
+                    >
+                    <input 
+                        type="text" 
+                        id="channelUrl" 
+                        placeholder="رابط البث (M3U URL)" 
+                        required
+                    >
+                    <input 
+                        type="text" 
+                        id="channelCategory" 
+                        placeholder="الفئة (رياضة، أخبار، ترفيه)" 
+                        required
+                    >
+                    <div class="modal-buttons">
+                        <button type="submit" class="btn btn-primary">حفظ</button>
+                        <button type="button" id="closeModal" class="btn btn-secondary">إلغاء</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- عرض القنوات -->
+        <div class="channels-section">
+            <h2>القنوات المتاحة</h2>
+            <div id="channelsList" class="channels-grid">
+                <!-- سيتم ملء القنوات هنا من JavaScript -->
+            </div>
+        </div>
+
+        <!-- رسالة عندما لا توجد قنوات -->
+        <div id="emptyMessage" class="empty-message hidden">
+            <p>لا توجد قنوات متاحة</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
