@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>بلادي سبورت — بث مباشر</title>
+  <title>أحمد سبورت — بث مباشر</title>
 
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
@@ -15,88 +15,206 @@
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #020617;
+      font-family: Arial, Tahoma, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(220, 38, 38, 0.22), transparent 35%),
+        #050816;
       color: #ffffff;
     }
 
-    header {
-      background: #0f172a;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 16px;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .header-content {
-      max-width: 1100px;
+    header {
+      background: rgba(10, 15, 30, 0.92);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+    }
+
+    .header-inner {
+      max-width: 1150px;
       margin: auto;
+      padding: 14px 16px;
       display: flex;
+      align-items: center;
       justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand {
+      display: flex;
       align-items: center;
       gap: 12px;
     }
 
-    .logo h1 {
+    .brand-logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #ef4444, #991b1b);
+      font-weight: 900;
+      box-shadow: 0 12px 30px rgba(239, 68, 68, 0.25);
+    }
+
+    .brand h1 {
       margin: 0;
-      font-size: 24px;
-      color: #ffffff;
+      font-size: 22px;
+      line-height: 1.2;
     }
 
-    .logo p {
-      margin: 4px 0 0;
+    .brand p {
+      margin: 3px 0 0;
       color: #94a3b8;
-      font-size: 14px;
+      font-size: 13px;
     }
 
-    .live-badge {
+    .header-badge {
       background: #dc2626;
-      color: #ffffff;
-      padding: 8px 14px;
+      color: #fff;
+      padding: 8px 13px;
       border-radius: 999px;
       font-size: 13px;
       font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+    }
+
+    .pulse {
+      width: 9px;
+      height: 9px;
+      background: #fff;
+      border-radius: 999px;
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      70% {
+        opacity: 0.3;
+        transform: scale(1.6);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     main {
-      max-width: 1100px;
+      max-width: 1150px;
       margin: auto;
-      padding: 20px 16px;
+      padding: 22px 16px;
+    }
+
+    .hero {
+      margin-bottom: 18px;
+      padding: 18px;
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, rgba(239, 68, 68, 0.18), rgba(15, 23, 42, 0.85)),
+        #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .hero h2 {
+      margin: 0 0 8px;
+      font-size: 26px;
+    }
+
+    .hero p {
+      margin: 0;
+      color: #cbd5e1;
+      line-height: 1.8;
+      font-size: 15px;
     }
 
     .layout {
       display: grid;
-      grid-template-columns: 1fr 330px;
-      gap: 20px;
+      grid-template-columns: 1fr 340px;
+      gap: 18px;
+      align-items: start;
     }
 
-    .player-card,
-    .channels-card,
-    .matches-card {
-      background: #0f172a;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 18px;
+    .card {
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 22px;
       overflow: hidden;
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.25);
     }
 
-    .video-wrap {
+    .video-area {
       position: relative;
       aspect-ratio: 16 / 9;
-      background: #000000;
+      background: #000;
     }
 
     video {
       width: 100%;
       height: 100%;
-      background: #000000;
+      background: #000;
+      display: block;
+    }
+
+    .top-overlay {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      z-index: 5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none;
+      direction: rtl;
+    }
+
+    .overlay-left,
+    .overlay-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tag {
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+    }
+
+    .tag.live {
+      background: #dc2626;
+      border-color: #dc2626;
+    }
+
+    .tag.hd {
+      background: rgba(255, 255, 255, 0.92);
+      color: #111827;
     }
 
     .loading {
       position: absolute;
       inset: 0;
+      z-index: 8;
       display: none;
       align-items: center;
       justify-content: center;
-      background: rgba(0, 0, 0, 0.75);
-      z-index: 5;
+      background: rgba(0, 0, 0, 0.76);
       text-align: center;
     }
 
@@ -105,13 +223,13 @@
     }
 
     .spinner {
-      width: 42px;
-      height: 42px;
+      width: 46px;
+      height: 46px;
       margin: 0 auto 12px;
       border: 4px solid #334155;
       border-top-color: #ef4444;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
+      border-radius: 999px;
+      animation: spin 0.9s linear infinite;
     }
 
     @keyframes spin {
@@ -120,23 +238,11 @@
       }
     }
 
-    .live-tag {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: #dc2626;
-      padding: 5px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: bold;
-      z-index: 3;
-    }
-
     .player-info {
       padding: 16px;
     }
 
-    .player-info h2 {
+    .player-info h3 {
       margin: 0 0 8px;
       font-size: 22px;
     }
@@ -144,64 +250,64 @@
     .player-info p {
       margin: 0;
       color: #94a3b8;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .error {
+      display: none;
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 14px;
+      color: #fecaca;
+      background: rgba(127, 29, 29, 0.45);
+      border: 1px solid rgba(248, 113, 113, 0.35);
       line-height: 1.7;
       font-size: 14px;
     }
 
-    .error-box {
-      display: none;
-      margin-top: 12px;
-      background: rgba(127, 29, 29, 0.45);
-      border: 1px solid rgba(248, 113, 113, 0.4);
-      color: #fecaca;
-      padding: 12px;
-      border-radius: 12px;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .error-box.active {
+    .error.active {
       display: block;
     }
 
-    .channels-card {
+    .side-card {
       padding: 16px;
     }
 
-    .channels-card h3,
-    .matches-card h3 {
+    .side-card h3 {
       margin: 0 0 14px;
       font-size: 19px;
     }
 
-    .channel-btn {
+    .channel {
       width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.08);
       background: #1e293b;
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 14px;
+      color: #fff;
+      border-radius: 16px;
       padding: 14px;
       margin-bottom: 10px;
-      text-align: right;
       cursor: pointer;
-      transition: 0.2s;
+      text-align: right;
+      transition: 0.2s ease;
     }
 
-    .channel-btn:hover {
-      background: #334155;
+    .channel:hover {
+      background: #273449;
+      transform: translateY(-1px);
     }
 
-    .channel-btn.active {
-      border-color: #ef4444;
-      background: rgba(239, 68, 68, 0.12);
+    .channel.active {
+      background: rgba(220, 38, 38, 0.14);
+      border-color: rgba(239, 68, 68, 0.9);
     }
 
     .channel-top {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 10px;
-      margin-bottom: 6px;
+      margin-bottom: 7px;
     }
 
     .channel-name {
@@ -210,15 +316,15 @@
     }
 
     .status {
+      font-size: 11px;
       padding: 4px 8px;
       border-radius: 999px;
-      font-size: 11px;
       white-space: nowrap;
     }
 
     .status.live {
       background: #dc2626;
-      color: #ffffff;
+      color: #fff;
     }
 
     .status.soon {
@@ -232,9 +338,14 @@
       line-height: 1.6;
     }
 
-    .matches-card {
-      margin-top: 20px;
+    .matches {
+      margin-top: 18px;
       padding: 16px;
+    }
+
+    .matches h3 {
+      margin: 0 0 14px;
+      font-size: 20px;
     }
 
     .matches-grid {
@@ -244,43 +355,60 @@
     }
 
     .match {
+      border-radius: 18px;
       background: #1e293b;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
       padding: 14px;
       text-align: center;
     }
 
+    .league {
+      color: #94a3b8;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
     .teams {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       gap: 8px;
       font-weight: bold;
       font-size: 14px;
     }
 
     .vs {
-      color: #94a3b8;
+      color: #ef4444;
       font-size: 12px;
     }
 
     .time {
       margin-top: 12px;
       background: #0f172a;
-      padding: 8px;
-      border-radius: 10px;
       color: #cbd5e1;
+      padding: 8px;
+      border-radius: 12px;
       font-size: 13px;
     }
 
+    .notice {
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(234, 179, 8, 0.09);
+      border: 1px solid rgba(234, 179, 8, 0.22);
+      color: #fde68a;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
     footer {
-      margin-top: 30px;
-      padding: 18px;
+      margin-top: 26px;
+      padding: 20px 16px;
       text-align: center;
       color: #94a3b8;
-      background: #020617;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(2, 6, 23, 0.95);
       font-size: 14px;
     }
 
@@ -289,7 +417,7 @@
       font-weight: bold;
     }
 
-    @media (max-width: 850px) {
+    @media (max-width: 900px) {
       .layout {
         grid-template-columns: 1fr;
       }
@@ -298,9 +426,32 @@
         grid-template-columns: 1fr;
       }
 
-      .header-content {
+      .hero h2 {
+        font-size: 22px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .header-inner {
         align-items: flex-start;
         flex-direction: column;
+      }
+
+      .brand h1 {
+        font-size: 20px;
+      }
+
+      .video-area {
+        aspect-ratio: 16 / 10;
+      }
+
+      .top-overlay {
+        align-items: flex-start;
+      }
+
+      .overlay-left,
+      .overlay-right {
+        flex-wrap: wrap;
       }
     }
   </style>
@@ -308,20 +459,34 @@
 
 <body>
   <header>
-    <div class="header-content">
-      <div class="logo">
-        <h1>بلادي سبورت</h1>
-        <p>بث مباشر للمباريات بجودة عالية</p>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-logo">AS</div>
+        <div>
+          <h1>أحمد سبورت</h1>
+          <p>بث مباشر بجودة عالية</p>
+        </div>
       </div>
 
-      <div class="live-badge">مباشر الآن</div>
+      <div class="header-badge">
+        <span class="pulse"></span>
+        مباشر الآن
+      </div>
     </div>
   </header>
 
   <main>
+    <section class="hero">
+      <h2>مشاهدة البث المباشر</h2>
+      <p>
+        اختر القناة من القائمة وشاهد البث مباشرة عبر مشغل HLS.
+        ضع روابط البث القانونية الخاصة بك بصيغة m3u8 داخل الكود.
+      </p>
+    </section>
+
     <section class="layout">
-      <div class="player-card">
-        <div class="video-wrap">
+      <div class="card">
+        <div class="video-area">
           <div id="loading" class="loading active">
             <div>
               <div class="spinner"></div>
@@ -329,70 +494,82 @@
             </div>
           </div>
 
-          <div class="live-tag">LIVE</div>
+          <div class="top-overlay">
+            <div class="overlay-right">
+              <span class="tag live">LIVE</span>
+              <span class="tag hd">HD</span>
+            </div>
+
+            <div class="overlay-left">
+              <span id="overlayChannel" class="tag">القناة الرياضية 1</span>
+            </div>
+          </div>
 
           <video id="video" controls autoplay muted playsinline></video>
         </div>
 
         <div class="player-info">
-          <h2 id="channelTitle">القناة الرياضية 1</h2>
-          <p id="channelDescription">بث مباشر تجريبي يعمل بتقنية HLS.</p>
+          <h3 id="channelTitle">القناة الرياضية 1</h3>
+          <p id="channelDescription">
+            بث تجريبي بتقنية HLS للتأكد من عمل المشغل.
+          </p>
 
-          <div id="errorBox" class="error-box">
+          <div id="errorBox" class="error">
             تعذر تشغيل البث. تأكد من أن رابط m3u8 صحيح ويعمل عبر HTTPS.
           </div>
         </div>
       </div>
 
-      <aside class="channels-card">
+      <aside class="card side-card">
         <h3>القنوات</h3>
 
         <button
-          class="channel-btn active"
+          class="channel active"
           data-title="القناة الرياضية 1"
-          data-description="بث مباشر تجريبي يعمل بتقنية HLS."
+          data-description="بث تجريبي بتقنية HLS للتأكد من عمل المشغل."
           data-url="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
         >
           <div class="channel-top">
             <span class="channel-name">القناة الرياضية 1</span>
             <span class="status live">مباشر</span>
           </div>
-          <div class="channel-desc">رابط تجريبي للتأكد من عمل المشغل.</div>
+          <div class="channel-desc">رابط تجريبي يعمل على أغلب المتصفحات.</div>
         </button>
 
         <button
-          class="channel-btn"
+          class="channel"
           data-title="القناة الرياضية 2"
-          data-description="ضع رابط البث الخاص بك هنا."
+          data-description="استبدل هذا الرابط برابط البث القانوني الخاص بك."
           data-url="https://example.com/live/channel2.m3u8"
         >
           <div class="channel-top">
             <span class="channel-name">القناة الرياضية 2</span>
             <span class="status soon">قريباً</span>
           </div>
-          <div class="channel-desc">استبدل الرابط برابط m3u8 الخاص بك.</div>
+          <div class="channel-desc">ضع رابط m3u8 الخاص بك هنا.</div>
         </button>
 
         <button
-          class="channel-btn"
+          class="channel"
           data-title="القناة الرياضية 3"
-          data-description="قناة احتياطية للبث المباشر."
+          data-description="قناة إضافية يمكنك استخدامها كبث احتياطي."
           data-url="https://example.com/live/channel3.m3u8"
         >
           <div class="channel-top">
             <span class="channel-name">القناة الرياضية 3</span>
             <span class="status soon">قريباً</span>
           </div>
-          <div class="channel-desc">يمكنك إضافة أكثر من قناة بنفس الطريقة.</div>
+          <div class="channel-desc">يمكنك إضافة قنوات أكثر بنفس الطريقة.</div>
         </button>
       </aside>
     </section>
 
-    <section class="matches-card">
+    <section class="card matches">
       <h3>مباريات اليوم</h3>
 
       <div class="matches-grid">
         <div class="match">
+          <div class="league">بطولة اليوم</div>
           <div class="teams">
             <span>الفريق الأول</span>
             <span class="vs">VS</span>
@@ -402,6 +579,7 @@
         </div>
 
         <div class="match">
+          <div class="league">بطولة اليوم</div>
           <div class="teams">
             <span>الفريق الثالث</span>
             <span class="vs">VS</span>
@@ -411,6 +589,7 @@
         </div>
 
         <div class="match">
+          <div class="league">بطولة اليوم</div>
           <div class="teams">
             <span>الفريق الخامس</span>
             <span class="vs">VS</span>
@@ -420,6 +599,11 @@
         </div>
       </div>
     </section>
+
+    <div class="notice">
+      تنبيه: هذه الصفحة مخصصة لتشغيل روابط بث قانونية تملكها أو لديك تصريح لاستخدامها.
+      لا تضع روابط قنوات مدفوعة أو محتوى محمي بحقوق نشر بدون إذن.
+    </div>
   </main>
 
   <footer>
@@ -432,7 +616,8 @@
     const errorBox = document.getElementById("errorBox");
     const channelTitle = document.getElementById("channelTitle");
     const channelDescription = document.getElementById("channelDescription");
-    const channelButtons = document.querySelectorAll(".channel-btn");
+    const overlayChannel = document.getElementById("overlayChannel");
+    const channelButtons = document.querySelectorAll(".channel");
 
     let hls = null;
 
@@ -451,17 +636,25 @@
       errorBox.classList.add("active");
     }
 
-    function loadStream(url) {
-      showLoading();
+    function resetVideo() {
+      video.pause();
+      video.removeAttribute("src");
+      video.load();
 
       if (hls) {
         hls.destroy();
         hls = null;
       }
+    }
 
-      video.pause();
-      video.removeAttribute("src");
-      video.load();
+    function loadStream(url) {
+      showLoading();
+      resetVideo();
+
+      if (!url || url.includes("example.com")) {
+        showError("ضع رابط بث m3u8 صحيح لهذه القناة.");
+        return;
+      }
 
       if (Hls.isSupported()) {
         hls = new Hls({
@@ -484,7 +677,7 @@
           console.error("HLS error:", data);
 
           if (data.fatal) {
-            showError("تعذر تشغيل البث. تأكد من أن رابط m3u8 صحيح ويعمل.");
+            showError("تعذر تشغيل البث. تأكد من أن رابط m3u8 يعمل وأن CORS مفعّل.");
           }
         });
       } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
@@ -528,6 +721,7 @@
 
         channelTitle.textContent = title;
         channelDescription.textContent = description;
+        overlayChannel.textContent = title;
 
         loadStream(url);
       });
