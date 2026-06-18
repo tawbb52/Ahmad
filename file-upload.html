@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رفع ملفات التطبيق - B52 Plus</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+      
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      
+      header {
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        margin-bottom: 30px;
+        text-align: center;
+      }
+      
+      header h1 {
+        color: #333;
+        font-size: 36px;
+        margin-bottom: 10px;
+      }
+      
+      header p {
+        color: #666;
+        font-size: 16px;
+      }
+      
+      .main-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-bottom: 30px;
+      }
+      
+      .card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        overflow: hidden;
+      }
+      
+      .card-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px 30px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      
+      .card-body {
+        padding: 30px;
+      }
+      
+      .form-group {
+        margin-bottom: 20px;
+      }
+      
+      label {
+        display: block;
+        color: #333;
+        font-weight: bold;
+        margin-bottom: 8px;
+        font-size: 14px;
+      }
+      
+      input[type="text"],
+      input[type="email"],
+      input[type="number"],
+      input[type="url"],
+      textarea,
+      select {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 14px;
+        font-family: inherit;
+        transition: border-color 0.3s;
+        direction: rtl;
+      }
+      
+      input:focus,
+      textarea:focus,
+      select:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 10px rgba(102, 126, 234, 0.2);
+      }
+      
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+      
+      .file-upload-area {
+        border: 2px dashed #667eea;
+        border-radius: 8px;
+        padding: 40px 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      
+      .file-upload-area:hover {
+        background: #f5f5ff;
+        border-color: #764ba2;
+      }
+      
+      .file-upload-area.dragover {
+        background: #f5f5ff;
+        border-color: #764ba2;
+        box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+      }
+      
+      .file-upload-area input[type="file"] {
+        display: none;
+      }
+      
+      .upload-icon {
+        font-size: 50px;
+        margin-bottom: 15px;
+      }
+      
+      .upload-text {
+        color: #667eea;
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+      
+      .upload-subtext {
+        color: #999;
+        font-size: 13px;
+      }
+      
+      .file-info {
+        background: #e8f5e9;
+        color: #2e7d32;
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 10px;
+        display: none;
+      }
+      
+      .file-info.show {
+        display: block;
+      }
+      
+      .button-group {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
+      
+      button {
+        flex: 1;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      
+      .btn-submit {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+      
+      .btn-submit:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+      
+      .btn-submit:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      
+      .btn-reset {
+        background: #f0f0f0;
+        color: #333;
+      }
+      
+      .btn-reset:hover {
+        background: #e0e0e0;
+      }
+      
+      .file-item {
+        background: #f9f9f9;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        border-right: 4px solid #667eea;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .file-details {
+        flex: 1;
+      }
+      
+      .file-name {
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+      }
+      
+      .file-meta {
+        font-size: 12px;
+        color: #999;
+      }
+      
+      .file-actions {
+        display: flex;
+        gap: 8px;
+      }
+      
+      .btn-action {
+        padding: 6px 12px;
+        font-size: 12px;
+        background: #e0e0e0;
+        color: #333;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      
+      .btn-action:hover {
+        background: #d0d0d0;
+      }
+      
+      .btn-delete {
+        background: #ff6b6b;
+        color: white;
+      }
+      
+      .btn-delete:hover {
+        background: #ff5252;
+      }
+      
+      .message {
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: none;
+      }
+      
+      .message.show {
+        display: block;
+      }
+      
+      .message.success {
+        background: #e8f5e9;
+        color: #2e7d32;
+        border: 1px solid #4caf50;
+      }
+      
+      .message.error {
+        background: #ffebee;
+        color: #c62828;
+        border: 1px solid #f44336;
+      }
+      
+      .info-box {
+        background: #e3f2fd;
+        border-left: 4px solid #2196f3;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        font-size: 13px;
+        color: #1565c0;
+      }
+      
+      .info-box strong {
+        color: #0d47a1;
+      }
+      
+      .full-width {
+        grid-column: 1 / -1;
+      }
+      
+      .empty-state {
+        text-align: center;
+        color: #999;
+        padding: 30px 20px;
+      }
+      
+      @media (max-width: 768px) {
+        .main-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .button-group {
+          flex-direction: column;
+        }
+        
+        button {
+          width: 100%;
+        }
+        
+        header {
+          padding: 30px 20px;
+        }
+        
+        header h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>📱 رفع ملفات التطبيق</h1>
+        <p>ارفع ملفات .ipa الخاصة بتطبيق B52 Plus</p>
+      </header>
+
+      <div class="main-grid">
+        <div class="card">
+          <div class="card-header">📤 رفع ملف جديد</div>
+          <div class="card-body">
+            <div id="successMessage" class="message success"></div>
+            <div id="errorMessage" class="message error"></div>
+
+            <div class="info-box">
+              <strong>💡 ملاحظة:</strong> يمكنك رفع ملفات .ipa بحجم يصل إلى 500 MB
+            </div>
+
+            <form id="fileForm">
+              <div class="form-group">
+                <label for="releaseName">اسم الإصدار</label>
+                <input type="text" id="releaseName" placeholder="مثال: B52 Plus v1.0.1" required>
+              </div>
+
+              <div class="form-group">
+                <label for="releaseNotes">ملاحظات الإصدار</label>
+                <textarea id="releaseNotes" placeholder="• إصلاح الأخطاء&#10;• تحسين الأداء"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="versionNumber">رقم الإصدار</label>
+                <input type="text" id="versionNumber" placeholder="1.0.1" required>
+              </div>
+
+              <div class="form-group">
+                <label>ملف التطبيق (.ipa)</label>
+                <div class="file-upload-area" id="fileUploadArea">
+                  <div class="upload-icon">📁</div>
+                  <div class="upload-text">اسحب الملف هنا أو اضغط للاختيار</div>
+                  <div class="upload-subtext">الملف المدعوم: .ipa (الحد الأقصى 500 MB)</div>
+                  <input type="file" id="fileInput" accept=".ipa" required>
+                </div>
+                <div id="fileInfo" class="file-info"></div>
+              </div>
+
+              <div class="button-group">
+                <button type="submit" class="btn-submit">✓ رفع الملف</button>
+                <button type="reset" class="btn-reset">↺ مسح</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">ℹ️ معلومات التطبيق</div>
+          <div class="card-body">
+            <div class="form-group">
+              <label>اسم التطبيق</label>
+              <input type="text" value="B52 Plus" readonly>
+            </div>
+
+            <div class="form-group">
+              <label>معرف التطبيق (Bundle ID)</label>
+              <input type="text" value="com.tawbb52.myapp" readonly>
+            </div>
+
+            <div class="form-group">
+              <label>نوع الملف</label>
+              <input type="text" value="iOS App Archive (.ipa)" readonly>
+            </div>
+
+            <div class="form-group">
+              <label>نظام التشغيل</label>
+              <input type="text" value="iOS 12.0 فما فوق" readonly>
+            </div>
+          </div>
+        </div>
+
+        <div class="card full-width">
+          <div class="card-header">📦 الملفات المرفوعة</div>
+          <div class="card-body">
+            <div id="filesList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const STORAGE_KEY = 'b52_uploaded_files';
+      const MAX_FILE_SIZE = 500 * 1024 * 1024;
+
+      function loadFiles() {
+        const files = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        const filesList = document.getElementById('filesList');
+        filesList.innerHTML = '';
+
+        if (files.length === 0) {
+          filesList.innerHTML = '<div class="empty-state">لا توجد ملفات مرفوعة حالياً</div>';
+          return;
+        }
+
+        files.forEach((file, index) => {
+          const fileHTML = `
+            <div class="file-item">
+              <div class="file-details">
+                <div class="file-name">📱 ${file.releaseName}</div>
+                <div class="file-meta">الإصدار: ${file.versionNumber} | الحجم: ${(file.size / 1024 / 1024).toFixed(2)} MB</div>
+              </div>
+              <div class="file-actions">
+                <button class="btn-action" onclick="deleteFile(${index})">🗑️ حذف</button>
+              </div>
+            </div>
+          `;
+          filesList.innerHTML += fileHTML;
+        });
+      }
+
+      const fileUploadArea = document.getElementById('fileUploadArea');
+      const fileInput = document.getElementById('fileInput');
+      const form = document.getElementById('fileForm');
+
+      fileUploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        fileUploadArea.classList.add('dragover');
+      });
+
+      fileUploadArea.addEventListener('dragleave', () => {
+        fileUploadArea.classList.remove('dragover');
+      });
+
+      fileUploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        fileUploadArea.classList.remove('dragover');
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+          fileInput.files = files;
+          showFileInfo(files[0]);
+        }
+      });
+
+      fileUploadArea.addEventListener('click', () => {
+        fileInput.click();
+      });
+
+      fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+          showFileInfo(e.target.files[0]);
+        }
+      });
+
+      function showFileInfo(file) {
+        const fileInfo = document.getElementById('fileInfo');
+        const sizeInMB = (file.size / 1024 / 1024).toFixed(2);
+
+        if (!file.name.endsWith('.ipa')) {
+          showMessage('errorMessage', '❌ خطأ: الملف يجب أن يكون من نوع .ipa');
+          fileInput.value = '';
+          return;
+        }
+
+        if (file.size > MAX_FILE_SIZE) {
+          showMessage('errorMessage', '❌ خطأ: حجم الملف يتجاوز 500 MB');
+          fileInput.value = '';
+          return;
+        }
+
+        fileInfo.innerHTML = `✓ ${file.name} (${sizeInMB} MB)`;
+        fileInfo.classList.add('show');
+      }
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const file = fileInput.files[0];
+        if (!file) {
+          showMessage('errorMessage', '❌ الرجاء اختيار ملف');
+          return;
+        }
+
+        const newFile = {
+          releaseName: document.getElementById('releaseName').value,
+          versionNumber: document.getElementById('versionNumber').value,
+          releaseNotes: document.getElementById('releaseNotes').value,
+          fileName: file.name,
+          size: file.size,
+          uploadDate: new Date().toISOString()
+        };
+
+        const files = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        files.unshift(newFile);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(files));
+
+        showMessage('successMessage', '✓ تم رفع الملف بنجاح!');
+        loadFiles();
+        form.reset();
+        document.getElementById('fileInfo').classList.remove('show');
+      });
+
+      function deleteFile(index) {
+        if (confirm('هل تريد حذف هذا الملف؟')) {
+          const files = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+          files.splice(index, 1);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(files));
+          loadFiles();
+        }
+      }
+
+      function showMessage(elementId, message) {
+        const element = document.getElementById(elementId);
+        element.textContent = message;
+        element.classList.add('show');
+        setTimeout(() => element.classList.remove('show'), 3000);
+      }
+
+      loadFiles();
+    </script>
+  </body>
+</html>
