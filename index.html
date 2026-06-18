@@ -1,26 +1,101 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tawbb52 - مطور iOS</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="container nav-container">
-            <div class="logo">tawbb52</div>
-            <ul class="nav-menu">
-                <li><a href="#home">الرئيسية</a></li>
-                <li><a href="#projects">المشاريع</a></li>
-                <li><a href="#contact">تواصل</a></li>
-            </ul>
-        </div>
-    </nav>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B52 Plus</title>
 
-    <section id="home" class="hero">
-        <div class="container">
-            <h1>مرحباً، أنا tawbb52</h1>
-            <p>مطور تطبيقات iOS متخصص</p>
-            <a href="#projects" class="btn
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: linear-gradient(135deg, #1d4661, #245678);
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 40px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 22px;
+      background: #3a8cc4;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background: #216fa3;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.1);
+      margin: 20px auto;
+      padding: 20px;
+      width: 85%;
+      max-width: 500px;
+      border-radius: 15px;
+    }
+
+    .app-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 20px;
+      margin-top: 10px;
+      object-fit: cover;
+      border: 2px solid white;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>B52 Plus</h1>
+    <p>متجر التطبيقات والألعاب</p>
+
+    <!-- زر تحميل -->
+    <a class="btn" href="#">تحميل التطبيق</a>
+
+    <!-- زر تثبيت المتجر -->
+    <a class="btn" href="#">تثبيت تطبيق المتجر</a>
+  </header>
+
+  <div class="card">
+    <h2>تطبيق المتجر</h2>
+
+    <!-- صورة جاهزة -->
+    <img class="app-img" src="https://b52-plus.com/logos/store-ipa.png" alt="Store App">
+
+    <p>اضغط على زر التثبيت لتحميل تطبيق المتجر على جهازك</p>
+  </div>
+
+  <div class="card">
+    <h2>المميزات</h2>
+    <p>✔ تطبيقات مهكرة<br>
+       ✔ ألعاب مدفوعة مجاناً<br>
+       ✔ تثبيت مباشر بدون App Store</p>
+  </div>
+
+  <footer>
+    © 2026 B52 Plus
+  </footer>
+
+</body>
+</html>
