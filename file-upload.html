@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>رفع ملفات التطبيق - B52 Plus</title>
+    <title>B52 Plus - المنتجات ورفع التطبيقات</title>
     <style>
       /* =========================
          B52 BLUE CLEAN THEME
@@ -24,7 +24,7 @@
       }
       
       .container {
-        max-width: 1000px;
+        max-width: 1200px;
         margin: 0 auto;
       }
 
@@ -62,10 +62,21 @@
         color: rgba(255, 255, 255, 0.8) !important;
         font-size: 16px;
       }
+
+      /* القسم الرئيسي */
+      .section-title {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        color: #fff !important;
+        margin: 40px 0 30px 0;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #5AA4E6;
+      }
       
       .main-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         gap: 30px;
         margin-bottom: 30px;
       }
@@ -78,6 +89,12 @@
         border-radius: 35px !important;
         box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.15), 0 5px 15px rgba(0, 0, 0, 0.25) !important;
         overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.15), 0 10px 25px rgba(0, 0, 0, 0.35) !important;
       }
       
       .card::before,
@@ -97,6 +114,57 @@
       
       .card-body {
         padding: 30px;
+      }
+
+      /* بطاقات المنتجات */
+      .product-card {
+        text-align: center;
+      }
+
+      .product-icon {
+        font-size: 60px;
+        margin-bottom: 15px;
+      }
+
+      .product-title {
+        color: #fff !important;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .product-price {
+        font-size: 32px;
+        font-weight: bold;
+        color: #7dff7d;
+        margin-bottom: 5px;
+      }
+
+      .product-currency {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 14px;
+        margin-bottom: 20px;
+      }
+
+      .btn-whatsapp {
+        width: 100%;
+        padding: 12px 20px;
+        background: linear-gradient(to bottom, #25D366 0%, #20A856 100%);
+        color: #fff !important;
+        border: none !important;
+        border-radius: 25px !important;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.15), 0 5px 15px rgba(0, 0, 0, 0.25);
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-whatsapp:hover {
+        transform: translateY(-2px);
+        box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.2), 0 8px 20px rgba(0, 0, 0, 0.35);
       }
       
       .form-group {
@@ -381,10 +449,114 @@
       .icon, svg, i {
         color: #fff !important;
       }
+
+      /* جزء التطبيقات */
+      .apps-section {
+        margin-top: 50px;
+      }
+
+      .apps-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+
+      /* قسم الأسئلة الشائعة */
+      .faq-section {
+        margin-top: 50px;
+        margin-bottom: 40px;
+      }
+
+      .faq-container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .faq-item {
+        margin-bottom: 15px;
+        background: #3B75A8 !important;
+        border-radius: 25px !important;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25) !important;
+        border: none !important;
+      }
+
+      .faq-question {
+        width: 100%;
+        padding: 20px 30px;
+        background: linear-gradient(to bottom, #5AA4E6 0%, #4187C7 50%, #2E6EA6 100%);
+        color: #fff !important;
+        border: none !important;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s;
+        text-align: right;
+      }
+
+      .faq-question:hover {
+        background: linear-gradient(to bottom, #6AAFE6 0%, #4A8FD7 50%, #3375B6 100%);
+        transform: translateX(-5px);
+      }
+
+      .faq-question.active {
+        background: linear-gradient(to bottom, #4A8FD7 0%, #3B75A8 50%, #2E6EA6 100%);
+      }
+
+      .faq-icon {
+        font-size: 20px;
+        transition: transform 0.3s;
+        margin-left: 15px;
+      }
+
+      .faq-question.active .faq-icon {
+        transform: rotate(180deg);
+      }
+
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+        background: #2E5A7F;
+        padding: 0 30px;
+      }
+
+      .faq-answer.active {
+        max-height: 500px;
+        padding: 20px 30px;
+        transition: max-height 0.3s ease-in;
+      }
+
+      .faq-answer-text {
+        color: rgba(255, 255, 255, 0.85) !important;
+        font-size: 14px;
+        line-height: 1.8;
+      }
+
+      .faq-answer-text strong {
+        color: #7dff7d;
+      }
       
       /* وسائط الاستجابة */
+      @media (max-width: 1024px) {
+        .main-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .apps-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
       @media (max-width: 768px) {
         .main-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .apps-grid {
           grid-template-columns: 1fr;
         }
         
@@ -407,6 +579,23 @@
         .logo-svg {
           width: 90px;
           height: 90px;
+        }
+
+        .section-title {
+          font-size: 22px;
+        }
+
+        .faq-question {
+          padding: 15px 20px;
+          font-size: 14px;
+        }
+
+        .faq-answer {
+          padding: 0 20px;
+        }
+
+        .faq-answer.active {
+          padding: 15px 20px;
         }
       }
     </style>
@@ -445,11 +634,61 @@
       </div>
 
       <header>
-        <h1>📱 رفع ملفات التطبيق</h1>
-        <p>ارفع ملفات .ipa الخاصة بتطبيق B52 Plus</p>
+        <h1>🛍️ B52 Plus - المنتجات والتطبيقات</h1>
+        <p>احصل على أفضل المنتجات والخدمات</p>
       </header>
 
+      <!-- قسم المنتجات -->
+      <div class="section-title">📦 منتجاتنا</div>
+
       <div class="main-grid">
+        <!-- المنتج 1 -->
+        <div class="card product-card">
+          <div class="card-header">سناب شات 3 شهور</div>
+          <div class="card-body">
+            <div class="product-icon">📱</div>
+            <div class="product-title">سناب شات</div>
+            <div class="product-price">16</div>
+            <div class="product-currency">ريال سعودي</div>
+            <a href="https://wa.me/966504106065?text=أريد%20شراء%20سناب%20شات%203%20شهور%20-%2016%20ريال" class="btn-whatsapp" target="_blank">
+              💬 اطلب عبر واتس
+            </a>
+          </div>
+        </div>
+
+        <!-- المنتج 2 -->
+        <div class="card product-card">
+          <div class="card-header">سناب شات 6 شهور</div>
+          <div class="card-body">
+            <div class="product-icon">📱</div>
+            <div class="product-title">سناب شات</div>
+            <div class="product-price">26</div>
+            <div class="product-currency">ريال سعودي</div>
+            <a href="https://wa.me/966504106065?text=أريد%20شراء%20سناب%20شات%206%20شهور%20-%2026%20ريال" class="btn-whatsapp" target="_blank">
+              💬 اطلب عبر واتس
+            </a>
+          </div>
+        </div>
+
+        <!-- المنتج 3 -->
+        <div class="card product-card">
+          <div class="card-header">سناب شات سنة كاملة</div>
+          <div class="card-body">
+            <div class="product-icon">📱</div>
+            <div class="product-title">سناب شات</div>
+            <div class="product-price">20</div>
+            <div class="product-currency">ريال سعودي</div>
+            <a href="https://wa.me/966504106065?text=أريد%20شراء%20سناب%20شات%20سنة%20كاملة%20-%2020%20ريال" class="btn-whatsapp" target="_blank">
+              💬 اطلب عبر واتس
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- قسم رفع التطبيقات -->
+      <div class="section-title apps-section">📱 رفع التطبيقات</div>
+
+      <div class="apps-grid">
         <div class="card">
           <div class="card-header">📤 رفع ملف جديد</div>
           <div class="card-body">
@@ -497,13 +736,52 @@
               <label>نظام التشغيل</label>
               <input type="text" value="iOS 12.0 فما فوق" readonly>
             </div>
+
+            <div class="form-group">
+              <label>رقم الدعم - واتس</label>
+              <a href="https://wa.me/966504106065" class="btn-whatsapp" target="_blank" style="text-align: center; display: block;">
+                💬 0504106065
+              </a>
+            </div>
           </div>
         </div>
+      </div>
 
-        <div class="card full-width">
-          <div class="card-header">📦 الملفات المرفوعة</div>
-          <div class="card-body">
-            <div id="filesList"></div>
+      <div class="card full-width" style="margin-top: 30px;">
+        <div class="card-header">📦 الملفات المرفوعة</div>
+        <div class="card-body">
+          <div id="filesList"></div>
+        </div>
+      </div>
+
+      <!-- قسم الأسئلة الشائعة -->
+      <div class="faq-section">
+        <div class="section-title">❓ الأسئلة الشائعة</div>
+        <div class="faq-container">
+          <!-- السؤال 1 -->
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span class="faq-icon">▼</span>
+              <span>هل متجر التطبيقات آمن على الجهاز؟</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-text">
+                <strong>نعم بكل تأكيد آمن تماماً!</strong> حيث أنه مصرح بشهادة من شركة ابل ولا يضر الجهاز ابداً أو يخرجه من الضمان أو يكسر حمايته. المتجر آمن 100% للاستخدام على أي جهاز iOS.
+              </div>
+            </div>
+          </div>
+
+          <!-- السؤال 2 -->
+          <div class="faq-item">
+            <button class="faq-question" onclick="toggleFAQ(this)">
+              <span class="faq-icon">▼</span>
+              <span>هل اقدر احذف متجر البلس من جهازي؟</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-text">
+                <strong>نعم تقدر تحذفه أو ما تثبته بهالحالة</strong> المتجر ما تستفيد منه لكن اشتراكك ما تقدر تلغيه لأنه بالأساس شغال وبأي وقت ترجع تثبته دام مدة الاشتراك سنة. وهالأمر ما بيضر جهازك ابداً أو حتى التطبيقات عندك اللي محملها من ابل ستور.
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -631,6 +909,25 @@
         element.textContent = message;
         element.classList.add('show');
         setTimeout(() => element.classList.remove('show'), 3000);
+      }
+
+      function toggleFAQ(button) {
+        const answer = button.nextElementSibling;
+        const isActive = answer.classList.contains('active');
+
+        // إغلاق جميع الأسئلة الأخرى
+        document.querySelectorAll('.faq-answer').forEach(a => {
+          a.classList.remove('active');
+        });
+        document.querySelectorAll('.faq-question').forEach(q => {
+          q.classList.remove('active');
+        });
+
+        // فتح السؤال الحالي إذا لم يكن مفتوحاً
+        if (!isActive) {
+          answer.classList.add('active');
+          button.classList.add('active');
+        }
       }
 
       loadFiles();
