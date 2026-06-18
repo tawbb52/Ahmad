@@ -1,0 +1,10 @@
+platform :ios, '15.0'
+use_frameworks!
+
+project 'Ahmad.xcodeproj'
+
+target 'Ahmad' do
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
+  pod 'GoogleSignIn'
+end

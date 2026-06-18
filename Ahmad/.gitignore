@@ -47,3 +47,5 @@ fastlane/test_output/
 # Environment
 .env
 .env.local
+# Firebase
+GoogleService-Info.plist
