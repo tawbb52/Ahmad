@@ -3,73 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة تحكم IPTV</title>
-    <link rel="stylesheet" href="style.css">
+    <title>لوحة الإدارة - iOS App Store</title>
+    <link rel="stylesheet" href="css/admin-style.css">
 </head>
 <body>
-    <div class="container">
-        <!-- الهيدر -->
-        <header class="header">
-            <h1>📺 لوحة تحكم IPTV</h1>
-            <p>إدارة قنوات البث المباشر</p>
-        </header>
-
-        <!-- شريط البحث والإضافة -->
-        <div class="controls">
-            <input 
-                type="text" 
-                id="searchInput" 
-                placeholder="ابحث عن قناة..." 
-                class="search-box"
-            >
-            <button id="addBtn" class="btn btn-add">➕ إضافة قناة</button>
+    <!-- الهيدر -->
+    <header class="admin-header">
+        <div class="container">
+            <h1>📊 لوحة التحكم - iOS App Store</h1>
+            <button id="logoutBtn" class="btn btn-logout">تسجيل خروج</button>
         </div>
+    </header>
 
-        <!-- نموذج إضافة قناة (مخفي في البداية) -->
-        <div id="addModal" class="modal hidden">
-            <div class="modal-content">
-                <h2>إضافة قناة جديدة</h2>
-                <form id="addChannelForm">
-                    <input 
-                        type="text" 
-                        id="channelName" 
-                        placeholder="اسم القناة" 
-                        required
-                    >
-                    <input 
-                        type="text" 
-                        id="channelUrl" 
-                        placeholder="رابط البث (M3U URL)" 
-                        required
-                    >
-                    <input 
-                        type="text" 
-                        id="channelCategory" 
-                        placeholder="الفئة (رياضة، أخبار، ترفيه)" 
-                        required
-                    >
-                    <div class="modal-buttons">
-                        <button type="submit" class="btn btn-primary">حفظ</button>
-                        <button type="button" id="closeModal" class="btn btn-secondary">إلغاء</button>
+    <!-- القائمة الجانبية -->
+    <div class="admin-container">
+        <aside class="admin-sidebar">
+            <nav class="admin-nav">
+                <a href="#" class="nav-link active" data-section="dashboard">📈 لوحة المعلومات</a>
+                <a href="#" class="nav-link" data-section="apps">📱 إدارة التطبيقات</a>
+                <a href="#" class="nav-link" data-section="users">👥 إدارة المستخدمين</a>
+                <a href="#" class="nav-link" data-section="sales">💰 المبيعات والإيرادات</a>
+                <a href="#" class="nav-link" data-section="comments">💬 التعليقات والتقييمات</a>
+                <a href="#" class="nav-link" data-section="settings">⚙️ الإعدادات</a>
+            </nav>
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="admin-content">
+
+            <!-- لوحة المعلومات -->
+            <section id="dashboard" class="section active">
+                <h2>لوحة المعلومات</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📱</div>
+                        <div class="stat-info">
+                            <h3>إجمالي التطبيقات</h3>
+                            <p id="totalApps" class="stat-number">0</p>
+                        </div>
                     </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <h3>المستخدمين</h3>
+                            <p id="totalUsers" class="stat-number">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">📥</div>
+                        <div class="stat-info">
+                            <h3>إجمالي التحميلات</h3>
+                            <p id="totalDownloads" class="stat-number">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-info">
+                            <h3>الإيرادات</h3>
+                            <p id="totalRevenue" class="stat-number">$0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>إحصائيات التحميلات</h3>
+                    <canvas id="downloadsChart"></canvas>
+                </div>
+            </section>
+
+            <!-- إدارة التطبيقات -->
+            <section id="apps" class="section">
+                <h2>إدارة التطبيقات</h2>
+                <button class="btn btn-add" onclick="showAddAppModal()">➕ إضافة تطبيق جديد</button>
+
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>الأيقونة</th>
+                                <th>اسم التطبيق</th>
+                                <th>الفئة</th>
+                                <th>الإصدار</th>
+                                <th>التقييم</th>
+                                <th>التحميلات</th>
+                                <th>الحالة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="appsTableBody">
+                            <!-- سيتم ملء البيانات هنا -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- إدارة المستخدمين -->
+            <section id="users" class="section">
+                <h2>إدارة المستخدمين</h2>
+
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>اسم المستخدم</th>
+                                <th>البريد الإلكتروني</th>
+                                <th>الدولة</th>
+                                <th>الاشتراك</th>
+                                <th>تاريخ الانضمام</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- سيتم ملء البيانات هنا -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- المبيعات والإيرادات -->
+            <section id="sales" class="section">
+                <h2>المبيعات والإيرادات</h2>
+
+                <div class="sales-filters">
+                    <input type="date" id="startDate" class="filter-input">
+                    <input type="date" id="endDate" class="filter-input">
+                    <button class="btn btn-filter">🔍 البحث</button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>المستخدم</th>
+                                <th>التطبيق</th>
+                                <th>المبلغ</th>
+                                <th>الخطة</th>
+                                <th>التاريخ</th>
+                                <th>الحالة</th>
+                            </tr>
+                        </thead>
+                        <tbody id="salesTableBody">
+                            <!-- سيتم ملء البيانات هنا -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- التعليقات والتقييمات -->
+            <section id="comments" class="section">
+                <h2>التعليقات والتقييمات</h2>
+
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>المستخدم</th>
+                                <th>التطبيق</th>
+                                <th>التقييم</th>
+                                <th>التعليق</th>
+                                <th>التاريخ</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="commentsTableBody">
+                            <!-- سيتم ملء البيانات هنا -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- الإعدادات -->
+            <section id="settings" class="section">
+                <h2>إعدادات الموقع</h2>
+
+                <form id="settingsForm" class="settings-form">
+                    <div class="form-group">
+                        <label>اسم الموقع</label>
+                        <input type="text" id="siteName" value="iOS App Store">
+                    </div>
+
+                    <div class="form-group">
+                        <label>الوصف</label>
+                        <textarea id="siteDescription">تحميل تطبيقات iOS الأصلية والموثوقة</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>البريد الإلكتروني للدعم</label>
+                        <input type="email" id="supportEmail" value="support@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label>رقم الهاتف</label>
+                        <input type="tel" id="supportPhone">
+                    </div>
+
+                    <div class="form-group">
+                        <label>عملة الموقع</label>
+                        <select id="currency">
+                            <option value="USD">$ - دولار أمريكي</option>
+                            <option value="EUR">€ - يورو</option>
+                            <option value="SAR">﷼ - ريال سعودي</option>
+                            <option value="AED">د.إ - درهم إماراتي</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">💾 حفظ الإعدادات</button>
                 </form>
-            </div>
-        </div>
+            </section>
 
-        <!-- عرض القنوات -->
-        <div class="channels-section">
-            <h2>القنوات المتاحة</h2>
-            <div id="channelsList" class="channels-grid">
-                <!-- سيتم ملء القنوات هنا من JavaScript -->
-            </div>
-        </div>
+        </main>
+    </div>
 
-        <!-- رسالة عندما لا توجد قنوات -->
-        <div id="emptyMessage" class="empty-message hidden">
-            <p>لا توجد قنوات متاحة</p>
+    <!-- نموذج إضافة تطبيق -->
+    <div id="addAppModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>إضافة تطبيق جديد</h2>
+            <form id="addAppForm">
+                <div class="form-group">
+                    <label>اسم التطبيق</label>
+                    <input type="text" id="appName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>الوصف</label>
+                    <textarea id="appDescription" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>الفئة</label>
+                    <select id="appCategory" required>
+                        <option value="">اختر الفئة</option>
+                        <option value="IPTV">📺 IPTV</option>
+                        <option value="streaming">🎬 Streaming</option>
+                        <option value="games">🎮 ألعاب</option>
+                        <option value="tools">🛠️ أدوات</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>الأيقونة</label>
+                    <input type="file" id="appIcon" accept="image/*" required>
+                </div>
+
+                <div class="form-group">
+                    <label>السعر (اترك فارغاً للمجاني)</label>
+                    <input type="number" id="appPrice" min="0" step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label>ملف التطبيق (IPA)</label>
+                    <input type="file" id="appFile" accept=".ipa" required>
+                </div>
+
+                <div class="form-group">
+                    <label>الإصدار</label>
+                    <input type="text" id="appVersion" value="1.0.0" required>
+                </div>
+
+                <div class="form-group">
+                    <label>المميزات (افصل بـ فاصلة)</label>
+                    <textarea id="appFeatures" placeholder="مميزة 1, مميزة 2, مميزة 3"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">➕ إضافة</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeAddAppModal()">إلغاء</button>
+                </div>
+            </form>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script type="module" src="js/admin.js"></script>
 </body>
 </html>
