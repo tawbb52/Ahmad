@@ -539,10 +539,10 @@
                 <label for="appFile">ملف التطبيق للمراجعة السريعة</label>
                 <div class="upload-box">
                   <label for="appFile" class="upload-trigger">📤 اختر ملف التطبيق</label>
-                  <input type="file" id="appFile" accept=".ipa,.apk,.zip,.plist">
+                  <input type="file" id="appFile" accept=".ipa">
                   <p class="upload-hint">
-                    يدعم ملفات IPA و APK و ZIP و PLIST. يتم عرض اسم الملف وحجمه فقط
-                    ولا يتم رفعه إلى خادم.
+                    يدعم ملفات IPA فقط. يتم عرض اسم الملف وحجمه فقط ولا يتم رفعه إلى
+                    خادم.
                   </p>
                   <div class="file-preview" id="filePreview"></div>
                 </div>
@@ -597,6 +597,7 @@
       const clearButton = document.getElementById("clearButton");
       const resetButton = document.getElementById("resetButton");
       const releaseDateInput = document.getElementById("releaseDate");
+      const IPA_EXTENSION = ".ipa";
 
       releaseDateInput.value = new Date().toISOString().split("T")[0];
 
@@ -740,6 +741,10 @@
         `;
       }
 
+      function isIpaFile(file) {
+        return Boolean(file && file.name.toLowerCase().endsWith(IPA_EXTENSION));
+      }
+
       async function copyToClipboard(text) {
         try {
           await navigator.clipboard.writeText(text);
@@ -798,6 +803,13 @@
           return;
         }
 
+        if (appFileInput.files[0] && !isIpaFile(appFileInput.files[0])) {
+          showMessage(infoMessage, "يرجى اختيار ملف بصيغة IPA فقط.");
+          updateFilePreview(null);
+          appFileInput.value = "";
+          return;
+        }
+
         const apps = getApps();
         apps.unshift(newApp);
         saveApps(apps);
@@ -808,7 +820,16 @@
       });
 
       appFileInput.addEventListener("change", (event) => {
-        updateFilePreview(event.target.files[0]);
+        const selectedFile = event.target.files[0];
+
+        if (selectedFile && !isIpaFile(selectedFile)) {
+          event.target.value = "";
+          updateFilePreview(null);
+          showMessage(infoMessage, "هذا الحقل يقبل ملفات IPA فقط.");
+          return;
+        }
+
+        updateFilePreview(selectedFile);
       });
 
       resetButton.addEventListener("click", clearFormState);
