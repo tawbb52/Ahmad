@@ -27,6 +27,19 @@
         max-width: 1000px;
         margin: 0 auto;
       }
+
+      /* الشعار */
+      .logo-section {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .logo-svg {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 20px;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+      }
       
       /* رأس الصفحة */
       header {
@@ -390,11 +403,47 @@
         header h1 {
           font-size: 24px;
         }
+
+        .logo-svg {
+          width: 90px;
+          height: 90px;
+        }
       }
     </style>
   </head>
   <body>
     <div class="container">
+      <!-- الشعار -->
+      <div class="logo-section">
+        <svg class="logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- دائرة خارجية -->
+          <circle cx="100" cy="100" r="95" fill="none" stroke="#5AA4E6" stroke-width="3"/>
+          
+          <!-- دائرة داخلية -->
+          <circle cx="100" cy="100" r="85" fill="rgba(90, 164, 230, 0.1)" stroke="#4187C7" stroke-width="2"/>
+          
+          <!-- حرف B -->
+          <text x="50" y="125" font-family="Arial, sans-serif" font-size="70" font-weight="bold" fill="#5AA4E6">B</text>
+          
+          <!-- حرف 5 -->
+          <text x="100" y="125" font-family="Arial, sans-serif" font-size="70" font-weight="bold" fill="#7dff7d">5</text>
+          
+          <!-- حرف 2 -->
+          <text x="145" y="125" font-family="Arial, sans-serif" font-size="70" font-weight="bold" fill="#5AA4E6">2</text>
+          
+          <!-- علامة Plus -->
+          <g transform="translate(100, 165)">
+            <line x1="-8" y1="0" x2="8" y2="0" stroke="#5AA4E6" stroke-width="2" stroke-linecap="round"/>
+            <line x1="0" y1="-8" x2="0" y2="8" stroke="#5AA4E6" stroke-width="2" stroke-linecap="round"/>
+          </g>
+          
+          <!-- ديكور علوي -->
+          <circle cx="100" cy="20" r="4" fill="#5AA4E6"/>
+          <circle cx="70" cy="35" r="3" fill="#7dff7d"/>
+          <circle cx="130" cy="35" r="3" fill="#7dff7d"/>
+        </svg>
+      </div>
+
       <header>
         <h1>📱 رفع ملفات التطبيق</h1>
         <p>ارفع ملفات .ipa الخاصة بتطبيق B52 Plus</p>
@@ -437,11 +486,6 @@
             <div class="form-group">
               <label>اسم التطبيق</label>
               <input type="text" value="B52 Plus" readonly>
-            </div>
-
-            <div class="form-group">
-              <label>معرف التطبيق (Bundle ID)</label>
-              <input type="text" value="com.tawbb52.myapp" readonly>
             </div>
 
             <div class="form-group">
