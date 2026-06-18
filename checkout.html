@@ -270,12 +270,12 @@
       
       .btn-whatsapp {
         width: 100%;
-        padding: 12px 20px;
+        padding: 15px 20px;
         background: linear-gradient(to bottom, #25D366 0%, #20A856 100%);
         color: #fff !important;
         border: none !important;
         border-radius: 25px !important;
-        font-size: 14px;
+        font-size: 16px;
         font-weight: bold;
         cursor: pointer;
         transition: all 0.3s;
@@ -473,33 +473,22 @@
       <div class="section-title">💳 إتمام الشراء</div>
 
       <div class="checkout-grid">
-        <!-- قسم بيانات العميل -->
+        <!-- قسم البيانات -->
         <div class="card">
-          <div class="card-header">👤 بيانات العميل</div>
+          <div class="card-header">📋 بيانات العميل</div>
           <div class="card-body">
             <form id="checkoutForm">
-              <div class="form-group">
-                <label>الاسم الكامل</label>
-                <input type="text" id="fullName" placeholder="أدخل اسمك الكامل" required>
-              </div>
-
               <div class="form-group">
                 <label>رقم الجوال</label>
                 <input type="text" id="phone" placeholder="05XXXXXXXX" required>
               </div>
 
               <div class="form-group">
-                <label>البريد الإلكتروني</label>
-                <input type="email" id="email" placeholder="example@email.com" required>
-              </div>
-
-              <div class="form-group">
-                <label>العنوان</label>
-                <textarea id="address" placeholder="أدخل عنوانك بالتفصيل" required></textarea>
+                <label>UDID</label>
+                <input type="text" id="udid" placeholder="أدخل UDID الجهاز" required>
               </div>
 
               <div class="button-group">
-                <button type="submit" class="btn-submit">✓ إرسال البيانات</button>
                 <button type="reset" class="btn-reset">↺ مسح</button>
               </div>
             </form>
@@ -546,23 +535,22 @@
         </div>
       </div>
 
-      <!-- زر إتمام الشراء -->
+      <!-- زر الشراء الرئيسي -->
       <div class="card full-width" style="margin-top: 30px;">
-        <div class="card-header">✅ إتمام العملية</div>
+        <div class="card-header">🛍️ إتمام الشراء</div>
         <div class="card-body">
           <div class="info-box">
-            <strong>📝 تنبيه:</strong> تأكد من ملء جميع البيانات المطلوبة قبل الضغط على زر الإتمام
+            <strong>📝 تنبيه:</strong> تأكد من ملء جميع البيانات المطلوبة (الجوال و UDID) قبل الضغط على زر الشراء
           </div>
-          <a href="https://wa.me/966504106065?text=أريد%20إتمام%20عملية%20الشراء" class="btn-whatsapp" target="_blank">
-            💬 إتمام الشراء عبر واتس
-          </a>
+          <button onclick="sendToWhatsApp()" class="btn-whatsapp">
+            💬 شراء
+          </button>
         </div>
       </div>
     </div>
 
     <script>
       const STORAGE_KEY = 'b52_uploaded_files';
-      const CHECKOUT_KEY = 'b52_checkout_data';
       const MAX_FILE_SIZE = 500 * 1024 * 1024;
 
       // تحميل الملفات
@@ -592,23 +580,30 @@
         });
       }
 
-      // معالجة بيانات العميل
-      const checkoutForm = document.getElementById('checkoutForm');
-      checkoutForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+      // إرسال البيانات للواتس
+      function sendToWhatsApp() {
+        const phone = document.getElementById('phone').value;
+        const udid = document.getElementById('udid').value;
 
-        const checkoutData = {
-          fullName: document.getElementById('fullName').value,
-          phone: document.getElementById('phone').value,
-          email: document.getElementById('email').value,
-          address: document.getElementById('address').value,
-          date: new Date().toISOString()
-        };
+        if (!phone || !udid) {
+          alert('الرجاء ملء جميع البيانات المطلوبة (الجوال و UDID)');
+          return;
+        }
 
-        localStorage.setItem(CHECKOUT_KEY, JSON.stringify(checkoutData));
-        showMessage('successMessage', '✓ تم حفظ بيانات العميل بنجاح!');
-        checkoutForm.reset();
-      });
+        const message = `
+🛍️ *طلب شراء جديد*
+
+📱 الجوال: ${phone}
+🆔 UDID: ${udid}
+
+شكراً لاستخدام B52 Plus!
+        `.trim();
+
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappURL = `https://wa.me/966504106065?text=${encodedMessage}`;
+        
+        window.open(whatsappURL, '_blank');
+      }
 
       // معالجة رفع الملفات
       const fileUploadArea = document.getElementById('fileUploadArea');
@@ -705,16 +700,8 @@
         setTimeout(() => element.classList.remove('show'), 3000);
       }
 
-      // تحميل البيانات المحفوظة
+      // تحميل البيانات عند فتح الصفحة
       window.addEventListener('load', () => {
-        const savedCheckoutData = localStorage.getItem(CHECKOUT_KEY);
-        if (savedCheckoutData) {
-          const data = JSON.parse(savedCheckoutData);
-          document.getElementById('fullName').value = data.fullName;
-          document.getElementById('phone').value = data.phone;
-          document.getElementById('email').value = data.email;
-          document.getElementById('address').value = data.address;
-        }
         loadFiles();
       });
     </script>
