@@ -1,101 +1,133 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>B52 Plus</title>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تثبيت تطبيق B52 Plus</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 20px;
+      }
+      .container {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        padding: 40px;
+        max-width: 500px;
+        text-align: center;
+      }
+      h1 {
+        color: #333;
+        margin: 0 0 10px 0;
+        font-size: 28px;
+      }
+      .app-name {
+        color: #667eea;
+        font-weight: bold;
+      }
+      p {
+        color: #666;
+        line-height: 1.6;
+        margin: 15px 0;
+      }
+      .version {
+        color: #999;
+        font-size: 14px;
+        margin: 20px 0;
+      }
+      .install-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 15px 40px;
+        font-size: 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        margin: 20px 0;
+        transition: transform 0.2s, box-shadow 0.2s;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .install-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+      }
+      .install-btn:active {
+        transform: translateY(0);
+      }
+      .warning {
+        background: #fff3cd;
+        border: 1px solid #ffc107;
+        color: #856404;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px 0;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .steps {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        text-align: right;
+      }
+      .steps h3 {
+        color: #333;
+        margin-top: 0;
+      }
+      .steps ol {
+        text-align: right;
+        color: #666;
+      }
+      .steps li {
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>تثبيت <span class="app-name">B52 Plus</span></h1>
+      <p class="version">الإصدار 1.0.0</p>
+      
+      <p>اضغط الزر أدناه لبدء تثبيت التطبيق على جهازك:</p>
+      
+      <a href="itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/tawbb52/Ahmad/main/manifest.plist" class="install-btn">
+        تثبيت التطبيق الآن
+      </a>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      background: linear-gradient(135deg, #1d4661, #245678);
-      color: white;
-      text-align: center;
-    }
+      <div class="warning">
+        <strong>⚠️ تنبيه مهم:</strong>
+        <ul style="margin: 10px 0; padding-right: 20px;">
+          <li>افتح هذه الصفحة في <strong>Safari</strong> على iPhone أو iPad</li>
+          <li>لا تفتح الرابط من متصفحات أخرى أو من داخل تطبيقات</li>
+          <li>إذا ظهرت رسالة "مطوّر غير موثوق"، اذهب إلى:<br>
+            <code>الإعدادات → عام → إدارة الجهاز → ثق المطوّر</code>
+          </li>
+        </ul>
+      </div>
 
-    header {
-      padding: 40px 20px;
-    }
+      <div class="steps">
+        <h3>خطوات التثبيت:</h3>
+        <ol>
+          <li>افتح هذه الصفحة في Safari</li>
+          <li>اضغط على زر "تثبيت التطبيق الآن"</li>
+          <li>سيظهر مربع تأكيد - اضغط "تثبيت"</li>
+          <li>انتظر انتهاء التثبيت على شاشتك</li>
+          <li>إذا طُلب منك تثقة المطوّر، اذهب إلى الإعدادات وثقّه</li>
+        </ol>
+      </div>
 
-    h1 {
-      font-size: 40px;
-    }
-
-    .btn {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 12px 22px;
-      background: #3a8cc4;
-      color: white;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
-    }
-
-    .btn:hover {
-      background: #216fa3;
-    }
-
-    .card {
-      background: rgba(255,255,255,0.1);
-      margin: 20px auto;
-      padding: 20px;
-      width: 85%;
-      max-width: 500px;
-      border-radius: 15px;
-    }
-
-    .app-img {
-      width: 120px;
-      height: 120px;
-      border-radius: 20px;
-      margin-top: 10px;
-      object-fit: cover;
-      border: 2px solid white;
-    }
-
-    footer {
-      margin-top: 40px;
-      padding: 20px;
-      font-size: 14px;
-      opacity: 0.7;
-    }
-  </style>
-</head>
-
-<body>
-
-  <header>
-    <h1>B52 Plus</h1>
-    <p>متجر التطبيقات والألعاب</p>
-
-    <!-- زر تحميل -->
-    <a class="btn" href="#">تحميل التطبيق</a>
-
-    <!-- زر تثبيت المتجر -->
-    <a class="btn" href="#">تثبيت تطبيق المتجر</a>
-  </header>
-
-  <div class="card">
-    <h2>تطبيق المتجر</h2>
-
-    <!-- صورة جاهزة -->
-    <img class="app-img" src="https://b52-plus.com/logos/store-ipa.png" alt="Store App">
-
-    <p>اضغط على زر التثبيت لتحميل تطبيق المتجر على جهازك</p>
-  </div>
-
-  <div class="card">
-    <h2>المميزات</h2>
-    <p>✔ تطبيقات مهكرة<br>
-       ✔ ألعاب مدفوعة مجاناً<br>
-       ✔ تثبيت مباشر بدون App Store</p>
-  </div>
-
-  <footer>
-    © 2026 B52 Plus
-  </footer>
-
-</body>
+      <p style="font-size: 12px; color: #999; margin-top: 30px;">
+        © B52 Plus | جميع الحقوق محفوظة
+      </p>
+    </div>
+  </body>
 </html>
