@@ -1,1 +1,872 @@
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رفع تطبيقات جديدة - B52 Plus</title>
+    <style>
+      :root {
+        --primary: #5b67f1;
+        --primary-dark: #4a52c8;
+        --secondary: #8f5cf6;
+        --success: #1f9d67;
+        --danger: #e45757;
+        --warning: #f59e0b;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --border: #e5e7eb;
+        --panel: #ffffff;
+        --page: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 50%, #fdf2f8 100%);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        background: var(--page);
+        color: var(--text);
+        padding: 24px;
+      }
+
+      .page {
+        max-width: 1180px;
+        margin: 0 auto;
+      }
+
+      .hero,
+      .panel {
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.65);
+        box-shadow: 0 20px 45px rgba(91, 103, 241, 0.08);
+        border-radius: 24px;
+      }
+
+      .hero {
+        padding: 32px;
+        margin-bottom: 24px;
+      }
+
+      .hero-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      .hero p {
+        max-width: 720px;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .hero-badge {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: #fff;
+        padding: 12px 18px;
+        border-radius: 16px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+        margin-top: 24px;
+      }
+
+      .stat-card {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 18px;
+      }
+
+      .stat-label {
+        color: var(--muted);
+        font-size: 0.92rem;
+        margin-bottom: 8px;
+      }
+
+      .stat-value {
+        font-size: 1.7rem;
+        font-weight: 700;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+        gap: 24px;
+      }
+
+      .panel {
+        padding: 28px;
+      }
+
+      .panel h2 {
+        font-size: 1.35rem;
+        margin-bottom: 8px;
+      }
+
+      .panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      .panel-subtitle {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .message {
+        display: none;
+        margin-bottom: 18px;
+        padding: 14px 16px;
+        border-radius: 14px;
+        font-weight: 600;
+      }
+
+      .message.show {
+        display: block;
+      }
+
+      .message.success {
+        background: #e8fff4;
+        color: var(--success);
+        border: 1px solid #b8f0d1;
+      }
+
+      .message.info {
+        background: #eef2ff;
+        color: var(--primary-dark);
+        border: 1px solid #c7d2fe;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .form-group.full-width {
+        grid-column: 1 / -1;
+      }
+
+      label {
+        font-weight: 700;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 13px 14px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        font: inherit;
+        background: #fff;
+        color: var(--text);
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(91, 103, 241, 0.12);
+      }
+
+      textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .upload-box {
+        border: 1.5px dashed #b7c0ff;
+        border-radius: 18px;
+        background: #f8faff;
+        padding: 24px;
+        text-align: center;
+      }
+
+      .upload-box input[type="file"] {
+        display: none;
+      }
+
+      .upload-trigger {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 18px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: #fff;
+        cursor: pointer;
+        font-weight: 700;
+      }
+
+      .upload-hint {
+        color: var(--muted);
+        margin-top: 12px;
+        line-height: 1.7;
+      }
+
+      .file-preview {
+        display: none;
+        margin-top: 16px;
+        padding: 14px;
+        border-radius: 14px;
+        background: #fff;
+        border: 1px solid var(--border);
+        text-align: right;
+      }
+
+      .file-preview.show {
+        display: block;
+      }
+
+      .file-preview strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 22px;
+      }
+
+      button,
+      .button-link {
+        border: none;
+        border-radius: 14px;
+        padding: 13px 18px;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      }
+
+      button:hover,
+      .button-link:hover {
+        transform: translateY(-1px);
+      }
+
+      .button-primary {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: #fff;
+        box-shadow: 0 12px 22px rgba(91, 103, 241, 0.18);
+      }
+
+      .button-secondary {
+        background: #edf2f7;
+        color: var(--text);
+      }
+
+      .button-danger {
+        background: #fff1f1;
+        color: var(--danger);
+      }
+
+      .button-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+      }
+
+      .list-controls {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .apps-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .empty-state {
+        border: 1px dashed var(--border);
+        border-radius: 18px;
+        padding: 28px 22px;
+        text-align: center;
+        color: var(--muted);
+        background: #fafafa;
+        line-height: 1.8;
+      }
+
+      .app-card {
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 20px;
+        background: #fff;
+      }
+
+      .app-card-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+      }
+
+      .app-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+
+      .app-meta {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 0.86rem;
+        font-weight: 700;
+      }
+
+      .badge.platform-ios {
+        background: #eef2ff;
+        color: var(--primary-dark);
+      }
+
+      .badge.platform-android {
+        background: #ecfdf3;
+        color: var(--success);
+      }
+
+      .badge.platform-web {
+        background: #fff7ed;
+        color: #c2410c;
+      }
+
+      .badge.date {
+        background: #f3f4f6;
+        color: var(--muted);
+      }
+
+      .details-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .detail {
+        background: #f9fafb;
+        border-radius: 14px;
+        padding: 12px;
+      }
+
+      .detail-label {
+        color: var(--muted);
+        font-size: 0.86rem;
+        margin-bottom: 6px;
+      }
+
+      .detail-value {
+        word-break: break-word;
+        line-height: 1.7;
+      }
+
+      .notes {
+        border-top: 1px solid var(--border);
+        margin-top: 14px;
+        padding-top: 14px;
+        color: #374151;
+        line-height: 1.8;
+        white-space: pre-wrap;
+      }
+
+      .card-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 16px;
+      }
+
+      @media (max-width: 980px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 680px) {
+        body {
+          padding: 16px;
+        }
+
+        .hero,
+        .panel {
+          padding: 22px;
+          border-radius: 20px;
+        }
+
+        .form-grid,
+        .details-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .actions,
+        .card-actions,
+        .list-controls {
+          flex-direction: column;
+        }
+
+        button,
+        .button-link {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <section class="hero">
+        <div class="hero-top">
+          <div>
+            <h1>صفحة رفع تطبيقات جديدة</h1>
+            <p>
+              أضف بيانات الإصدارات الجديدة، راجع تفاصيل الملف، واحتفظ بسجل التطبيقات
+              المضافة محلياً داخل المتصفح لسهولة الإدارة والمتابعة.
+            </p>
+          </div>
+          <div class="hero-badge">B52 Plus Admin</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat-card">
+            <div class="stat-label">إجمالي التطبيقات</div>
+            <div class="stat-value" id="totalApps">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">أحدث إصدار مضاف</div>
+            <div class="stat-value" id="latestVersion">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">آخر منصة مضافة</div>
+            <div class="stat-value" id="latestPlatform">—</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="layout">
+        <section class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>إضافة تطبيق جديد</h2>
+              <p class="panel-subtitle">
+                أدخل بيانات الإصدار الجديد وأرفق الملف للمراجعة السريعة. يتم حفظ
+                البيانات في <strong>Local Storage</strong> داخل هذا المتصفح.
+              </p>
+            </div>
+          </div>
+
+          <div class="message success" id="successMessage"></div>
+
+          <form id="uploadForm" novalidate>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="appName">اسم التطبيق</label>
+                <input type="text" id="appName" placeholder="مثال: B52 Plus" value="B52 Plus" required>
+              </div>
+
+              <div class="form-group">
+                <label for="version">رقم الإصدار</label>
+                <input type="text" id="version" placeholder="مثال: 1.2.0" required>
+              </div>
+
+              <div class="form-group">
+                <label for="platform">المنصة</label>
+                <select id="platform" required>
+                  <option value="iOS">iOS</option>
+                  <option value="Android">Android</option>
+                  <option value="Web">Web</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="bundleId">المعرف / الحزمة</label>
+                <input type="text" id="bundleId" placeholder="com.example.app" value="com.tawbb52.myapp" required>
+              </div>
+
+              <div class="form-group">
+                <label for="releaseDate">تاريخ الإطلاق</label>
+                <input type="date" id="releaseDate" required>
+              </div>
+
+              <div class="form-group">
+                <label for="downloadUrl">رابط التحميل</label>
+                <input type="url" id="downloadUrl" placeholder="https://example.com/app.ipa" required>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="appFile">ملف التطبيق للمراجعة السريعة</label>
+                <div class="upload-box">
+                  <label for="appFile" class="upload-trigger">📤 اختر ملف التطبيق</label>
+                  <input type="file" id="appFile" accept=".ipa">
+                  <p class="upload-hint">
+                    يدعم ملفات IPA فقط. يتم عرض اسم الملف وحجمه فقط ولا يتم رفعه إلى
+                    خادم.
+                  </p>
+                  <div class="file-preview" id="filePreview"></div>
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <label for="notes">ملاحظات الإصدار</label>
+                <textarea id="notes" placeholder="اكتب أهم التغييرات أو ملاحظات المراجعة هنا"></textarea>
+              </div>
+            </div>
+
+            <div class="actions">
+              <button type="submit" class="button-primary">حفظ التطبيق</button>
+              <button type="reset" class="button-secondary" id="resetButton">مسح النموذج</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>التطبيقات المحفوظة</h2>
+              <p class="panel-subtitle">
+                راجع التطبيقات التي أضفتها، انسخ رابط التحميل، أو صدّر السجل كملف JSON.
+              </p>
+            </div>
+
+            <div class="list-controls">
+              <button type="button" class="button-secondary" id="exportButton">تصدير JSON</button>
+              <button type="button" class="button-danger" id="clearButton">مسح الكل</button>
+            </div>
+          </div>
+
+          <div class="message info" id="infoMessage"></div>
+          <div class="apps-list" id="appsList"></div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      const STORAGE_KEY = "b52_new_upload_apps";
+      const form = document.getElementById("uploadForm");
+      const appFileInput = document.getElementById("appFile");
+      const filePreview = document.getElementById("filePreview");
+      const appsList = document.getElementById("appsList");
+      const successMessage = document.getElementById("successMessage");
+      const infoMessage = document.getElementById("infoMessage");
+      const totalApps = document.getElementById("totalApps");
+      const latestVersion = document.getElementById("latestVersion");
+      const latestPlatform = document.getElementById("latestPlatform");
+      const exportButton = document.getElementById("exportButton");
+      const clearButton = document.getElementById("clearButton");
+      const resetButton = document.getElementById("resetButton");
+      const releaseDateInput = document.getElementById("releaseDate");
+      const IPA_EXTENSION = ".ipa";
+
+      releaseDateInput.value = new Date().toISOString().split("T")[0];
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, (character) => {
+          const entities = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            "\"": "&quot;",
+            "'": "&#39;"
+          };
+          return entities[character];
+        });
+      }
+
+      function formatFileSize(bytes) {
+        if (!bytes) {
+          return "0 MB";
+        }
+
+        return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+      }
+
+      function getApps() {
+        const rawData = localStorage.getItem(STORAGE_KEY);
+
+        try {
+          const parsed = rawData ? JSON.parse(rawData) : [];
+          return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+          return [];
+        }
+      }
+
+      function saveApps(apps) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(apps));
+      }
+
+      function showMessage(element, text) {
+        element.textContent = text;
+        element.classList.add("show");
+        window.clearTimeout(element.hideTimer);
+        element.hideTimer = window.setTimeout(() => {
+          element.classList.remove("show");
+        }, 3200);
+      }
+
+      function updateStats(apps) {
+        totalApps.textContent = String(apps.length);
+
+        if (apps.length === 0) {
+          latestVersion.textContent = "—";
+          latestPlatform.textContent = "—";
+          return;
+        }
+
+        latestVersion.textContent = apps[0].version || "—";
+        latestPlatform.textContent = apps[0].platform || "—";
+      }
+
+      function platformBadgeClass(platform) {
+        if (platform === "Android") {
+          return "platform-android";
+        }
+
+        if (platform === "Web") {
+          return "platform-web";
+        }
+
+        return "platform-ios";
+      }
+
+      function renderApps() {
+        const apps = getApps();
+        updateStats(apps);
+
+        if (apps.length === 0) {
+          appsList.innerHTML = `
+            <div class="empty-state">
+              لا توجد تطبيقات محفوظة حالياً.<br>
+              أضف أول تطبيق من النموذج الموجود على اليسار.
+            </div>
+          `;
+          return;
+        }
+
+        appsList.innerHTML = apps.map((app) => `
+          <article class="app-card">
+            <div class="app-card-header">
+              <div>
+                <div class="app-title">${escapeHtml(app.appName)} <span>— ${escapeHtml(app.version)}</span></div>
+                <div class="app-meta">
+                  <span class="badge ${platformBadgeClass(app.platform)}">${escapeHtml(app.platform)}</span>
+                  <span class="badge date">${escapeHtml(app.releaseDate)}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="details-grid">
+              <div class="detail">
+                <div class="detail-label">المعرف</div>
+                <div class="detail-value">${escapeHtml(app.bundleId)}</div>
+              </div>
+              <div class="detail">
+                <div class="detail-label">رابط التحميل</div>
+                <div class="detail-value">${escapeHtml(app.downloadUrl)}</div>
+              </div>
+              <div class="detail">
+                <div class="detail-label">اسم الملف</div>
+                <div class="detail-value">${escapeHtml(app.fileName || "لم يتم اختيار ملف")}</div>
+              </div>
+              <div class="detail">
+                <div class="detail-label">حجم الملف</div>
+                <div class="detail-value">${escapeHtml(app.fileSize || "—")}</div>
+              </div>
+            </div>
+
+            ${app.notes ? `<div class="notes">${escapeHtml(app.notes)}</div>` : ""}
+
+            <div class="card-actions">
+              <button type="button" class="button-secondary" data-copy="${escapeHtml(app.downloadUrl)}">نسخ الرابط</button>
+              <a href="${encodeURI(app.downloadUrl)}" class="button-link button-primary" target="_blank" rel="noopener noreferrer">فتح الرابط</a>
+              <button type="button" class="button-danger" data-delete="${escapeHtml(app.id)}">حذف</button>
+            </div>
+          </article>
+        `).join("");
+      }
+
+      function updateFilePreview(file) {
+        if (!file) {
+          filePreview.classList.remove("show");
+          filePreview.innerHTML = "";
+          return;
+        }
+
+        filePreview.classList.add("show");
+        filePreview.innerHTML = `
+          <strong>${escapeHtml(file.name)}</strong>
+          <span>الحجم: ${escapeHtml(formatFileSize(file.size))}</span>
+        `;
+      }
+
+      function isIpaFile(file) {
+        return Boolean(file && file.name.toLowerCase().endsWith(IPA_EXTENSION));
+      }
+
+      async function copyToClipboard(text) {
+        try {
+          await navigator.clipboard.writeText(text);
+          showMessage(infoMessage, "تم نسخ الرابط بنجاح.");
+        } catch (error) {
+          showMessage(infoMessage, "تعذر نسخ الرابط من هذا المتصفح.");
+        }
+      }
+
+      function exportApps() {
+        const apps = getApps();
+
+        if (apps.length === 0) {
+          showMessage(infoMessage, "لا توجد بيانات لتصديرها.");
+          return;
+        }
+
+        const data = new Blob([JSON.stringify(apps, null, 2)], { type: "application/json" });
+        const downloadUrl = URL.createObjectURL(data);
+        const link = document.createElement("a");
+        link.href = downloadUrl;
+        link.download = "b52-apps.json";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(downloadUrl);
+      }
+
+      function clearFormState() {
+        window.setTimeout(() => {
+          releaseDateInput.value = new Date().toISOString().split("T")[0];
+          updateFilePreview(null);
+        }, 0);
+      }
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const downloadUrl = document.getElementById("downloadUrl").value.trim();
+        const newApp = {
+          id: String(Date.now()),
+          appName: document.getElementById("appName").value.trim(),
+          version: document.getElementById("version").value.trim(),
+          platform: document.getElementById("platform").value,
+          bundleId: document.getElementById("bundleId").value.trim(),
+          releaseDate: releaseDateInput.value,
+          downloadUrl,
+          notes: document.getElementById("notes").value.trim(),
+          fileName: appFileInput.files[0] ? appFileInput.files[0].name : "",
+          fileSize: appFileInput.files[0] ? formatFileSize(appFileInput.files[0].size) : "",
+          createdAt: new Date().toISOString()
+        };
+
+        if (!newApp.appName || !newApp.version || !newApp.bundleId || !downloadUrl || !newApp.releaseDate) {
+          showMessage(infoMessage, "يرجى تعبئة جميع الحقول الأساسية.");
+          return;
+        }
+
+        if (appFileInput.files[0] && !isIpaFile(appFileInput.files[0])) {
+          showMessage(infoMessage, "يرجى اختيار ملف بصيغة IPA فقط.");
+          updateFilePreview(null);
+          appFileInput.value = "";
+          return;
+        }
+
+        const apps = getApps();
+        apps.unshift(newApp);
+        saveApps(apps);
+        renderApps();
+        form.reset();
+        clearFormState();
+        showMessage(successMessage, "تم حفظ التطبيق الجديد بنجاح.");
+      });
+
+      appFileInput.addEventListener("change", (event) => {
+        const selectedFile = event.target.files[0];
+
+        if (selectedFile && !isIpaFile(selectedFile)) {
+          event.target.value = "";
+          updateFilePreview(null);
+          showMessage(infoMessage, "هذا الحقل يقبل ملفات IPA فقط.");
+          return;
+        }
+
+        updateFilePreview(selectedFile);
+      });
+
+      resetButton.addEventListener("click", clearFormState);
+
+      exportButton.addEventListener("click", exportApps);
+
+      clearButton.addEventListener("click", () => {
+        if (getApps().length === 0) {
+          showMessage(infoMessage, "لا توجد بيانات محفوظة لمسحها.");
+          return;
+        }
+
+        if (window.confirm("هل تريد حذف جميع التطبيقات المحفوظة؟")) {
+          localStorage.removeItem(STORAGE_KEY);
+          renderApps();
+          showMessage(infoMessage, "تم مسح جميع التطبيقات المحفوظة.");
+        }
+      });
+
+      appsList.addEventListener("click", (event) => {
+        const copyTarget = event.target.getAttribute("data-copy");
+        const deleteTarget = event.target.getAttribute("data-delete");
+
+        if (copyTarget) {
+          copyToClipboard(copyTarget);
+          return;
+        }
+
+        if (deleteTarget) {
+          const apps = getApps().filter((app) => app.id !== deleteTarget);
+          saveApps(apps);
+          renderApps();
+          showMessage(infoMessage, "تم حذف التطبيق.");
+        }
+      });
+
+      renderApps();
+    </script>
+  </body>
+</html>
