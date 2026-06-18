@@ -349,21 +349,6 @@
 
             <form id="fileForm">
               <div class="form-group">
-                <label for="releaseName">اسم الإصدار</label>
-                <input type="text" id="releaseName" placeholder="مثال: B52 Plus v1.0.1" required>
-              </div>
-
-              <div class="form-group">
-                <label for="releaseNotes">ملاحظات الإصدار</label>
-                <textarea id="releaseNotes" placeholder="• إصلاح الأخطاء&#10;• تحسين الأداء"></textarea>
-              </div>
-
-              <div class="form-group">
-                <label for="versionNumber">رقم الإصدار</label>
-                <input type="text" id="versionNumber" placeholder="1.0.1" required>
-              </div>
-
-              <div class="form-group">
                 <label>ملف التطبيق (.ipa)</label>
                 <div class="file-upload-area" id="fileUploadArea">
                   <div class="upload-icon">📁</div>
@@ -434,8 +419,8 @@
           const fileHTML = `
             <div class="file-item">
               <div class="file-details">
-                <div class="file-name">📱 ${file.releaseName}</div>
-                <div class="file-meta">الإصدار: ${file.versionNumber} | الحجم: ${(file.size / 1024 / 1024).toFixed(2)} MB</div>
+                <div class="file-name">📱 ${file.fileName}</div>
+                <div class="file-meta">الحجم: ${(file.size / 1024 / 1024).toFixed(2)} MB | التاريخ: ${new Date(file.uploadDate).toLocaleDateString('ar-SA')}</div>
               </div>
               <div class="file-actions">
                 <button class="btn-action" onclick="deleteFile(${index})">🗑️ حذف</button>
@@ -509,9 +494,6 @@
         }
 
         const newFile = {
-          releaseName: document.getElementById('releaseName').value,
-          versionNumber: document.getElementById('versionNumber').value,
-          releaseNotes: document.getElementById('releaseNotes').value,
           fileName: file.name,
           size: file.size,
           uploadDate: new Date().toISOString()
