@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحديثات تطبيق B52 Plus</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+      
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      
+      header {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        margin-bottom: 30px;
+        text-align: center;
+      }
+      
+      header h1 {
+        color: #333;
+        font-size: 32px;
+        margin-bottom: 10px;
+      }
+      
+      header .app-version {
+        color: #667eea;
+        font-weight: bold;
+        font-size: 18px;
+      }
+      
+      header p {
+        color: #666;
+        margin-top: 10px;
+      }
+      
+      .current-version {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+        text-align: center;
+      }
+      
+      .current-version strong {
+        font-size: 18px;
+      }
+      
+      .updates-section {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+      }
+      
+      .section-title {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      
+      .update-item {
+        padding: 20px;
+        border-bottom: 1px solid #f0f0f0;
+        transition: background 0.3s;
+      }
+      
+      .update-item:last-child {
+        border-bottom: none;
+      }
+      
+      .update-item:hover {
+        background: #f9f9f9;
+      }
+      
+      .update-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      
+      .version-number {
+        background: #667eea;
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 14px;
+      }
+      
+      .update-date {
+        color: #999;
+        font-size: 14px;
+      }
+      
+      .update-title {
+        color: #333;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 10px 0;
+      }
+      
+      .update-description {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 15px;
+      }
+      
+      .changelog {
+        background: #f9f9f9;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        direction: rtl;
+        text-align: right;
+      }
+      
+      .changelog h4 {
+        color: #667eea;
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+      
+      .changelog ul {
+        list-style: none;
+        padding-right: 20px;
+      }
+      
+      .changelog li {
+        color: #666;
+        margin: 5px 0;
+        padding-right: 10px;
+        border-right: 3px solid #667eea;
+      }
+      
+      .update-actions {
+        display: flex;
+        gap: 10px;
+      }
+      
+      .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: transform 0.2s, box-shadow 0.2s;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+      }
+      
+      .btn-download {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+      
+      .btn-download:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+      
+      .btn-info {
+        background: #f0f0f0;
+        color: #333;
+      }
+      
+      .btn-info:hover {
+        background: #e0e0e0;
+      }
+      
+      .new-badge {
+        background: #ff6b6b;
+        color: white;
+        padding: 3px 8px;
+        border-radius: 5px;
+        font-size: 12px;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+      
+      .status {
+        font-size: 12px;
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        background: #e8f5e9;
+        color: #2e7d32;
+      }
+      
+      footer {
+        text-align: center;
+        color: white;
+        margin-top: 30px;
+        padding: 20px;
+      }
+      
+      @media (max-width: 600px) {
+        .update-actions {
+          flex-direction: column;
+        }
+        
+        .btn {
+          width: 100%;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- رأس الصفحة -->
+      <header>
+        <h1>B52 Plus</h1>
+        <p class="app-version">متجر التطبيقات والألعاب</p>
+        <div class="current-version">
+          <strong>الإصدار الحالي: 1.0.0</strong>
+        </div>
+      </header>
+
+      <!-- قسم التحديثات المتاحة -->
+      <div class="updates-section">
+        <div class="section-title">📱 التحديثات المتاحة</div>
+        
+        <!-- تحديث 1.0.1 -->
+        <div class="update-item">
+          <div class="update-header">
+            <span>
+              <span class="new-badge">جديد</span>
+              <span class="version-number">الإصدار 1.0.1</span>
+            </span>
+            <span class="update-date">2026-06-18</span>
+          </div>
+          <div class="update-title">تحديث بسيط - إصلاحات وتحسينات</div>
+          <div class="update-description">
+            تحديث صغير يتضمن إصلاحات للأخطاء وتحسينات الأداء العامة للتطبيق.
+          </div>
+          <div class="changelog">
+            <h4>✅ التغييرات:</h4>
+            <ul>
+              <li>إصلاح مشكلة تحميل التطبيقات</li>
+              <li>تحسين سرعة الواجهة</li>
+              <li>إصلاح بعض الأخطاء البسيطة</li>
+            </ul>
+          </div>
+          <div class="update-actions">
+            <a href="itms-services://?action=download-manifest&url=https://raw.githubusercontent.com/tawbb52/Ahmad/main/manifest.plist" class="btn btn-download">تحديث الآن</a>
+            <button class="btn btn-info">معلومات إضافية</button>
+          </div>
+          <div class="status">✓ متوفر للتحميل الآن</div>
+        </div>
+
+        <!-- تحديث 1.0.0 (الحالي) -->
+        <div class="update-item">
+          <div class="update-header">
+            <span class="version-number">الإصدار 1.0.0</span>
+            <span class="update-date">2026-06-15</span>
+          </div>
+          <div class="update-title">الإصدار الأول - الإطلاق الرسمي</div>
+          <div class="update-description">
+            الإصدار الأول من تطبيق B52 Plus مع كل المميزات الأساسية.
+          </div>
+          <div class="changelog">
+            <h4>✅ المميزات الرئيسية:</h4>
+            <ul>
+              <li>متجر التطبيقات المتكامل</li>
+              <li>متجر الألعاب الحصري</li>
+              <li>تثبيت التطبيقات والألعاب المدفوعة مجاناً</li>
+              <li>واجهة مستخدم سهلة وجميلة</li>
+              <li>دعم اللغة العربية كاملة</li>
+            </ul>
+          </div>
+          <div class="update-actions">
+            <button class="btn btn-info">تم التثبيت</button>
+          </div>
+          <div class="status">✓ الإصدار الحالي المثبت لديك</div>
+        </div>
+      </div>
+
+      <!-- قسم الإصدارات القديمة -->
+      <div class="updates-section">
+        <div class="section-title">📋 الإصدارات السابقة</div>
+        
+        <div class="update-item">
+          <div class="update-header">
+            <span class="version-number">الإصدار 0.9.0 (Beta)</span>
+            <span class="update-date">2026-06-01</span>
+          </div>
+          <div class="update-title">نسخة تجريبية - الإصدار التجريبي الأول</div>
+          <div class="update-description">
+            النسخة التجريبية الأولى للاختبار والتطوير.
+          </div>
+          <div class="status">⚠️ إصدار قديم - يُرجى التحديث للإصدار الأحدث</div>
+        </div>
+      </div>
+
+      <!-- معلومات إضافية -->
+      <div class="updates-section">
+        <div class="section-title">ℹ️ معلومات مهمة</div>
+        <div class="update-item">
+          <div class="update-description">
+            <strong>💡 نصيحة:</strong> للحصول على أفضل أداء للتطبيق، يُنصح بتحديث التطبيق عند توفر نسخة جديدة.
+          </div>
+          <div class="update-description">
+            <strong>⚠️ تنبيه:</strong> تأكد من توفر مساحة كافية على جهازك قبل تحميل النسخة الجديدة.
+          </div>
+          <div class="update-description">
+            <strong>🔒 الأمان:</strong> نحن نتأكد من أمان كل نسخة قبل إطلاقها للمستخدمين.
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p>© 2026 B52 Plus - جميع الحقوق محفوظة</p>
+        <p>للدعم والمساعدة: support@b52plus.com</p>
+      </footer>
+    </div>
+  </body>
+</html>
