@@ -1,10 +1,19 @@
 const { Router } = require("express");
+const rateLimit = require("express-rate-limit");
 const { authenticateToken, authorize } = require("../middleware/auth");
+
+const adminLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 180,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 function createAdminRoutes({ jwtSecret, adminController }) {
   const router = Router();
 
   router.get("/health", adminController.health);
+  router.use(adminLimiter);
   router.use(authenticateToken(jwtSecret));
   router.use(authorize("admin", "manager"));
 

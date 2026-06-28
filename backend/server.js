@@ -1,11 +1,19 @@
 const path = require("node:path");
 const express = require("express");
+const rateLimit = require("express-rate-limit");
 const { loadEnv } = require("./config/env");
 const { createDataStore } = require("./models/dataStore");
 const { createAuthController } = require("./controllers/authController");
 const { createAdminController } = require("./controllers/adminController");
 const { createAuthRoutes } = require("./routes/authRoutes");
 const { createAdminRoutes } = require("./routes/adminRoutes");
+
+const rootLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 60,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 function createApp(overrides = {}) {
   const env = loadEnv(overrides);
@@ -21,7 +29,7 @@ function createApp(overrides = {}) {
   app.use("/api/auth", createAuthRoutes(authController));
   app.use("/api", createAdminRoutes({ jwtSecret: env.jwtSecret, adminController }));
 
-  app.get("/", (_req, res) => {
+  app.get("/", rootLimiter, (_req, res) => {
     res.sendFile(path.join(frontendPath, "login.html"));
   });
 
