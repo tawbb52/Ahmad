@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ahmad Admin | تسجيل الدخول</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body class="login-body" data-page="login">
+    <section class="login-panel">
+      <h1>تسجيل الدخول</h1>
+      <p class="muted">وصول آمن عبر JWT لإدارة المستخدمين، الأجهزة، والاشتراكات.</p>
+      <div class="hero-note">
+        الحساب التجريبي الافتراضي:
+        <strong>admin@ahmad.local</strong> / <strong>Admin123!</strong>
+      </div>
+      <form id="loginForm">
+        <label>البريد الإلكتروني<input type="email" name="email" value="admin@ahmad.local" required /></label>
+        <label>كلمة المرور<input type="password" name="password" value="Admin123!" required /></label>
+        <button class="btn-primary" type="submit">دخول</button>
+      </form>
+      <p id="loginStatus" class="muted"></p>
+    </section>
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+  </body>
+</html>
