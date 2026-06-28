@@ -13,6 +13,23 @@ const api = {
     }
   },
 
+  // دعم الجوال: تغيير عنوان السيرفر
+  setHostForMobile(host) {
+    localStorage.setItem("ahmad-api-host", host);
+    this.updateBaseUrl();
+  },
+
+  updateBaseUrl() {
+    const savedHost = localStorage.getItem("ahmad-api-host");
+    if (savedHost) {
+      const protocol = window.location.protocol;
+      const port = window.location.port || (protocol === "https:" ? 443 : 80);
+      this.baseUrl = `${protocol}//${savedHost}:${port}/api`;
+    } else {
+      this.baseUrl = "/api";
+    }
+  },
+
   async request(path, options = {}) {
     const headers = {
       "Content-Type": "application/json",
@@ -23,22 +40,33 @@ const api = {
       headers.Authorization = "Bearer " + this.token;
     }
 
-    const response = await fetch(`${this.baseUrl}${path}`, {
-      ...options,
-      headers,
-    });
+    try {
+      const response = await fetch(`${this.baseUrl}${path}`, {
+        ...options,
+        headers,
+      });
 
-    if (response.status === 204) {
-      return null;
+      if (response.status === 204) {
+        return null;
+      }
+
+      const payload = await response.json().catch(() => ({}));
+
+      if (response.status === 401) {
+        this.token = "";
+        window.location.href = "/login.html";
+        throw new Error("انتهت جلستك. يرجى تسجيل الدخول مجددًا");
+      }
+
+      if (!response.ok) {
+        throw new Error(payload.message || payload.details || "حدث خطأ غير متوقع.");
+      }
+
+      return payload;
+    } catch (error) {
+      console.error(`API Error [${options.method || 'GET'} ${path}]:`, error);
+      throw error;
     }
-
-    const payload = await response.json().catch(() => ({}));
-
-    if (!response.ok) {
-      throw new Error(payload.message || "حدث خطأ غير متوقع.");
-    }
-
-    return payload;
   },
 
   get(path, params = {}) {
@@ -61,5 +89,8 @@ const api = {
     return this.request(path, { method: "DELETE" });
   },
 };
+
+// تحديث BaseUrl عند التحميل
+api.updateBaseUrl();
 
 window.api = api;
