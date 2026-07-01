@@ -89,7 +89,10 @@ router.put('/:id', authenticateToken, async (req: AuthRequest, res: Response) =>
 
     const { deviceName, deviceType } = req.body;
     const udidId = new Types.ObjectId(req.params.id);
-    const updatedUDID = await UDID.findByIdAndUpdate(udidId, { deviceName, deviceType }, {
+    const updateFields: Record<string, unknown> = {};
+    if (deviceName !== undefined) updateFields.deviceName = String(deviceName);
+    if (deviceType !== undefined) updateFields.deviceType = String(deviceType);
+    const updatedUDID = await UDID.findByIdAndUpdate(udidId, updateFields, {
       new: true,
     });
 

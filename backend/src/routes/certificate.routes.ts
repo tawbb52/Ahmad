@@ -82,7 +82,10 @@ router.put('/:id', authenticateToken, async (req: AuthRequest, res: Response) =>
 
     const { expiryDate, status } = req.body;
     const certId = new Types.ObjectId(req.params.id);
-    const updatedCert = await Certificate.findByIdAndUpdate(certId, { expiryDate, status }, {
+    const updateFields: Record<string, unknown> = {};
+    if (expiryDate !== undefined) updateFields.expiryDate = new Date(String(expiryDate));
+    if (status !== undefined) updateFields.status = String(status);
+    const updatedCert = await Certificate.findByIdAndUpdate(certId, updateFields, {
       new: true,
     });
 
