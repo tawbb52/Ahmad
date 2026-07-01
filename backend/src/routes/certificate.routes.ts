@@ -1,4 +1,5 @@
 import { Router, Response } from 'express';
+import { Types } from 'mongoose';
 import { Certificate } from '../models/Certificate';
 import { AuditLog } from '../models/AuditLog';
 import { authenticateToken, AuthRequest, authorizeRole } from '../middleware/auth';
@@ -80,7 +81,8 @@ router.put('/:id', authenticateToken, async (req: AuthRequest, res: Response) =>
     }
 
     const { expiryDate, status } = req.body;
-    const updatedCert = await Certificate.findByIdAndUpdate(req.params.id, { expiryDate, status }, {
+    const certId = new Types.ObjectId(req.params.id);
+    const updatedCert = await Certificate.findByIdAndUpdate(certId, { expiryDate, status }, {
       new: true,
     });
 

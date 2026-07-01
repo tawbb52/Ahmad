@@ -1,4 +1,5 @@
 import { Router, Response } from 'express';
+import { Types } from 'mongoose';
 import { UDID } from '../models/UDID';
 import { AuditLog } from '../models/AuditLog';
 import { authenticateToken, AuthRequest, authorizeRole } from '../middleware/auth';
@@ -87,7 +88,8 @@ router.put('/:id', authenticateToken, async (req: AuthRequest, res: Response) =>
     }
 
     const { deviceName, deviceType } = req.body;
-    const updatedUDID = await UDID.findByIdAndUpdate(req.params.id, { deviceName, deviceType }, {
+    const udidId = new Types.ObjectId(req.params.id);
+    const updatedUDID = await UDID.findByIdAndUpdate(udidId, { deviceName, deviceType }, {
       new: true,
     });
 
