@@ -9,13 +9,13 @@ const generateTokens = (userId: string, role: string) => {
   const token = jwt.sign(
     { userId, role },
     process.env.JWT_SECRET || 'secret',
-    { expiresIn: process.env.JWT_EXPIRY || '7d' }
+    { expiresIn: (process.env.JWT_EXPIRY || '7d') as any }
   );
 
   const refreshToken = jwt.sign(
     { userId },
     process.env.JWT_REFRESH_SECRET || 'refresh_secret',
-    { expiresIn: process.env.JWT_REFRESH_EXPIRY || '30d' }
+    { expiresIn: (process.env.JWT_REFRESH_EXPIRY || '30d') as any }
   );
 
   return { token, refreshToken };
@@ -25,13 +25,14 @@ const generateTokens = (userId: string, role: string) => {
 router.post('/register', async (req, res: Response) => {
   try {
     const { email, password, fullName } = req.body;
+    const sanitizedEmail = String(email);
 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email: sanitizedEmail });
     if (existingUser) {
       return res.status(400).json({ error: 'User already exists' });
     }
 
-    const user = new User({ email, password, fullName });
+    const user = new User({ email: sanitizedEmail, password, fullName });
     await user.save();
 
     const { token, refreshToken } = generateTokens(user._id.toString(), user.role);
@@ -51,8 +52,9 @@ router.post('/register', async (req, res: Response) => {
 router.post('/login', async (req, res: Response) => {
   try {
     const { email, password } = req.body;
+    const sanitizedEmail = String(email);
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: sanitizedEmail });
     if (!user || !(await user.comparePassword(password))) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
@@ -86,7 +88,7 @@ router.post('/refresh', (req: AuthRequest, res: Response) => {
     const token = jwt.sign(
       { userId: decoded.userId, role: decoded.role },
       process.env.JWT_SECRET || 'secret',
-      { expiresIn: process.env.JWT_EXPIRY || '7d' }
+      { expiresIn: (process.env.JWT_EXPIRY || '7d') as any }
     );
 
     res.json({ token });

@@ -42,7 +42,7 @@ router.put('/:id', authenticateToken, async (req: AuthRequest, res: Response) =>
     const { fullName, email } = req.body;
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
-      { fullName, email },
+      { fullName: fullName !== undefined ? String(fullName) : undefined, email: email !== undefined ? String(email) : undefined },
       { new: true }
     ).select('-password');
 

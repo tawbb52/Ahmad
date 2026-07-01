@@ -3,6 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
+import rateLimit from 'express-rate-limit';
 import { connectDatabase } from './config/database';
 import authRoutes from './routes/auth.routes';
 import certificateRoutes from './routes/certificate.routes';
@@ -17,6 +18,20 @@ dotenv.config();
 const app: Express = express();
 const PORT = process.env.PORT || 5000;
 
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 // Middleware
 app.use(helmet());
 app.use(cors());
@@ -24,12 +39,13 @@ app.use(morgan('combined'));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(requestLogger);
+app.use(limiter);
 
 // Database Connection
 connectDatabase();
 
 // Routes
-app.use('/api/auth', authRoutes);
+app.use('/api/auth', authLimiter, authRoutes);
 app.use('/api/certificates', certificateRoutes);
 app.use('/api/udid', udidRoutes);
 app.use('/api/users', userRoutes);

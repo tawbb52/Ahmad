@@ -24,15 +24,16 @@ router.get('/', authenticateToken, async (req: AuthRequest, res: Response) => {
 router.post('/', authenticateToken, async (req: AuthRequest, res: Response) => {
   try {
     const { udid, deviceName, deviceType } = req.body;
+    const sanitizedUdid = String(udid);
 
-    const existingUDID = await UDID.findOne({ udid });
+    const existingUDID = await UDID.findOne({ udid: sanitizedUdid });
     if (existingUDID) {
       return res.status(400).json({ error: 'UDID already registered' });
     }
 
     const newUDID = new UDID({
       userId: req.userId,
-      udid,
+      udid: sanitizedUdid,
       deviceName,
       deviceType,
     });
@@ -85,7 +86,8 @@ router.put('/:id', authenticateToken, async (req: AuthRequest, res: Response) =>
       return res.status(403).json({ error: 'Unauthorized' });
     }
 
-    const updatedUDID = await UDID.findByIdAndUpdate(req.params.id, req.body, {
+    const { deviceName, deviceType } = req.body;
+    const updatedUDID = await UDID.findByIdAndUpdate(req.params.id, { deviceName, deviceType }, {
       new: true,
     });
 
@@ -134,7 +136,7 @@ router.delete('/:id', authenticateToken, async (req: AuthRequest, res: Response)
 router.post('/validate', async (req, res: Response) => {
   try {
     const { udid } = req.body;
-    const udidRecord = await UDID.findOne({ udid });
+    const udidRecord = await UDID.findOne({ udid: String(udid) });
 
     if (!udidRecord) {
       return res.json({ valid: false, message: 'UDID not found' });

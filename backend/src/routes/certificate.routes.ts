@@ -79,7 +79,8 @@ router.put('/:id', authenticateToken, async (req: AuthRequest, res: Response) =>
       return res.status(403).json({ error: 'Unauthorized' });
     }
 
-    const updatedCert = await Certificate.findByIdAndUpdate(req.params.id, req.body, {
+    const { expiryDate, status } = req.body;
+    const updatedCert = await Certificate.findByIdAndUpdate(req.params.id, { expiryDate, status }, {
       new: true,
     });
 
@@ -131,7 +132,7 @@ router.delete('/:id', authenticateToken, async (req: AuthRequest, res: Response)
 router.post('/validate', async (req, res: Response) => {
   try {
     const { certificateData } = req.body;
-    const certificate = await Certificate.findOne({ certificateData });
+    const certificate = await Certificate.findOne({ certificateData: String(certificateData) });
 
     if (!certificate) {
       return res.json({ valid: false });
